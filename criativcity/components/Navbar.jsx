@@ -1,0 +1,58 @@
+import React, { useState, useEffect } from "react";
+import { navlinks } from "@/constants/navlinks";
+import Image from "next/image";
+import Logo from "../public/img/Criativcity.png";
+import { CgClose, CgMenuRight } from "react-icons/cg";
+const Navbar = () => {
+   const [toggle, setToggle] = useState(true);
+   const [active, setActive] = useState("Home");
+   return (
+      <nav className="w-full navbarbg text-white flex py-4 justify-between items-center navbar px-5 md:px-10 lg:px-20">
+         <Image src={Logo} alt="" className="h-[1.6rem] object-contain aspect-4/4 w-[11.2rem]" />
+         <ul className="list-none sm:flex hidden text-white justify-end items-center flex-1">
+            {navlinks.map((nav, index) => (
+               <li className={`text-white text-[1.1rem] mr-8`} key={index}>
+                  <a href={`#${nav.id}`}>{nav.text}</a>
+               </li>
+            ))}
+            <style jsx>{`
+               li:last-of-type {
+                  background: linear-gradient(95.75deg, #5200ff 5.19%, #ad00ff 104.15%);
+                  font-family: "Lato";
+                  font-style: "regular";
+                  font-size: 17px;
+                  padding: 12px 40px;
+                  border-radius: 8px;
+                  font-weight: 650;
+                  align-content: Center;
+                  vertical-align: Center;
+               }
+            `}</style>
+         </ul>
+         <div
+            className="sm:hidden flex flex-1 justify-end items-center text-white"
+            onClick={() => {
+               setToggle((prev) => !prev);
+            }}
+         >
+            {toggle ? <CgMenuRight className="" size={32} /> : <CgClose size={32} />}
+         </div>
+         <div className={`${toggle ? "hidden" : "flex"} p-6 bg-black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}>
+            <ul className="list-none flex justify-end items-start flex-1 flex-col">
+               {navlinks.map((nav, index) => (
+                  <li
+                     key={nav.id}
+                     className={`font-poppins font-medium cursor-pointer text-[16px]  ${active === nav.text ? "text-white" : "text-dimWhite"} ${
+                        index === navlinks.length - 1 ? "mb-0" : "mb-4"
+                     }`}
+                     onClick={() => setActive(nav.text)}
+                  >
+                     <a href={`#${nav.id}`}>{nav.text}</a>
+                  </li>
+               ))}
+            </ul>
+         </div>
+      </nav>
+   );
+};
+export default Navbar;
