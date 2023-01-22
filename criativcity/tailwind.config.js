@@ -3,6 +3,10 @@ module.exports = {
    content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
    theme: {
       extend: {
+         backgroundImage: {
+            'planets': "url('../assets/Group.png')",
+            
+          },
          colors: {
             primary: "#00040f",
             secondary: "#00f6ff",
@@ -14,6 +18,7 @@ module.exports = {
       },
       fontFamily: {
          pressfont: 'Yatra One',
+         Lato :'Lato'
       },
    },
    plugins: [],
