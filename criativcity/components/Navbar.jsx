@@ -12,9 +12,10 @@ const Navbar = () => {
    const [toggle, setToggle] = useState(true);
    const [active, setActive] = useState("Home");
    return (
-      <nav className="w-full navbarbg text-white flex py-4 justify-between items-center navbar px-5 md:px-10 lg:px-20">
+      <nav className="w-full fixed top-0 z-40 navbarbg text-white flex py-5 justify-between items-center navbar px-5 md:px-10 lg:px-20">
          <Link href={"/"}>
-            <Image src={Logo} alt="" className="h-[1.6rem] object-contain aspect-4/4 w-[11.2rem]" />
+            {/* <Image src={Logo} alt="" className="h-[1.6rem] object-contain aspect-4/4 w-[11.2rem]" /> */}
+            <h1 className="font-pressfont text-[1.3rem] lg:text-[2rem] uppercase">Criativcity</h1>
          </Link>
          <motion.nav animate={{ x:50 }} transition={{ type: "spring", stiffness: 100, damping:30 }}>
             <ul className="list-none sm:flex hidden text-white justify-end items-center flex-1">
@@ -46,12 +47,12 @@ const Navbar = () => {
          >
             {toggle ? <CgMenuRight className="" size={32} /> : <CgClose size={32} />}
          </div>
-         <div className={`${toggle ? "hidden" : "flex"} p-6 bg-mob-menu absolute z-20 top-20 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}>
+         <div className={`${toggle ? "hidden" : "flex"} p-6 bg-mob-menu absolute z-20 top-12 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}>
             <ul className="list-none flex justify-end items-start flex-1 flex-col">
                {navlinks.map((nav, index) => (
                   <li
                      key={nav.id}
-                     className={`font-poppins font-medium cursor-pointer text-[16px]  ${active === nav.text ? "text-white" : "text-dimWhite"} ${
+                     className={`font-pressfont font-medium cursor-pointer text-[16px]  ${active === nav.text ? "text-white" : "text-dimWhite"} ${
                         index === navlinks.length - 1 ? "mb-0" : "mb-4"
                      }`}
                      onClick={() => setActive(nav.text)}
