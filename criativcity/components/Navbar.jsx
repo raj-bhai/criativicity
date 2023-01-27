@@ -17,7 +17,7 @@ const Navbar = () => {
             {/* <Image src={Logo} alt="" className="h-[1.6rem] object-contain aspect-4/4 w-[11.2rem]" /> */}
             <h1 className="font-pressfont text-[1.3rem] lg:text-[2rem] uppercase">Criativcity</h1>
          </Link>
-         <motion.nav animate={{ x:50 }} transition={{ type: "spring", stiffness: 100, damping:30 }}>
+         <motion.nav animate={{ x:50 }} transition={{ type: "spring", stiffness: 100, damping:45 }}>
             <ul className="list-none sm:flex hidden text-white justify-end items-center flex-1">
                {navlinks.map((nav, index) => (
                   <li className={`text-white text-[1.1rem] mr-8`} key={index}>
