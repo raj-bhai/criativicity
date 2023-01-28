@@ -5,6 +5,7 @@ import styles from "@/src/style";
 import Hero from "@/components/Hero";
 import MidSection from "@/components/MidSection";
 import LowMidSection from "@/components/LowMidSection";
+import CourseFAQ from "@/components/CourseFAQ";
 
 export default function Home() {
    return (
@@ -30,13 +31,19 @@ export default function Home() {
 
             <div className={`navbarbg `}>
                <div className={`${styles.boxWidth}`}>
-                  <MidSection/>
+                  <MidSection />
                </div>
             </div>
 
             <div className={`navbarbg `}>
                <div className={`${styles.boxWidth}`}>
-                  <LowMidSection/>
+                  <LowMidSection />
+               </div>
+            </div>
+
+            <div className={`navbarbg `}>
+               <div className={`${styles.boxWidth}`}>
+                  <CourseFAQ />
                </div>
             </div>
          </div>
