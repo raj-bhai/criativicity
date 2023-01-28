@@ -47,7 +47,7 @@ const Navbar = () => {
          >
             {toggle ? <CgMenuRight className="" size={32} /> : <CgClose size={32} />}
          </div>
-         <div className={`${toggle ? "hidden" : "flex"} p-6 bg-mob-menu absolute z-20 top-12 right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}>
+         <div className={`${toggle ? "hidden" : "flex"} p-6 bg-mob-menu absolute z-20 top-[3.9rem] right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}>
             <ul className="list-none flex justify-end items-start flex-1 flex-col">
                {navlinks.map((nav, index) => (
                   <li

@@ -12,16 +12,22 @@ const Hero = () => {
       <section id="home" className="flex md:flex mt-24 overflow-hidden">
          <div className=" w-full h-full bg-planets bg-contain bg-no-repeat rounded-top-[120px] z-[0]">
             <motion.div
-               variants={staggerContainer}
-               initial="hidden"
-               whileInView="show"
-               viewport={{ once: false, amount: 0.45 }}
+               // variants={staggerContainer}
+               // initial="hidden"
+               // whileInView="show"
+               // viewport={{ once: false, amount: 0.45 }}
                className={`${styles.innerWidth} mx-auto flex flex-col`}
             >
-               <div className="flex justify-center items-center z-10 my-20 lg:h-screen ">
-                  <motion.div variants={textVariant(0.65)} className={` text-center `}>
+               <div className="flex justify-center items-center z-10 mt-[10rem]   ">
+                  <motion.div
+                     variants={textVariant(0.65)}
+                     initial="hidden"
+                     whileInView="show"
+                     viewport={{ once: true, amount: 0.45 }}
+                     className={` text-center lg:mt-[6rem] `}
+                  >
                      {/* <div className=" absolute -z-50  inset-0 gradient-01"/> */}
-           
+
                      <h1
                         className={` font-pressfont text-[1.5rem] lg:text-[4.8rem]  pressFont text-transparent bg-clip-text bg-gradient-to-r from-dimPink to-dimPurple `}
                      >

@@ -3,6 +3,9 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import styles from "@/src/style";
 import Hero from "@/components/Hero";
+import MidSection from "@/components/MidSection";
+import LowMidSection from "@/components/LowMidSection";
+import CourseFAQ from "@/components/CourseFAQ";
 
 export default function Home() {
    return (
@@ -12,7 +15,6 @@ export default function Home() {
             <meta name="description" content="Best Video Editing Platform" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="icon" href="/favicon.ico" />
-            
          </Head>
          <div className=" bg-black-gradient w-full overflow-hidden">
             <div className={`${styles.paddingX} ${styles.flexCenter}`}>
@@ -21,14 +23,28 @@ export default function Home() {
                </div>
             </div>
 
-            <div className={`navbarbg ${styles.flexStart}`}>
+            <div className={`navbarbg ${styles.flexCenter}`}>
                <div className={`${styles.boxWidth}`}>
                   <Hero />
                </div>
             </div>
 
-            <div className={`bg-primary ${styles.paddingX} ${styles.flexCenter}`}>
-               <div className={`${styles.boxWidth}`}>{/* components */}</div>
+            <div className={`navbarbg `}>
+               <div className={`${styles.boxWidth}`}>
+                  <MidSection />
+               </div>
+            </div>
+
+            <div className={`navbarbg `}>
+               <div className={`${styles.boxWidth}`}>
+                  <LowMidSection />
+               </div>
+            </div>
+
+            <div className={`navbarbg `}>
+               <div className={`${styles.boxWidth}`}>
+                  <CourseFAQ />
+               </div>
             </div>
          </div>
       </>
