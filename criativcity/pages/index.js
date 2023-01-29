@@ -6,6 +6,8 @@ import Hero from "@/components/Hero";
 import MidSection from "@/components/MidSection";
 import LowMidSection from "@/components/LowMidSection";
 import CourseFAQ from "@/components/CourseFAQ";
+import Instructor from "@/components/Followus";
+import FollowUs from "@/components/Followus";
 
 export default function Home() {
    return (
@@ -44,6 +46,11 @@ export default function Home() {
             <div className={`navbarbg `}>
                <div className={`${styles.boxWidth}`}>
                   <CourseFAQ />
+               </div>
+            </div>
+            <div className={`navbarbg `}>
+               <div className={`${styles.boxWidth}`}>
+                  <FollowUs />
                </div>
             </div>
          </div>
