@@ -17,11 +17,11 @@ const Navbar = () => {
             {/* <Image src={Logo} alt="" className="h-[1.6rem] object-contain aspect-4/4 w-[11.2rem]" /> */}
             <h1 className="font-pressfont text-[1.3rem] lg:text-[2rem] uppercase">Criativcity</h1>
          </Link>
-         <motion.nav animate={{ x:50 }} transition={{ type: "spring", stiffness: 100, damping:45 }}>
+         <motion.nav animate={{ x: 50 }} transition={{ type: "spring", stiffness: 100, damping: 45 }}>
             <ul className="list-none sm:flex hidden text-white justify-end items-center flex-1">
                {navlinks.map((nav, index) => (
                   <li className={`text-white text-[1.1rem] mr-8`} key={index}>
-                     <a href={`#${nav.id}`}>{nav.text}</a>
+                     <a href={`${nav.path}`}>{nav.text}</a>
                   </li>
                ))}
                <style jsx>{`
@@ -52,12 +52,11 @@ const Navbar = () => {
                {navlinks.map((nav, index) => (
                   <li
                      key={nav.id}
-                     className={`font-pressfont font-medium cursor-pointer text-[16px]  ${active === nav.text ? "text-white" : "text-dimWhite"} ${
-                        index === navlinks.length - 1 ? "mb-0" : "mb-4"
-                     }`}
+                     className={`font-pressfont font-medium cursor-pointer text-[16px]  ${active === nav.text ? "text-white" : "text-dimWhite"} ${index === navlinks.length - 1 ? "mb-0" : "mb-4"
+                        }`}
                      onClick={() => setActive(nav.text)}
                   >
-                     <a href={`#${nav.id}`}>{nav.text}</a>
+                     <a href={`${nav.path}`}>{nav.text}</a>
                   </li>
                ))}
             </ul>
