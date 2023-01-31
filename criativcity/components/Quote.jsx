@@ -15,7 +15,7 @@ const Quote = () => {
             <div className="moneyback w-[400px]">
                <Image src={moneyback}></Image>
             </div>
-            <div className="videPrice border-2 rounded-lg border-fuchsia-50  flex flex-col items-center justify-around ">
+            <div className="videPrice border-2 rounded-lg border-fuchsia-100  flex flex-col items-center justify-around ">
                <div className="videocont lg:w-[500px] lg:h-[340px] mt-7">
                   <Image src={vidimg}></Image>
                </div>
@@ -36,7 +36,7 @@ const Quote = () => {
                      </button>
                   </div>
                </div>
-               <div className="textcont mt-3 w-3/4 pb-3">
+               <div className="textcont mt-3 w-3/4 pb-3 text-white">
                 <div className="headtext">
                     <h4 className="text-[0.8rem] lg:text-[1.5rem]">Adobe Premiere Pro CC Masterclass: Video Editing in Premiere </h4>
                 </div>

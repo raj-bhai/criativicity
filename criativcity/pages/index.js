@@ -9,6 +9,8 @@ import CourseFAQ from "@/components/CourseFAQ";
 import Instructor from "@/components/Followus";
 import FollowUs from "@/components/Followus";
 import Quote from "@/components/Quote";
+import Footer from "@/components/Footer";
+import Subcontent from "@/components/Subcontent";
 
 export default function Home() {
    return (
@@ -57,6 +59,17 @@ export default function Home() {
             <div className={`navbarbg `}>
                <div className={`${styles.boxWidth}`}>
                   <Quote />
+               </div>
+            </div>
+            <div className={`navbarbg `}>
+               <div className={`${styles.boxWidth}`}>
+                  <Subcontent />
+               </div>
+            </div>
+
+            <div className={`navbarbg `}>
+               <div className={`${styles.boxWidth}`}>
+                  <Footer />
                </div>
             </div>
          </div>
