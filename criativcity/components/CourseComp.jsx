@@ -5,8 +5,8 @@ import vidimg from "../assets/vidimg.png";
 const CourseComp = () => {
    return (
       <>
-         <section className="mt-32 ">
-            <div className="text-center lg:text-left lg:ml-[10rem] py-6">
+         <section className=" text-white navbarbg">
+            <div className="text-center lg:text-left lg:ml-[10rem] mt-[4rem] py-12">
                <h1
                   className={`font-pressfont text-[1.5rem] lg:text-[3.1rem]  
                   pressFont text-transparent bg-clip-text bg-gradient-to-r from-dimPink to-dimPurple`}
@@ -14,11 +14,11 @@ const CourseComp = () => {
                   Courses
                </h1>
             </div>
-            <div className="flex items-center justify-center">
-               <section className="mt flex justify-center border-2 border-fuchsia-50 rounded-lg w-3/4 px-4 py-1">
+            <div className="flex items-center navbarbg justify-center">
+               <section className="mt flex justify-center border-2 border-fuchsia-50 rounded-lg lg:w-[78%] px-2 mx-2 py-1">
                   <div className="adobe-vid-cont lg:flex lg:items-start  justify-between">
                      <div className="text-cont">
-                        <h2 className="text-[1.2rem] w-3/4 mt-4">Adobe Premiere Pro CC Masterclass: Video Editing in Premiere </h2>
+                        <h2 className="text-[1.2rem] w-3/4 mt-4 ">Adobe Premiere Pro CC Masterclass: Video Editing in Premiere </h2>
                         <div>
                            <h3>24.5 hours on-demand video</h3>
                            <h3>24.5 hours on-demand video</h3>
@@ -53,7 +53,7 @@ const CourseComp = () => {
                </section>
             </div>
 
-            <div className="more-course flex flex-col items-center justify-center mt-24">
+            <div className="more-course navbarbg flex flex-col items-center justify-center mt-24">
                <div className="text">
                   <h2
                      className={`font-pressfont text-[1.5rem] lg:text-[3.1rem]  

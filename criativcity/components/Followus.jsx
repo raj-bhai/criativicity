@@ -9,7 +9,7 @@ import ellipse from '../assets/ellipse.png'
 
 const FollowUs = () => {
    return (
-      <section className=" flex flex-col items-center justify-center pt-8 lg:pt-32 pb-24 ">
+      <section className=" navbarbg flex flex-col items-center justify-center pt-8 lg:pt-32 pb-24 ">
          <div className="instext mb-4">
             <h2
                className={`font-pressfont text-[1.5rem] lg:text-[3.0rem]  

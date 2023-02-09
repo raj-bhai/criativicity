@@ -8,7 +8,7 @@ import fish from '../assets/fish.png'
 
 const Subcontent = () => {
   return (
-    <section className="pb-12 pt-12">
+    <section className=" navbarbg pb-12 pt-12">
         <div className="w-full flex items-center justify-center">
             <Image src={fish} className="aspect-1/4"></Image>
         </div>
