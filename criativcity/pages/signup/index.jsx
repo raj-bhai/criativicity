@@ -8,17 +8,21 @@ const SignupScreen = () => {
     return (
         <>
             <Navbar />
-            <div className='w-full h-full bg-planets bg-contain bg-no-repeat rounded-top-[120px] z-[0]'>
-                <section className='bg-planets min-h-screen flex items-center justify-center mt-24 bg-contain bg-no-repeat rounded-top-[120px]'>
+            <div className='w-full h-full bg-planets bg-contain bg-no-repeat rounded-top-[120px] z-[0] mt-20 navbarbg'>
+                <section className='bg-planets min-h-screen flex items-center justify-center bg-contain bg-no-repeat rounded-top-[120px]'>
                     <div className='bg-black text-white  shadow-lg max-w-3xl p-5'>
                         <div className='justify-center items-center px-16'>
-                            <h2 className='font-pressfont text-[1rem] lg:text-[1.5rem]  pressFont text-transparent text-white'>Create Account</h2>
+                            <h2 className='font-pressfont text-[1rem] lg:text-[1.5rem]  pressFont text-white'>Create Account</h2>
                         </div>
                         <form action='' className='flex flex-col gap-4'>
-                            <span>FULL NAME</span>
-                            <input className='p-2' type="text" name="name" placeholder='Enter Your FullName' autoComplete='off' />
-                            <span>EMAIL</span>
-                            <input className='p-2' type="text" name="email" placeholder='name@email.com' autoComplete='off' />
+                            <div className='relative'>
+                                <span>FULL NAME</span>
+                                <input className='p-2 w-full' type="text" name="name" placeholder='Enter Your FullName' autoComplete='off' />
+                            </div>
+                            <div className='relative'>
+                                <span>EMAIL</span>
+                                <input className='p-2 w-full' type="text" name="email" placeholder='name@email.com' autoComplete='off' />
+                            </div>
                             <div className='relative'>
                                 <span>PASSWORD</span>
                                 <input className='p-2 w-full' type="text" name="password" placeholder='Enter Your Password' autoComplete='off'
@@ -38,7 +42,7 @@ const SignupScreen = () => {
                         <button className=' border-dimPink border-2 py-2 px-3 items-center w-full mt-4 flex justify-center text-sm'><BsApple width="25px" height="25px" className='mr-8' />Continue with Apple</button>
                         <div className='mt-3 text-xs flex justify-center items-center'>
                             <p>New to Coursera?</p>
-                            <button className='py-2 hover:scale-110 duration-300'><a href='signup'>Sign up</a></button>
+                            <button className='py-2 hover:scale-110 duration-300 ml-2'><a href='signup'>Sign up</a></button>
                         </div>
                         <hr className='border-white' />
                         <div className='justify-center items-center text-sm'>
