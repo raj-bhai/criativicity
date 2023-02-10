@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import student from "../assets/student.png";
 import Image from "next/image";
 import affimg from "../assets/affimg.png";
+import ellipse from '../assets/ellipse.png'
+import planets from '../assets/Group.png'
+
 
 const Affiliate = () => {
    return (
@@ -107,11 +110,21 @@ const Affiliate = () => {
             </div>
             <div className=" text-white mt-4 outerTextDiv flex border-[0.04rem]  rounded-lg border-fuchsia-50 items-center justify-around lg:justify-between lg:mx-[8.5rem]">
                <div className="px-5 py-7">
-                  <h3 className="text-[1.2rem] mb-4">How Criativcity Affiliate Program Will Work</h3> 
-                  <h6>You can earn money by sharing Criativcity courses through their affiliate program. To become an affiliate, you must first create an account on Criativcity. Once your account is created, you can access the affiliate section and generate unique links for any course on the website. When someone clicks on your link and enrolls in a course, you will earn a commission on the sale. Additionally, You can also share courses on your website or social media channels and use tracking links to earn 
-                    20% commission on any course purchases made through your links.</h6> 
+                  <h3 className="text-[1.2rem] mb-4">How Criativcity Affiliate Program Will Work</h3>
+                  <h6>
+                     You can earn money by sharing Criativcity courses through their affiliate program. To become an affiliate, you must first create
+                     an account on Criativcity. Once your account is created, you can access the affiliate section and generate unique links for any
+                     course on the website. When someone clicks on your link and enrolls in a course, you will earn a commission on the sale.
+                     Additionally, You can also share courses on your website or social media channels and use tracking links to earn 20% commission
+                     on any course purchases made through your links.
+                  </h6>
                </div>
-               
+            </div>
+            <div className="pt-12">
+               <Image src={planets}></Image>
+            </div>
+            <div className="pt-12">
+               <Image src={ellipse}></Image>
             </div>
          </section>
       </>
