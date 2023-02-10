@@ -2,11 +2,7 @@ export const navlinks = [
    {
       id: 1,
       text: "HOME",
-<<<<<<< HEAD
-      path: '/home'
-=======
-      path:'/'
->>>>>>> 2ce7681ed73ad5fe5d5f81d5f1980d562abbfd6d
+      path: '/'
    },
    {
       id: 2,
