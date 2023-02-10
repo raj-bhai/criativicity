@@ -7,7 +7,7 @@ import { slideIn, staggerContainer, textVariant, textVariant2 } from "@/utils/mo
 
 const Footer = () => {
   return (
-    <section className="w-full px-12 py-6 flex lg:flex-row flex-col text-white items-start justify-between">
+    <section className="w-full navbarbg  px-12 py-6 flex lg:flex-row flex-col text-white items-start justify-between">
             <div className="leftlogotext ">
                 <h2 className="font-pressfont text-[1.3rem] lg:text-[2rem] uppercase">Criativcity</h2>
                 <h3>Privacy</h3>
