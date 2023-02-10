@@ -2,22 +2,22 @@ export const navlinks = [
    {
       id: 1,
       text: "HOME",
-      path:'/home'
+      path: '/home'
    },
    {
       id: 2,
       text: "COURSES",
-      path:'/courses'
+      path: '/courses'
    },
    {
       id: 3,
       text: "AFFILIATES",
-      path:'/affiliates'
+      path: '/affiliates'
    },
    {
       id: 4,
       text: "SUPPORT",
-      paht:'/support'
+      path: '/support'
    },
    {
       id: 5,
