@@ -29,7 +29,7 @@ const Affiliate = () => {
                <section className="mt flex justify-center border-[0.04rem]  border-fuchsia-50 rounded-lg lg:w-[80%]  px-2 mx-2 py-1">
                   <div className="adobe-vid-cont lg:flex lg:items-start w-full justify-between">
                      <div className="text-cont mx-auto text-white">
-                        <h2 className="text-[1.2rem]  mt-4">Here's how we are doing </h2>
+                        <h2 className="text-[1.2rem]  mt-4">Here&apos;s how we are doing </h2>
                         <div className="flex items-center justify-center mt-[2rem]">
                            <div className="grid grid-cols-3 gap-4">
                               <div className="border-fuchsia-50 rounded-lg px-4 py-6 text-white text-center border-[0.04rem]  ">
