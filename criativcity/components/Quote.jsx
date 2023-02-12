@@ -10,16 +10,16 @@ import vidimg from "../assets/vidimg.png";
 
 const Quote = () => {
    return (
-      <section>
-         <div className=" flex lg:flex-row flex-col items-center justify-around pb-4">
-            <div className="moneyback w-[400px]">
+      <section className="navbarbg">
+         <div className="  flex lg:flex-row flex-col items-center justify-around pb-4">
+            <div className="moneyback flex items-center justify-center w-[220px] mb-4 lg:w-[400px]">
                <Image src={moneyback}></Image>
             </div>
-            <div className="videPrice border-2 rounded-lg border-fuchsia-100  flex flex-col items-center justify-around ">
+            <div className="videPrice rounded-lg border-[0.04rem]  border-fuchsia-50  flex flex-col items-center justify-around ">
                <div className="videocont lg:w-[500px] lg:h-[340px] mt-7">
                   <Image src={vidimg}></Image>
                </div>
-               <div className="cta flex items-center justify-center  gap-x-8 lg:gap-x-14 mt-5 lg:mt-10 ">
+               <div className="cta navbarbg flex items-center justify-center  gap-x-8 lg:gap-x-14 mt-5 lg:mt-10 ">
                   <div className="imgencont flex items-center justify-start flex-col">
                      <div className="w-full h-full aspect-3/2 object-contain flex items-center justify-center gap-2">
                         <Image src={student}></Image>
@@ -27,7 +27,7 @@ const Quote = () => {
                      </div>
                      <h1 className="text-white font-normal font-Lato text-[0.8rem] lg:text-[1.1rem]">Students Enrolled</h1>
                   </div>
-                  <div className="price">
+                  <div className="price text-white">
                         <h3>$199</h3>
                   </div>
                   <div className="btn">
@@ -59,6 +59,7 @@ const Quote = () => {
                </div>
             </div>
          </div>
+         
       </section>
    );
 };

@@ -6,6 +6,10 @@
   background: #1E1E1E;
 }
 
+.newnavbarbg{
+  background : rgb(54, 59, 61)
+}
+
 .navTitle {
   font-family: 'Avatar Water';
   font-style: 'regular';
