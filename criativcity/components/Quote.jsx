@@ -7,6 +7,10 @@ import { slideIn, staggerContainer, textVariant, textVariant2 } from "@/utils/mo
 import moneyback from "../assets/moneyback.png";
 import student from "../assets/student.png";
 import vidimg from "../assets/vidimg.png";
+import {AiOutlineClockCircle,AiOutlineCloudDownload,AiOutlineMobile} from 'react-icons/ai'
+import {TbCertificate} from 'react-icons/tb'
+import {MdLanguage} from 'react-icons/md'
+import {BiNotepad} from 'react-icons/bi'
 
 const Quote = () => {
    return (
@@ -36,25 +40,45 @@ const Quote = () => {
                      </button>
                   </div>
                </div>
-               <div className="textcont mt-3 w-3/4 pb-3 text-white">
+               <div className="textcont mt-3 w-3/4 pb-3 text-white ">
                 <div className="headtext">
                     <h4 className="text-[0.8rem] lg:text-[1.5rem]">Adobe Premiere Pro CC Masterclass: Video Editing in Premiere </h4>
                 </div>
-                <div className="subtext">
-                    <h3>This Course includes:</h3>
+                <div className="subtext my-1">
+                    <h3 className="lg:text-[1.2rem] font-Lato font-medium">This Course includes:</h3>
                 </div>
                 <div className="minortext">
+                  <div className="flex items-center my-1 gap-x-2">
+                     <AiOutlineClockCircle size={20}/>
                     <h6>24.5 hours demand video</h6>
+                  </div>
+                  <div className="flex items-center my-1 gap-x-2">
+                     <AiOutlineCloudDownload size={20}/>
+                    <h6>18 downloadable resoures</h6>
+                  </div>
+                  <div className="flex items-center my-1 gap-x-2">
+                     <AiOutlineClockCircle size={20}/>
                     <h6>24.5 hours demand video</h6>
-                    <h6>24.5 hours demand video</h6>
-                    <h6>24.5 hours demand video</h6>
-                    <h6>24.5 hours demand video</h6>
-                    <h6>24.5 hours demand video</h6>
-                    <h6>24.5 hours demand video</h6>
-                    <h6>24.5 hours demand video</h6>
-                    <h6>24.5 hours demand video</h6>
-                    <h6>24.5 hours demand video</h6>
-                    <h6>24.5 hours demand video</h6>
+                  </div>
+                  <div className="flex items-center my-1  gap-x-2">
+                     <AiOutlineMobile size={20}/>
+                    <h6>Access on Mobile and Tv</h6>
+                  </div>
+
+                  <div className="flex items-center my-1 gap-x-2">
+                     <TbCertificate size={20}/>
+                    <h6>Certificate on Completion</h6>
+                  </div>
+
+                  <div className="flex items-center my-1 gap-x-2">
+                     <MdLanguage size={20}/>
+                    <h6>Language-Hindi</h6>
+                  </div>
+                  <div className="flex items-center my-1  gap-x-2">
+                     <BiNotepad size={20}/>
+                    <h6>Last updated 08/22</h6>
+                  </div>
+                    
                 </div>
                </div>
             </div>
