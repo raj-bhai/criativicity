@@ -26,13 +26,13 @@ const Affiliate = () => {
                </div>
             </div>
             <div className="flex items-center navbarbg justify-center mt-[3.3rem] ">
-               <section className="mt flex justify-center border-[0.04rem]  border-fuchsia-50 rounded-lg lg:w-[80%]  px-2 mx-2 py-1">
+               <section className="mt flex justify-center border-[0.04rem]  border-fuchsia-400 rounded-lg lg:w-[80%]  px-2 mx-2 py-1">
                   <div className="adobe-vid-cont lg:flex lg:items-start w-full justify-between">
                      <div className="text-cont mx-auto text-white">
                         <h2 className="text-[1.2rem]  mt-4">Here&apos;s how we are doing </h2>
                         <div className="flex items-center justify-center mt-[2rem]">
                            <div className="grid grid-cols-3 gap-4">
-                              <div className="border-fuchsia-50 rounded-lg px-4 py-6 text-white text-center border-[0.04rem]  ">
+                              <div className="border-fuchsia-400 rounded-lg px-4 py-6 text-white text-center border-[0.04rem]  ">
                                  <div>
                                     <h3>$199</h3>
                                  </div>
@@ -40,7 +40,7 @@ const Affiliate = () => {
                                     <h3>Available Balance</h3>
                                  </div>
                               </div>
-                              <div className="border-fuchsia-50 rounded-lg px-4 py-6 text-white text-center border-[0.04rem] ">
+                              <div className="border-fuchsia-400 rounded-lg px-4 py-6 text-white text-center border-[0.04rem] ">
                                  <div>
                                     <h3>$199</h3>
                                  </div>
@@ -48,7 +48,7 @@ const Affiliate = () => {
                                     <h3>Available Balance</h3>
                                  </div>
                               </div>
-                              <div className="border-fuchsia-50 rounded-lg px-4 py-6 text-white text-center border-[0.04rem] ">
+                              <div className="border-fuchsia-400 rounded-lg px-4 py-6 text-white text-center border-[0.04rem] ">
                                  <div>
                                     <h3>$199</h3>
                                  </div>
@@ -56,7 +56,7 @@ const Affiliate = () => {
                                     <h3>Available Balance</h3>
                                  </div>
                               </div>
-                              <div className="border-fuchsia-50 rounded-lg px-4 py-6 text-white text-center border-[0.04rem] ">
+                              <div className="border-fuchsia-400 rounded-lg px-4 py-6 text-white text-center border-[0.04rem] ">
                                  <div>
                                     <h3>$199</h3>
                                  </div>
@@ -64,7 +64,7 @@ const Affiliate = () => {
                                     <h3>Available Balance</h3>
                                  </div>
                               </div>
-                              <div className="border-fuchsia-50 rounded-lg px-4 py-6 text-white text-center border-[0.04rem] ">
+                              <div className="border-fuchsia-400 rounded-lg px-4 py-6 text-white text-center border-[0.04rem] ">
                                  <div>
                                     <h3>$199</h3>
                                  </div>
@@ -72,7 +72,7 @@ const Affiliate = () => {
                                     <h3>Available Balance</h3>
                                  </div>
                               </div>
-                              <div className="border-fuchsia-50 rounded-lg px-4 py-4 text-white text-center border-[0.04rem] ">
+                              <div className="border-fuchsia-400 rounded-lg px-4 py-4 text-white text-center border-[0.04rem] ">
                                  <div>
                                     <h3>$199</h3>
                                  </div>
@@ -95,7 +95,7 @@ const Affiliate = () => {
                               </div>
                               <h1 className="text-white font-normal font-Lato text-[0.8rem] lg:text-[1.1rem]">Recently Joined</h1>
                            </div>
-                           <div className="price">
+                           <div className="price text-white">
                               <h3>$199</h3>
                            </div>
                            <div className="btn">
@@ -108,7 +108,7 @@ const Affiliate = () => {
                   </div>
                </section>
             </div>
-            <div className=" text-white mt-4 outerTextDiv flex border-[0.04rem]  rounded-lg border-fuchsia-50 items-center justify-around lg:justify-between lg:mx-[8.5rem]">
+            <div className=" text-white mt-4 outerTextDiv flex border-[0.04rem]  rounded-lg border-fuchsia-400 items-center justify-around lg:justify-between lg:mx-[8.5rem]">
                <div className="px-5 py-7">
                   <h3 className="text-[1.2rem] mb-4">How Criativcity Affiliate Program Will Work</h3>
                   <h6>
