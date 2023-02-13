@@ -40,6 +40,8 @@ const Hero = () => {
                         {" "}
                         Criativcity.
                      </h1>
+                     {/* <div className=" absolute -z-50  inset-0 gradient-01"/> */}
+
                      <motion.div variants={textVariant2}>
                         <h1 className="text-white text-[0.7rem] lg:text-[1.8rem] font-Lato">Where we offer a comprehensive video editing</h1>
                         <h1 className="text-white text-[0.7rem] lg:text-[1.8rem] font-Lato">course for individuals of all skill levels.</h1>

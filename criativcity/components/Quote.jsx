@@ -15,7 +15,7 @@ const Quote = () => {
             <div className="moneyback flex items-center justify-center w-[220px] mb-4 lg:w-[400px]">
                <Image src={moneyback}></Image>
             </div>
-            <div className="videPrice rounded-lg border-[0.04rem]  border-fuchsia-50  flex flex-col items-center justify-around ">
+            <div className="videPrice rounded-lg border-[0.04rem]  border-fuchsia-400  flex flex-col items-center justify-around ">
                <div className="videocont lg:w-[500px] lg:h-[340px] mt-7">
                   <Image src={vidimg}></Image>
                </div>

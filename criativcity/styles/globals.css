@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .navbarbg {
-  background: #1E1E1E;
+  background: #000;
 }
 
 .newnavbarbg{
