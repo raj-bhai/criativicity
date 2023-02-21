@@ -11,7 +11,7 @@ import { BiLike, BiDislike } from "react-icons/bi";
 const VideoComp = () => {
    return (
       <>
-         <section className="navbarbg pt-32 text-white font-Lato ">
+         <section className="navbarbg pt-32 text-white font-Lato pb-24">
             <div className="grid grid-cols-1 lg:grid-cols-3  gap-4 mx-8 lg:mx-12">
                <div className=" border-fuchsia-400 col-span-2 rounded-lg mx-4 lg:w-[100%]">
                   <Image src={vidImg} className="w-full h-auto rounded-t-lg " />
@@ -121,7 +121,7 @@ const VideoComp = () => {
                      </div>
                   </div>
 
-                  
+
                </div>
                <div className="space-y-4 mx-4">
                   <div className="border border-fuchsia-400 rounded-md p-4">
