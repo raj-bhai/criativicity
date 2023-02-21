@@ -5,40 +5,39 @@ import whatsappimg from '../../public/img/whatsappimg.png';
 import discordimg from '../../public/img/discordimg.png';
 import Image from 'next/image';
 import Footer from '@/components/Footer';
+import Subcontent from '@/components/Subcontent';
+import ellipse from '../../assets/ellipse.png'
 
 const SupportScreen = () => {
     return (
         <>
             <Navbar />
-            <div className='w-full h-full bg-planets bg-contain bg-no-repeat rounded-top-[120px] mt-24 navbarbg'>
-                <section className='bg-planets min-h-screen flex items-center justify-center bg-contain bg-no-repeat '>
-                    <div className='flex flex-row'>
+            <div className=' bg-contain bg-no-repeat rounded-top-[120px] mt-20 navbarbg'>
+                <section className='bg-planets min-h-screen flex items-center justify-center bg-contain bg-no-repeat mt-9 '>
+                    <div className='flex flex-row mt-[24rem] gap-[10.25rem]'>
                         <div className='w-1/2 items-center justify-center'>
                             <Image src={contactimg} alt="" />
 
                         </div>
                         <div className='w-1/2'>
                             <div className='justify-center items-center px-16 text-white'>
-                                <h2 className='font-pressfont text-[1rem] lg:text-[1.5rem]  pressFont text-dimPink '>
+                                <h2 className='font-pressfont text-[1.5rem] lg:text-[2rem]  pressFont text-transparent bg-clip-text bg-gradient-to-r from-dimPink to-dimPurple'>
                                     CONTACT US</h2>
                             </div>
 
-                            <form action='' className='flex flex-col gap-4 text-white '>
-                                <div className='relative'>
-                                    <Image src={whatsappimg} alt="" className='absolute top-1/2 left-1' width="16" height="16" />
-                                    <input className='p-2 w-full border-dimPink border-2' type="text" name="whatapp" placeholder='Contact us on WhatsApp' autoComplete='off' />
-                                    <button className='absolute bg-gradient-to-r from-dimPink to-dimPurple py-2 px-3 rounded-sm right-3'>
-                                        whatapp
-                                    </button>
+                            <form action='' className='flex flex-col gap-4 text-white mt-10'>
+                                <div className="border-2 border-fuchsia-50 rounded-lg relative">
+                                    {/* <Image src={whatsappimg} alt="" className='absolute top-1/2 left-1' width="16" height="16" /> */}
+                                    <input className="outline-none px-2 py-3 bg-transparent" placeholder="Contact us on WhatsApp" type="text" />
+                                    <button className="px-5 border-2 mx-1 rounded-lg py-2 logibtn text-white ">Start Chat</button>
                                 </div>
-                                <div className='relative'>
-                                    <Image src={discordimg} alt="" className='absolute top-1/2 left-1' width="16" height="16" />
-                                    <input className='p-2 w-full border-dimPink border-2' type="text" name="" placeholder='Contact us on Discord' autoComplete='off'
-                                    />
-                                    <button className='absolute bg-gradient-to-r from-dimPink to-dimPurple py-2 px-3 rounded-sm right-3'>
-                                        whatapp
-                                    </button>
+
+                                <div className="border-2 border-fuchsia-50 rounded-lg relative gap-2">
+                                    {/* <Image src={discordimg} alt="" className='absolute top-1/2 left-1' width="16" height="16" /> */}
+                                    <input className="outline-none px-2 py-3 bg-transparent" placeholder="Contact us on Discord" type="text" />
+                                    <button className="px-5 border-2 mx-1 rounded-lg py-2 logibtn text-white ">Start Chat</button>
                                 </div>
+
                             </form>
 
                         </div>
@@ -46,6 +45,10 @@ const SupportScreen = () => {
                     </div>
 
                 </section>
+                <div className="pt-12">
+                    <Image src={ellipse} className="rounded-lg" alt=''></Image>
+                </div>
+                <Subcontent />
                 <Footer />
 
             </div>
