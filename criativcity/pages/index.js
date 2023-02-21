@@ -15,6 +15,7 @@ import Subcontent from "@/components/Subcontent";
 export default function Home() {
    return (
       <>
+
          <Head>
             <title>Criativcity</title>
             <meta name="description" content="Best Video Editing Platform" />

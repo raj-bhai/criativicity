@@ -1,10 +1,14 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
-import { BsEye, BsFacebook, BsApple } from 'react-icons/bs';
+import { BsEye } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
+import { useSession, signIn } from 'next-auth/react'
+
+
 
 
 const LoginScreen = () => {
+    const { data: session } = useSession()
 
     return (
         <>
@@ -17,7 +21,7 @@ const LoginScreen = () => {
                                 Welcome Back</h2>
                         </div>
 
-                        <form action='' className='flex flex-col gap-4 text-white '>
+                        <div action='' className='flex flex-col gap-4 text-white '>
                             <div className='relative'>
                                 <span>EMAIL</span>
                                 <input className='p-2 w-full text-gray-500' type="text" name="email" placeholder='name@email.com' autoComplete='off' />
@@ -30,15 +34,18 @@ const LoginScreen = () => {
                             </div>
                             <span className='text-dimPink'>Forget Password?</span>
                             <button className='logibtn text-white py-2 px-3'>Login</button>
-                        </form>
+                        </div>
                         <div className='mt-5 grid grid-cols-3 items-center text-dimPink'>
                             <hr className='border-gray-400' />
                             <p className='text-center text-sm' >OR</p>
                             <hr className='border-gray-400' />
                         </div>
-                        <button className=' border-dimPink border-2 py-2 px-3 items-center w-full mt-4 flex justify-center text-sm text-white'><FcGoogle width="25px" height="25px" className='mr-8 text-white' />Continue with Google</button>
+                        {!session ?
+                            <button className=' border-dimPink border-2 py-2 px-3 items-center w-full mt-4 flex justify-center text-sm text-white' onClick={() => signIn()}><FcGoogle width="25px" height="25px" className='mr-8 text-white' onClick={() => signIn()} />Continue with Google</button>
+                            : ""
+                        }
                         {/* <button className='border-dimPink border-2 py-2 px-3 items-center w-full mt-4 flex justify-center text-sm text-white'><BsFacebook width="25px" height="25px" className='mr-8 text-white' />Continue with Facebook</button>
-                        <button className='border-dimPink border-2 py-2 px-3 items-center w-full mt-4 flex justify-center text-sm text-white'><BsApple width="25px" height="25px" className='mr-8' />Continue with Apple</button> */}
+                <button className='border-dimPink border-2 py-2 px-3 items-center w-full mt-4 flex justify-center text-sm text-white'><BsApple width="25px" height="25px" className='mr-8' />Continue with Apple</button> */}
                         <div className='mt-3 text-xs flex justify-center items-center text-white'>
                             <p>New to Coursera?</p>
                             <button className='py-2 hover:scale-110 duration-300 ml-2'><a href='signup'>Sign up</a></button>
@@ -56,6 +63,7 @@ const LoginScreen = () => {
 
             </div>
         </>
+
     )
 }
 
