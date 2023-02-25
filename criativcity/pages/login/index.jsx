@@ -5,10 +5,9 @@ import { FcGoogle } from 'react-icons/fc';
 import { useSession, signIn } from 'next-auth/react'
 
 
-
-
 const LoginScreen = () => {
-    const { data: session } = useSession()
+    const { data: session } = useSession();
+    console.log(session, "Check");
 
     return (
         <>
