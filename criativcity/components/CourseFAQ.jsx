@@ -19,8 +19,8 @@ const CourseFAQ = () => {
 
    return (
       <section className="flex relative items-center  flex-col justify-center pt-[3rem] lg:pt-[12rem] pb-4">
-            <Image src={rectange} className="absolute lg:w-44 lg:h-44 w-20 h-20 left-3 top-2"></Image>
-            <Image src={polygon} className=" absolute right-12 top-2 lg:w-16 lg:h-16 w-8 h-8"></Image>
+            <Image src={rectange} alt="rectange" className="absolute lg:w-44 lg:h-44 w-20 h-20 left-3 top-2"></Image>
+            <Image src={polygon} alt="polygon" className=" absolute right-12 top-2 lg:w-16 lg:h-16 w-8 h-8"></Image>
          <div className="w-[60%] flex text-center items-center justify-center mt-4">
             <h2
                className={`font-pressfont text-[1.5rem] lg:text-[3.1rem]  

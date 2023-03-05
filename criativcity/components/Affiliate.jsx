@@ -85,12 +85,12 @@ const Affiliate = () => {
                      </div>
                      <div className="vidimg-cont">
                         <div className="videocont lg:w-[500px] lg:h-[340px] mt-7 ">
-                           <Image src={affimg} className="rounded-lg"></Image>
+                           <Image src={affimg} className="rounded-lg" alt="image affiliate"></Image>
                         </div>
                         <div className="cta flex items-center justify-center  gap-x-8 lg:gap-x-14 mt-3 lg:mt-10 ">
                            <div className="imgencont flex items-center justify-start flex-col">
                               <div className="w-full h-full aspect-3/2 object-contain flex items-center justify-center gap-2">
-                                 <Image src={student}></Image>
+                                 <Image src={student} alt="Student Enrolled"></Image>
                                  <h1 className="text-[#00DB8C] text-[1.5rem] lg:text-[2rem] font-bold font-Lato">414</h1>
                               </div>
                               <h1 className="text-white font-normal font-Lato text-[0.8rem] lg:text-[1.1rem]">Recently Joined</h1>
@@ -121,10 +121,10 @@ const Affiliate = () => {
                </div>
             </div>
             <div className="pt-12">
-               <Image src={planets}></Image>
+               <Image src={planets} alt="planets"></Image>
             </div>
             <div className="pt-12">
-               <Image src={ellipse}></Image>
+               <Image src={ellipse} alt="ellipse"></Image>
             </div>
          </section>
       </>

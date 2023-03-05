@@ -11,8 +11,8 @@ const Subcontent = () => {
    return (
       <section className="navbarbg ">
          <div className="w-full relative flex flex-col items-center justify-center">
-            <Image src={grouppl} className="absolute lg:top-32 "></Image>
-            <Image src={fish} className="aspect-1/4 "></Image>
+            <Image src={grouppl} alt="group" className="absolute lg:top-32 "></Image>
+            <Image src={fish} alt="fish" className="aspect-1/4 "></Image>
          </div>
       </section>
    );

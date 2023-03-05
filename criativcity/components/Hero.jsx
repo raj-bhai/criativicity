@@ -49,7 +49,7 @@ const Hero = () => {
                      <div className="cta flex items-center justify-center  gap-x-8 lg:gap-x-14 mt-5 lg:mt-10 ">
                         <div className="imgencont flex items-center justify-start flex-col">
                            <div className="w-full h-full aspect-3/2 object-contain flex items-center justify-center gap-2">
-                              <Image src={student}></Image>
+                              <Image src={student} alt="student"></Image>
                               <h1 className="text-[#00DB8C] text-[1.5rem] lg:text-[2rem] font-bold font-Lato">414</h1>
                            </div>
                            <h1 className="text-white font-normal font-Lato text-[0.8rem] lg:text-[1.1rem]">Students Enrolled</h1>
