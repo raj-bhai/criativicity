@@ -7,8 +7,9 @@ import smallvid from "../assets/smallvid.png";
 import { AiOutlineComment } from "react-icons/ai";
 import { GoSettings } from "react-icons/go";
 import { BiLike, BiDislike } from "react-icons/bi";
-
+import { useSelector, useDispatch } from "react-redux";
 const VideoComp = () => {
+   const data = useSelector((state) => state.dummyData.data);
    return (
       <>
          <section className="navbarbg pt-32 text-white font-Lato pb-24">
@@ -120,44 +121,38 @@ const VideoComp = () => {
                         </div>
                      </div>
                   </div>
-
-
                </div>
-               <div className="space-y-4 mx-4">
-                  <div className="border border-fuchsia-400 rounded-md p-4">
-                     <h2 className="text-[0.6rem] lg:text-[0.89rem] font-bold mb-4">Adobe Premiere Pro CC Masterclass: Full Crash Course.</h2>
-                     <div className="space-y-2">
-                        <h3 className="text-[0.9rem] font-medium">24.5 hours on-demand video</h3>
-                        <h3 className="text-[0.9rem] font-medium">10 hours 33 Minutes Left</h3>
-                        <h3 className="text-[0.9rem] font-medium">Creator: Yasir Quyoom</h3>
-                        <h3 className="text-[0.9rem] font-medium">Last updated 08/2022</h3>
+               {data.map((item,index) => (
+                  <div className="space-y-4 mx-4" key={index}>
+                     <div className="border border-fuchsia-400 rounded-md p-4">
+                        {/* <h2 className="text-[0.6rem] lg:text-[0.89rem] font-bold mb-4">Adobe Premiere Pro CC Masterclass: Full Crash Course</h2> */}
+                        <h2 className="text-[0.6rem] lg:text-[0.89rem] font-bold mb-4">{item.courseName}</h2>
+                        {item.details.map((texts) => (
+                           <div className="space-y-2">
+                              <h3 className="text-[0.9rem] font-medium">{texts}</h3>
+                              {/* <h3 className="text-[0.9rem] font-medium">10 hours 33 Minutes Left</h3>
+                              <h3 className="text-[0.9rem] font-medium">Creator: Yasir Quyoom</h3>
+                              <h3 className="text-[0.9rem] font-medium">Last updated 08/2022</h3> */}
+                           </div>
+                        ))}
                      </div>
-                  </div>
-                  <div className="space-y-2">
-                     <div className="border border-fuchsia-400 rounded-md flex items-center p-4">
-                        <Image src={smallvid} className="w-20 lg:w-1/2 h-auto rounded-md" />
-                        <div className="ml-4">
-                           <h3 className="text-[0.6rem] lg:text-[0.89rem] font-medium mb-1">The Complete Adobe Premiere Pro Masterclass</h3>
-                           <h4 className="text-sm font-medium text-gray-500 mb-1">By: John Smith</h4>
-                           <div className="flex items-center">
-                              <h5 className="text-sm font-medium mr-2">Last Updated:</h5>
-                              <h5 className="text-sm font-medium">10/2022</h5>
+                     {item.videos.map((viddet) => (
+                        <div className="space-y-2">
+                           <div className="border border-fuchsia-400 rounded-md flex items-center p-4">
+                              <img src={viddet.thumbnail} className="w-20 lg:w-1/2 h-auto rounded-md" />
+                              <div className="ml-4">
+                                 <h3 className="text-[0.6rem] lg:text-[0.89rem] font-medium mb-1">{viddet.title}</h3>
+                                 <h4 className="text-sm font-medium text-gray-500 mb-1">By: John Smith</h4>
+                                 <div className="flex items-center">
+                                    <h5 className="text-sm font-medium mr-2">Duration</h5>
+                                    <h5 className="text-sm font-medium">{viddet.duration}</h5>
+                                 </div>
+                              </div>
                            </div>
                         </div>
-                     </div>
-                     <div className="border border-fuchsia-400 rounded-md flex items-center p-4">
-                        <Image src={smallvid} className="w-20 lg:w-1/2 h-auto rounded-md" />
-                        <div className="ml-4">
-                           <h3 className="text-[0.6rem] lg:text-[0.89rem] font-medium mb-1">Adobe Premiere Pro CC: Video Editing for Beginners</h3>
-                           <h4 className="text-sm font-medium text-gray-500 mb-1">By: Jane Doe</h4>
-                           <div className="flex items-center">
-                              <h5 className="text-sm font-medium mr-2">Last Updated:</h5>
-                              <h5 className="text-sm font-medium">09/2021</h5>
-                           </div>
-                        </div>
-                     </div>
+                     ))}
                   </div>
-               </div>
+               ))}
             </div>
          </section>
       </>
