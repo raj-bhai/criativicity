@@ -15,12 +15,12 @@ const VideoComp = () => {
          <section className="navbarbg pt-32 text-white font-Lato pb-24">
             <div className="grid grid-cols-1 lg:grid-cols-3  gap-4 mx-8 lg:mx-12">
                <div className=" border-fuchsia-400 col-span-2 rounded-lg mx-4 lg:w-[100%]">
-                  <Image src={vidImg} className="w-full h-auto rounded-t-lg " />
+                  <Image src={vidImg} alt="men" className="w-full h-auto rounded-t-lg " />
                   <div className="p-4 border-[0.03rem] border-fuchsia-400 rounded-t-lg mt-4">
                      <h2 className="text-[1rem] font-Lato lg:text-[1.2rem] font-bold mb-4">Adobe Premiere Pro Essentials Course</h2>
                      <div className="flex justify-between items-center">
                         <div className="flex items-center">
-                           <Image src={men} className="w-8 h-8 rounded-full mr-2" />
+                           <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
                            <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">Satish Prajapati</h3>
                         </div>
                         <div className="flex items-center">
@@ -60,7 +60,7 @@ const VideoComp = () => {
                      </div>
                   </div>
                   <div className="flex py-2.5 items-center border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400 w-full">
-                     <Image src={men} className="w-8 h-8 rounded-full mr-2" />
+                     <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
                      <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">Satish Prajapati</h3>
                      <input
                         className=" mx-4 py-2 bg-transparent border-none focus:border-none border-transparent outline-none"
@@ -70,7 +70,7 @@ const VideoComp = () => {
                   </div>
                   <div className="flex py-3 items-start flex-col border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400">
                      <div className="flex items-center gap-x-[0.9rem] px-3">
-                        <Image src={men} className="w-8 h-8 rounded-full mr-2" />
+                        <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
                         <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">Satish Prajapati</h3>
                         <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">2 days ago</h3>
                      </div>
@@ -88,7 +88,7 @@ const VideoComp = () => {
 
                   <div className="flex py-3 items-start flex-col border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400">
                      <div className="flex items-center gap-x-[0.9rem] px-3">
-                        <Image src={men} className="w-8 h-8 rounded-full mr-2" />
+                        <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
                         <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">Satish Prajapati</h3>
                         <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">2 days ago</h3>
                      </div>
@@ -106,7 +106,7 @@ const VideoComp = () => {
 
                   <div className="flex py-3 items-start flex-col border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400">
                      <div className="flex items-center gap-x-[0.9rem] px-3">
-                        <Image src={men} className="w-8 h-8 rounded-full mr-2" />
+                        <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
                         <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">Satish Prajapati</h3>
                         <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">2 days ago</h3>
                      </div>
@@ -127,8 +127,8 @@ const VideoComp = () => {
                      <div className="border border-fuchsia-400 rounded-md p-4">
                         {/* <h2 className="text-[0.6rem] lg:text-[0.89rem] font-bold mb-4">Adobe Premiere Pro CC Masterclass: Full Crash Course</h2> */}
                         <h2 className="text-[0.6rem] lg:text-[0.89rem] font-bold mb-4">{item.courseName}</h2>
-                        {item.details.map((texts) => (
-                           <div className="space-y-2">
+                        {item.details.map((texts, index) => (
+                           <div className="space-y-2" key={index}>
                               <h3 className="text-[0.9rem] font-medium">{texts}</h3>
                               {/* <h3 className="text-[0.9rem] font-medium">10 hours 33 Minutes Left</h3>
                               <h3 className="text-[0.9rem] font-medium">Creator: Yasir Quyoom</h3>
@@ -139,7 +139,7 @@ const VideoComp = () => {
                      {item.videos.map((viddet, index) => (
                         <div className="space-y-2" key={index}>
                            <div className="border border-fuchsia-400 rounded-md flex items-center p-4">
-                              <img src={viddet.thumbnail} className="w-20 lg:w-1/2 h-auto rounded-md" />
+                              <img src={viddet.thumbnail} alt="thumbnail" className="w-20 lg:w-1/2 h-auto rounded-md" />
                               <div className="ml-4">
                                  <h3 className="text-[0.6rem] lg:text-[0.89rem] font-medium mb-1">{viddet.title}</h3>
                                  <h4 className="text-sm font-medium text-gray-500 mb-1">By: John Smith</h4>

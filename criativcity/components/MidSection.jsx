@@ -17,7 +17,7 @@ const MidSection = () => {
    return (
       <section id="midsection" className="">
          <div className="relative cityContainer flex items-center justify-center">
-            <Image src={city} className="aspect-4/4"></Image>
+            <Image src={city} alt="city" className="aspect-4/4"></Image>
             <div className="videoContainer absolute bottom-2 lg:bottom-12">
                <Image src={bigvid} alt="image" className="w-[250px] lg:w-[740px]"></Image>
                <Image src={ball} alt="image" className="absolute -right-3 w-[2rem] h-[2rem] lg:w-[3.2rem] lg:h-[3.2rem] mt-4"></Image>
