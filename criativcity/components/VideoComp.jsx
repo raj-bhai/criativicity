@@ -136,8 +136,8 @@ const VideoComp = () => {
                            </div>
                         ))}
                      </div>
-                     {item.videos.map((viddet) => (
-                        <div className="space-y-2">
+                     {item.videos.map((viddet, index) => (
+                        <div className="space-y-2" key={index}>
                            <div className="border border-fuchsia-400 rounded-md flex items-center p-4">
                               <img src={viddet.thumbnail} className="w-20 lg:w-1/2 h-auto rounded-md" />
                               <div className="ml-4">
