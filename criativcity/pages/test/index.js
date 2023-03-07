@@ -486,7 +486,7 @@ export function text() {
         <Frame1000001079>
           <Group39740>
             <HereSHowHowReDoing>
-              Here’s how how're doing.
+              Here&apos;s how how're doing.
             </HereSHowHowReDoing>
           </Group39740>
           <Frame1000001068>
