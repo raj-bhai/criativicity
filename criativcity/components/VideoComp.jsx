@@ -4,18 +4,79 @@ import Image from "next/image";
 import vidImg from "../assets/videoimg.png";
 import men from "../assets/men.png";
 import smallvid from "../assets/smallvid.png";
-import { AiOutlineComment } from "react-icons/ai";
+import { AiOutlineComment, AiFillLock } from "react-icons/ai";
 import { GoSettings } from "react-icons/go";
 import { BiLike, BiDislike } from "react-icons/bi";
+import { FaBackward } from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
+
+const Video_ = (props) => {
+   return (
+      <iframe
+         // ref={videoRef}
+         // width={"100%"}
+         // height={"100%"}
+         className="  w-full h-auto rounded-lg min-h-[500px] "
+         // className={'rounded-lg ' + videoOpacity}
+         // onLoad={() => {
+         //    setImageOpacity(' opacity-0  z-[100] ')
+         //    setVideoOpacity(' opacity-1 z-[200] ')
+         //    setVideoLoad(true)
+         // }}
+         // onPause={() => {
+         //    setShowVideo(false)
+         //    setImageOpacity(' opacity-1  z-[200] ')
+         //    setVideoOpacity(' opacity-0 z-[100] ')
+         // }}
+         allow="autoplay; fullscreen"
+         controls
+         src={props.src}
+         poster={men}
+      ></iframe>
+   )
+}
+
 const VideoComp = () => {
    const data = useSelector((state) => state.dummyData.data);
+   const [selectedIndex, setSelectedIndex] = useState(0);
+   const [selectedVideo, setSelectedVideo] = useState('');
+   const [loading, setLoading] = useState(false);
+
+   useEffect(() => {
+      setSelectedVideo(data[0].videos[selectedIndex].url)
+   }, [selectedIndex])
+
+
+   const AllowedToWatch = (selectedI, i) => {
+      if (selectedI + 1 >= i) {
+         return true
+      } else {
+         return false
+      }
+   }
+
+   const Completed = (selectedI, i) => {
+      if (selectedI > i) {
+         return true
+      } else {
+         return false
+      }
+   }
+
+
    return (
       <>
          <section className="navbarbg pt-32 text-white font-Lato pb-24">
             <div className="grid grid-cols-1 lg:grid-cols-3  gap-4 mx-8 lg:mx-12">
                <div className=" border-fuchsia-400 col-span-2 rounded-lg mx-4 lg:w-[100%]">
-                  <Image src={vidImg} alt="men" className="w-full h-auto rounded-t-lg " />
+                  {
+                     !loading &&
+                     <Video_
+                        src={selectedVideo}
+                     // poster={data[0].videos[selectedIndex].thumbnail}
+                     />
+                  }
+                  {/* <Image src={vidImg} alt="men" className="w-full h-auto rounded-t-lg " /> */}
                   <div className="p-4 border-[0.03rem] border-fuchsia-400 rounded-t-lg mt-4">
                      <h2 className="text-[1rem] font-Lato lg:text-[1.2rem] font-bold mb-4">Adobe Premiere Pro Essentials Course</h2>
                      <div className="flex justify-between items-center">
@@ -122,11 +183,11 @@ const VideoComp = () => {
                      </div>
                   </div>
                </div>
-               {data.map((item,index) => (
-                  <div className="space-y-4 mx-4" key={index}>
+               {data.map((item, index) => (
+                  <div className="space-y-4 mx-4 border-[0px] pr-[20px] " key={index}>
                      <div className="border border-fuchsia-400 rounded-md p-4">
                         {/* <h2 className="text-[0.6rem] lg:text-[0.89rem] font-bold mb-4">Adobe Premiere Pro CC Masterclass: Full Crash Course</h2> */}
-                        <h2 className="text-[0.6rem] lg:text-[0.89rem] font-bold mb-4">{item.courseName}</h2>
+                        <h2 className="text-[0.6rem] lg:text-[0.89rem] font-bold mb-4">{item.courseName} {selectedIndex}</h2>
                         {item.details.map((texts, index) => (
                            <div className="space-y-2" key={index}>
                               <h3 className="text-[0.9rem] font-medium">{texts}</h3>
@@ -136,21 +197,62 @@ const VideoComp = () => {
                            </div>
                         ))}
                      </div>
-                     {item.videos.map((viddet, index) => (
-                        <div className="space-y-2" key={index}>
-                           <div className="border border-fuchsia-400 rounded-md flex items-center p-4">
-                              <img src={viddet.thumbnail} alt="thumbnail" className="w-20 lg:w-1/2 h-auto rounded-md" />
-                              <div className="ml-4">
-                                 <h3 className="text-[0.6rem] lg:text-[0.89rem] font-medium mb-1">{viddet.title}</h3>
-                                 <h4 className="text-sm font-medium text-gray-500 mb-1">By: John Smith</h4>
-                                 <div className="flex items-center">
-                                    <h5 className="text-sm font-medium mr-2">Duration</h5>
-                                    <h5 className="text-sm font-medium">{viddet.duration}</h5>
+                     <div className="space-y-4" >
+                        {item.videos.map((viddet, index1) => (
+                           // ((selectedIndex < index1) && (selectedIndex !== index1)) &&
+                           ((selectedIndex && (index1 === selectedIndex - 1)) || (selectedIndex < index1)) &&
+                           <div className={`space-y-2 relative  ${AllowedToWatch(selectedIndex, index1) ? ' cursor-pointer  ' : 'cursor-not-allowed '} ${Completed(selectedIndex, index1) ? 'bg-[rgba(16,188,156,0.1)] ' : ''}  `} key={index1}
+                              onClick={async () => {
+                                 if (AllowedToWatch(selectedIndex, index1)) {
+                                    await setLoading(true)
+                                    await setSelectedIndex(index1);
+                                    await setLoading(false)
+                                 }
+                              }}
+                           >
+                              <div className="border border-fuchsia-400 rounded-md flex items-center p-4">
+                                 <img src={viddet.thumbnail} alt="thumbnail" className="w-20 lg:w-1/2 h-auto rounded-md" />
+                                 <div className="ml-4">
+                                    <h3 className="text-[0.6rem] lg:text-[0.89rem] font-medium mb-1">{viddet.title}</h3>
+                                    <h4 className="text-sm font-medium text-gray-500 mb-1">By: John Smith</h4>
+                                    <div className="flex items-center">
+                                       <h5 className="text-sm font-medium mr-2">Duration</h5>
+                                       <h5 className="text-sm font-medium">{viddet.duration}</h5>
+                                    </div>
                                  </div>
                               </div>
+                              {
+                                 !AllowedToWatch(selectedIndex, index1) ?
+                                    <div className=" absolute w-[50px] h-[50px] bg-white  top-[30%] left-[45%] flex items-center justify-center rounded-lg " >
+                                       {/* <h1 className="text-[#000]" >{index1}</h1> */}
+                                       <AiFillLock
+                                          color="#000"
+                                          size={30}
+                                       />
+                                    </div>
+                                    : null
+                              }
+                              {
+                                 (selectedIndex + 1 === index1) ?
+                                    <div className=" absolute w-[50px] h-[50px] bg-white  top-[30%] left-[45%] flex items-center justify-center rounded-lg " >
+                                       <h1 className="text-[#000] font-bold " >Next</h1>
+                                    </div>
+                                    : null
+                              }
+                              {
+                                 Completed(selectedIndex, index1) ?
+                                    <div className=" absolute w-[50px] h-[50px] bg-white top-[30%] left-[45%] flex items-center justify-center rounded-lg " >
+                                       {/* <h1 className="text-[#000] font-bold " >Next</h1> */}
+                                       <FaBackward
+                                          color="#000"
+                                          size={30}
+                                       />
+                                    </div>
+                                    : null
+                              }
                            </div>
-                        </div>
-                     ))}
+                        ))}
+                     </div>
                   </div>
                ))}
             </div>
