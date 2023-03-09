@@ -16,7 +16,7 @@ const Video_ = (props) => {
          // ref={videoRef}
          // width={"100%"}
          // height={"100%"}
-         className="  w-full h-auto rounded-lg min-h-[500px] "
+         className="  w-full h-auto rounded-lg min-h-[500px] bg-yellow-200  "
          // className={'rounded-lg ' + videoOpacity}
          // onLoad={() => {
          //    setImageOpacity(' opacity-0  z-[100] ')
