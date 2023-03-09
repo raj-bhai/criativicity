@@ -30,7 +30,8 @@ const Video_ = (props) => {
          // }}
          allow="autoplay; fullscreen"
          controls
-         src={props.src}
+         // src={props.src}
+         src={'https://res.cloudinary.com/drgvislmm/video/upload/v1669371379/videos/tech/yt1s.com_-Toyata_1080p_1_ewgaum.mp4'}
          poster={men}
       ></iframe>
    )
