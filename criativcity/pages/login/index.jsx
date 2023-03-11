@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import { BsEye, BsFacebook, BsApple } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
+import axios from 'axios';
+import { Apiurl } from '@/constants/url';
 
 
 const LoginScreen = () => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const Login = (email, password) => {
+        const postData = {
+            email: email,
+            password: password,
+        };
+        axios.post(`${Apiurl}/auth/Login`, postData)
+            .then((response) => {
+                console.log('Post created successfully:', response.data);
+            })
+            .catch((error) => {
+                console.error('Error creating post:', error);
+            });
+    }
 
     return (
         <>
@@ -20,16 +39,27 @@ const LoginScreen = () => {
                         <form action='' className='flex flex-col gap-4 text-white '>
                             <div className='relative'>
                                 <span>EMAIL</span>
-                                <input className='p-2 w-full text-gray-500' type="text" name="email" placeholder='name@email.com' autoComplete='off' />
+                                <input className='p-2 w-full text-gray-500' type="text" name="email" placeholder='name@email.com' autoComplete='off'
+                                    onChange={(e) => {
+                                        setEmail(e.target.value)
+                                    }}
+                                />
                             </div>
                             <div className='relative'>
                                 <span>PASSWORD</span>
                                 <input className='p-2 w-full text-gray-500' type="password" name="password" placeholder='Enter Your Password' autoComplete='off'
+                                    onChange={(e) => {
+                                        setPassword(e.target.value)
+                                    }}
                                 />
                                 <BsEye className='absolute top-1/2 right-3 text-black' width="16" height="16" />
                             </div>
                             <span className='text-dimPink'>Forget Password?</span>
-                            <button className='logibtn text-white py-2 px-3'>Login</button>
+                            <button className='logibtn text-white py-2 px-3'
+                                onClick={() => {
+                                    Login(email, password)
+                                }}
+                            >Login</button>
                         </form>
                         <div className='mt-5 grid grid-cols-3 items-center text-dimPink'>
                             <hr className='border-gray-400' />

@@ -13,21 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 const Video_ = (props) => {
    return (
       <iframe
-         // ref={videoRef}
-         // width={"100%"}
-         // height={"100%"}
          className="  w-full h-auto rounded-lg min-h-[500px] bg-yellow-200  "
-         // className={'rounded-lg ' + videoOpacity}
-         // onLoad={() => {
-         //    setImageOpacity(' opacity-0  z-[100] ')
-         //    setVideoOpacity(' opacity-1 z-[200] ')
-         //    setVideoLoad(true)
-         // }}
-         // onPause={() => {
-         //    setShowVideo(false)
-         //    setImageOpacity(' opacity-1  z-[200] ')
-         //    setVideoOpacity(' opacity-0 z-[100] ')
-         // }}
          allow="autoplay; fullscreen"
          controls
          // src={props.src}
@@ -233,13 +219,13 @@ const VideoComp = () => {
                                     </div>
                                     : null
                               }
-                              {
+                              {/* {
                                  (selectedIndex + 1 === index1) ?
                                     <div className=" absolute w-[50px] h-[50px] bg-white  top-[30%] left-[45%] flex items-center justify-center rounded-lg " >
                                        <h1 className="text-[#000] font-bold " >Next</h1>
                                     </div>
                                     : null
-                              }
+                              } */}
                               {
                                  Completed(selectedIndex, index1) ?
                                     <div className=" absolute w-[50px] h-[50px] bg-white top-[30%] left-[45%] flex items-center justify-center rounded-lg " >

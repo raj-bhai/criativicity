@@ -47,13 +47,13 @@ const Hero = () => {
                         <h1 className="text-white text-[0.7rem] lg:text-[1.8rem] font-Lato">course for individuals of all skill levels.</h1>
                      </motion.div>
                      <div className="cta flex items-center justify-center  gap-x-8 lg:gap-x-14 mt-5 lg:mt-10 ">
-                        <div className="imgencont flex items-center justify-start flex-col">
+                        {/* <div className="imgencont flex items-center justify-start flex-col">
                            <div className="w-full h-full aspect-3/2 object-contain flex items-center justify-center gap-2">
                               <Image src={student} alt="student"></Image>
                               <h1 className="text-[#00DB8C] text-[1.5rem] lg:text-[2rem] font-bold font-Lato">414</h1>
                            </div>
                            <h1 className="text-white font-normal font-Lato text-[0.8rem] lg:text-[1.1rem]">Students Enrolled</h1>
-                        </div>
+                        </div> */}
                         <div className="btn">
                            <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg">
                               Get Started
