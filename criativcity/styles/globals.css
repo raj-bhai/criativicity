@@ -6,6 +6,16 @@
   background: #000;
 }
 
+.no-scrollbar {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+
 .newnavbarbg{
   background : rgb(54, 59, 61)
 }
