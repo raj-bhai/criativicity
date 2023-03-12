@@ -12,31 +12,15 @@ import { useSelector, useDispatch } from "react-redux";
 
 const Video_ = (props) => {
    const videoRef = useRef(null);
-
-   const handleVideoEnded = () => {
-      console.log("Video ended");
-      // Set the current time of the video to the end of the video
-      //  videoRef.current.currentTime = videoRef.current.duration;
-   };
    return (
-      // <iframe
-      //    className="  w-full h-auto rounded-lg min-h-[500px] bg-yellow-200  "
-      //    allow="autoplay; fullscreen"
-      //    controls
-      //    src={props.src}
-      //    //src={'https://res.cloudinary.com/drgvislmm/video/upload/v1669371379/videos/tech/yt1s.com_-Toyata_1080p_1_ewgaum.mp4'}
-      //    poster={men}
-      //    onEnded={handleVideoEnded}
-      //    ref={videoRef}
-      // ></iframe>
       <video
-         className="w-full h-auto rounded-lg min-h-[500px] bg-[#000]"
+         className="w-full h-auto  rounded-lg min-h-[500px] bg-[#000]"
          allow="autoplay; fullscreen"
          controls
          src={props.src}
-         poster={men}
          onEnded={() => props.onVideoEnd()}
          ref={videoRef}
+         poster={props.thumbnail}
       ></video>
    );
 };
@@ -47,13 +31,14 @@ const VideoComp = () => {
    const [selectedVideo, setSelectedVideo] = useState("");
    const [loading, setLoading] = useState(false);
    const videoListRef = useRef(null);
+   const mainScrollRef = useRef(null);
 
    useEffect(() => {
       setSelectedVideo(data[0].videos[selectedIndex].url);
    }, [selectedIndex]);
 
    const AllowedToWatch = (selectedI, i) => {
-      if (selectedI + 1 <= i) {
+      if (selectedI + 1 >= i) {
          return true;
       } else {
          return false;
@@ -67,26 +52,32 @@ const VideoComp = () => {
          return false;
       }
    };
+    
+
+    
 
    return (
       <>
          <section className="navbarbg pt-32 text-white font-Lato pb-24">
-            <div className="grid grid-cols-1 lg:grid-cols-3  gap-4 mx-8 lg:mx-12">
+            <div className="grid grid-cols-1 lg:grid-cols-3  gap-4 mx-8 lg:mx-12" ref={mainScrollRef} >
                <div className=" border-fuchsia-400 col-span-2 rounded-lg mx-4 lg:w-[100%]">
                   {!loading && (
                      <Video_
                         src={selectedVideo}
+                        thumbnail={data[0].videos[selectedIndex].thumbnail}
                         onVideoEnd={async () => {
                            if (data.vi) await setLoading(true);
                            await setSelectedIndex(selectedIndex + 1);
+                           await videoListRef.current.children[selectedIndex + 1].scrollIntoView({ behavior: "smooth", block: "start" });
+                          // await window.scrollTo(0, 0)
                            await setLoading(false);
                         }}
-                        // poster={data[0].videos[selectedIndex].thumbnail}
+                     // poster={data[0].videos[selectedIndex].thumbnail}
                      />
                   )}
                   {/* <Image src={vidImg} alt="men" className="w-full h-auto rounded-t-lg " /> */}
                   <div className="p-4 border-[0.03rem] border-fuchsia-400 rounded-t-lg mt-4">
-                     <h2 className="text-[1rem] font-Lato lg:text-[1.2rem] font-bold mb-4">Adobe Premiere Pro Essentials Course</h2>
+                     <h2 className="text-[1rem] font-Lato lg:text-[1.2rem] font-bold mb-4">{data[0].videos[selectedIndex].title}</h2>
                      <div className="flex justify-between items-center">
                         <div className="flex items-center">
                            <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
@@ -110,23 +101,27 @@ const VideoComp = () => {
                      </div>
                      <div className="summary px-2 py-2">
                         <h2 className="text-[0.78rem] font-Lato lg:text-[1rem] ">
-                           In this video, We are explaining about Introduction to Video Editing. Please do watch the complete video for in-depth
-                           information.
+                           {data[0].videos[selectedIndex].description}
+                           {/* In this video, We are explaining about Introduction to Video Editing. Please do watch the complete video for in-depth
+                           information. */}
                         </h2>
                      </div>
-                     <div className="commentFilter flex items-center justify-between">
-                        <div className="cms flex items-center gap-x-[0.7rem]">
-                           <AiOutlineComment className="lg:w-7 lg:h-7" />
-                           <h3>51</h3>
-                           <h3 className="text-[0.6rem] lg:text-[1.1rem]">comments</h3>
-                        </div>
-                        <div className="filter gap-x-[0.6rem] flex items-center ">
-                           <div className="">
-                              <GoSettings className="rotate-90 lg:w-4 lg:h-4" />
-                           </div>
-                           <div className="text-[0.6rem] lg:text-[1.1rem]">Sort By</div>
-                        </div>
-                     </div>
+                     {
+                        data[0].videos[selectedIndex]?.comments?.length ?
+                           <div className="commentFilter flex items-center justify-between">
+                              <div className="cms flex items-center gap-x-[0.7rem]">
+                                 <AiOutlineComment className="lg:w-7 lg:h-7" />
+                                 <h3>{data[0].videos[selectedIndex]?.comments?.length}</h3>
+                                 <h3 className="text-[0.6rem] lg:text-[1.1rem]">comments</h3>
+                              </div>
+                              <div className="filter gap-x-[0.6rem] flex items-center ">
+                                 <div className="">
+                                    <GoSettings className="rotate-90 lg:w-4 lg:h-4" />
+                                 </div>
+                                 <div className="text-[0.6rem] lg:text-[1.1rem]">Sort By</div>
+                              </div>
+                           </div> : null
+                     }
                   </div>
                   <div className="flex py-2.5 items-center border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400 w-full">
                      <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
@@ -137,66 +132,34 @@ const VideoComp = () => {
                         type="text"
                      />
                   </div>
-                  <div className="flex py-3 items-start flex-col border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400">
-                     <div className="flex items-center gap-x-[0.9rem] px-3">
-                        <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
-                        <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">Satish Prajapati</h3>
-                        <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">2 days ago</h3>
-                     </div>
-                     <div className="flex ml-[4rem] flex-col">
-                        <h3 className="text-[0.7rem] lg:text-[1.1rem] py-2">All this was Comment section</h3>
-                        <div className="flex gap-x-[0.4rem] items-center justify-between">
-                           <div className="flex gap-x-[0.6rem]">
-                              <BiLike></BiLike>
-                              <BiDislike />
+                  {
+                     data[0].videos[selectedIndex].comments.map((comment) => (
+                        <div className="flex py-3 items-start flex-col border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400">
+                           <div className="flex items-center gap-x-[0.9rem] px-3">
+                              <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
+                              <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">{comment.user}</h3>
+                              <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">2 days ago</h3>
                            </div>
-                           <h2 className="text-[0.7rem] lg:text-[1rem]">Reply</h2>
-                        </div>
-                     </div>
-                  </div>
-
-                  <div className="flex py-3 items-start flex-col border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400">
-                     <div className="flex items-center gap-x-[0.9rem] px-3">
-                        <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
-                        <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">Satish Prajapati</h3>
-                        <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">2 days ago</h3>
-                     </div>
-                     <div className="flex ml-[4rem] flex-col">
-                        <h3 className="text-[0.7rem] lg:text-[1.1rem] py-2">All this was Comment section</h3>
-                        <div className="flex gap-x-[0.4rem] items-center justify-between">
-                           <div className="flex gap-x-[0.6rem]">
-                              <BiLike></BiLike>
-                              <BiDislike />
+                           <div className="flex ml-[4rem] flex-col">
+                              <h3 className="text-[0.7rem] lg:text-[1.1rem] py-2">{comment.data}</h3>
+                              <div className="flex gap-x-[0.4rem] items-center justify-between">
+                                 <div className="flex gap-x-[0.6rem]">
+                                    <BiLike></BiLike>
+                                    <BiDislike />
+                                 </div>
+                                 <h2 className="text-[0.7rem] lg:text-[1rem]">Reply</h2>
+                              </div>
                            </div>
-                           <h2 className="text-[0.7rem] lg:text-[1rem]">Reply</h2>
                         </div>
-                     </div>
-                  </div>
-
-                  <div className="flex py-3 items-start flex-col border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400">
-                     <div className="flex items-center gap-x-[0.9rem] px-3">
-                        <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
-                        <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">Satish Prajapati</h3>
-                        <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">2 days ago</h3>
-                     </div>
-                     <div className="flex ml-[4rem] flex-col">
-                        <h3 className="text-[0.7rem] lg:text-[1.1rem] py-2">All this was Comment section</h3>
-                        <div className="flex gap-x-[0.4rem] items-center justify-between">
-                           <div className="flex gap-x-[0.6rem]">
-                              <BiLike></BiLike>
-                              <BiDislike />
-                           </div>
-                           <h2 className="text-[0.7rem] lg:text-[1rem]">Reply</h2>
-                        </div>
-                     </div>
-                  </div>
+                     ))
+                  }
                </div>
                {data.map((item, index) => (
                   <div className="space-y-4 mx-4 border-[0px] pr-[20px] " key={index}>
                      <div className="border border-fuchsia-400 rounded-md p-4">
                         {/* <h2 className="text-[0.6rem] lg:text-[0.89rem] font-bold mb-4">Adobe Premiere Pro CC Masterclass: Full Crash Course</h2> */}
                         <h2 className="text-[0.6rem] lg:text-[0.89rem] font-bold mb-4">
-                           {item.courseName} {selectedIndex}
+                           {item.courseName}
                         </h2>
                         {item.details.map((texts, index) => (
                            <div className="space-y-2" key={index}>
@@ -204,60 +167,61 @@ const VideoComp = () => {
                               {/* <h3 className="text-[0.9rem] font-medium">10 hours 33 Minutes Left</h3>
                               <h3 className="text-[0.9rem] font-medium">Creator: Yasir Quyoom</h3>
                               <h3 className="text-[0.9rem] font-medium">Last updated 08/2022</h3> */}
-                           </div>
+                           </div> 
                         ))}
                      </div>
-                     <div className="space-y-4 border- border-red-300 py-2 px-1 no-scrollbar overflow-auto h-[550px]"ref={videoListRef} >
+                     <div className="space-y-4 border- border-red-300 py-2 px-1 no-scrollbar overflow-auto h-[550px]" ref={videoListRef} >
                         {item.videos.map(
                            (viddet, index1) =>
                               // ((selectedIndex < index1) && (selectedIndex !== index1)) &&
-                              ((selectedIndex && index1 === selectedIndex - 1) || selectedIndex < index1) && (
-                                 <div
-                                    className={`space-y-2 relative  ${
-                                       AllowedToWatch(selectedIndex, index1) ? " cursor-pointer  " : "cursor-not-allowed "
-                                    } ${Completed(selectedIndex, index1) ? "bg-[rgba(16,188,156,0.1)] " : ""}  `}
-                                    key={index1}
-                                    onClick={async () => {
-                                       if (AllowedToWatch(selectedIndex, index1)) {
-                                          await setLoading(true);
-                                          await setSelectedIndex(index1);
-                                          await setLoading(false);
-                                          videoListRef.current.children[index1].scrollIntoView({ behavior: "smooth", block: "start" });
-                                       }
-                                    }}
-                                 >
-                                    <div className="border border-fuchsia-400 rounded-md flex items-center p-4">
-                                       <img src={viddet.thumbnail} alt="thumbnail" className="w-20 lg:w-1/2 h-auto rounded-md" />
-                                       <div className="ml-4">
-                                          <h3 className="text-[0.6rem] lg:text-[0.89rem] font-medium mb-1">{viddet.title}</h3>
-                                          <h4 className="text-sm font-medium text-gray-500 mb-1">By: John Smith</h4>
-                                          <div className="flex items-center">
-                                             <h5 className="text-sm font-medium mr-2">Duration</h5>
-                                             <h5 className="text-sm font-medium">{viddet.duration}</h5>
-                                          </div>
+                              // ((selectedIndex && index1 === selectedIndex - 1) || selectedIndex < index1) && 
+                              (  selectedIndex !== index1) &&
+                           (
+                              <div
+                                 className={`space-y-2 relative  ${AllowedToWatch(selectedIndex, index1) ? " cursor-pointer  " : "cursor-not-allowed "
+                                    } ${Completed(selectedIndex, index1) ? "bg-[#CACFD2] " : ""}  `}
+                                 key={index1}
+                                 onClick={async () => {
+                                    if (AllowedToWatch(selectedIndex, index1)) {
+                                       await setLoading(true);
+                                       await setSelectedIndex(index1);
+                                       await setLoading(false);
+                                       videoListRef.current.children[index1].scrollIntoView({ behavior: "smooth", block: "start" });
+                                    }
+                                 }}
+                              >
+                                 <div className="border border-fuchsia-400 rounded-md flex items-center p-4">
+                                    <img src={viddet.thumbnail} alt="thumbnail" className="w-20 lg:w-1/2 h-auto rounded-md" />
+                                    <div className="ml-4">
+                                       <h3 className="text-[0.6rem] lg:text-[0.89rem] font-medium mb-1">{viddet.title}</h3>
+                                       <h4 className="text-sm font-medium text-gray-500 mb-1">By: John Smith</h4>
+                                       <div className="flex items-center">
+                                          <h5 className="text-sm font-medium mr-2">Duration</h5>
+                                          <h5 className="text-sm font-medium">{viddet.duration}</h5>
                                        </div>
                                     </div>
-                                    {!AllowedToWatch(selectedIndex, index1) ? (
-                                       <div className=" absolute w-[50px] h-[50px] bg-white  top-[30%] left-[45%] flex items-center justify-center rounded-lg ">
-                                          {/* <h1 className="text-[#000]" >{index1}</h1> */}
-                                          <AiFillLock color="#000" size={30} />
-                                       </div>
-                                    ) : null}
-                                    {/* {
-                                 (selectedIndex + 1 === index1) ?
-                                    <div className=" absolute w-[50px] h-[50px] bg-white  top-[30%] left-[45%] flex items-center justify-center rounded-lg " >
-                                       <h1 className="text-[#000] font-bold " >Next</h1>
-                                    </div>
-                                    : null
-                              } */}
-                                    {Completed(selectedIndex, index1) ? (
-                                       <div className=" absolute w-[50px] h-[50px] bg-white top-[30%] left-[45%] flex items-center justify-center rounded-lg ">
-                                          {/* <h1 className="text-[#000] font-bold " >Next</h1> */}
-                                          <FaBackward color="#000" size={30} />
-                                       </div>
-                                    ) : null}
                                  </div>
-                              )
+                                 {!AllowedToWatch(selectedIndex, index1) ? (
+                                    <div className=" absolute w-[50px] h-[50px] bg-white  top-[30%] left-[45%] flex items-center justify-center rounded-lg ">
+                                       {/* <h1 className="text-[#000]" >{index1}</h1> */}
+                                       <AiFillLock color="#000" size={30} />
+                                    </div>
+                                 ) : null}
+                                 {
+                                    (selectedIndex + 1 === index1) ?
+                                       <div className=" absolute w-[50px] h-[50px] bg-white  top-[30%] left-[45%] flex items-center justify-center rounded-lg " >
+                                          <h1 className="text-[#000] font-bold " >Next</h1>
+                                       </div>
+                                       : null
+                                 }
+                                 {Completed(selectedIndex, index1) ? (
+                                    <div className=" absolute w-[50px] h-[50px] bg-white top-[30%] left-[45%] flex items-center justify-center rounded-lg ">
+                                       {/* <h1 className="text-[#000] font-bold " >Next</h1> */}
+                                       <FaBackward color="#000" size={30} />
+                                    </div>
+                                 ) : null}
+                              </div>
+                           )
                         )}
                      </div>
                   </div>

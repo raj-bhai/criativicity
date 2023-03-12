@@ -7,10 +7,24 @@ import { motion } from "framer-motion";
 import { navVariants } from "@/utils/motion";
 import Link from "next/link";
 import styles from "@/src/style";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
    const [toggle, setToggle] = useState(true);
    const [active, setActive] = useState("Home");
+   const [token, setToken] = useState(null);
+   const router = useRouter()
+
+
+   useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+         setToken(token)
+      }
+      console.log("Token :", token)
+   }, [])
+
+
    return (
       <nav className="w-full fixed top-0 z-40 navbarbg text-white flex py-5 justify-between items-center navbar px-5 md:px-10 lg:px-20">
          <Link href={"/"}>
@@ -20,9 +34,23 @@ const Navbar = () => {
          <motion.nav animate={{ x: 50 }} transition={{ type: "spring", stiffness: 100, damping: 45 }}>
             <ul className="list-none sm:flex hidden text-white justify-end items-center flex-1">
                {navlinks.map((nav, index) => (
-                  <li className={`text-white text-[1.1rem] mr-8`} key={index}>
-                     <a href={`${nav.path}`}>{nav.text}</a>
-                  </li>
+                  index !== 4 ?
+                     <li className={`text-white text-[1.1rem] mr-8`} key={index}>
+                        <a href={`${nav.path}`}>{nav.text}</a>
+                     </li> :
+                     <li className={`text-white text-[1.1rem] mr-8`} key={index}
+                        onClick={() => {
+                           if (token) {
+                              localStorage.removeItem('token');
+                              setToken(null)
+                              router.reload( )
+                           } else {
+                              router.push('/login')
+                           }
+                        }}
+                     >
+                        <a>{token ? "Logout" : nav.text}</a>
+                     </li>
                ))}
                <style jsx>{`
                   li:last-of-type {
@@ -35,6 +63,7 @@ const Navbar = () => {
                      font-weight: 650;
                      align-content: Center;
                      vertical-align: Center;
+                     cursor:pointer;
                   }
                `}</style>
             </ul>
