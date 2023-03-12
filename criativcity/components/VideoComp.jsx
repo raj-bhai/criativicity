@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import student from "../assets/student.png";
 import Image from "next/image";
 import vidImg from "../assets/videoimg.png";
@@ -11,15 +11,34 @@ import { FaBackward } from 'react-icons/fa'
 import { useSelector, useDispatch } from "react-redux";
 
 const Video_ = (props) => {
+
+   const videoRef = useRef(null);
+
+   const handleVideoEnded = () => {
+      console.log("Video ended");
+      // Set the current time of the video to the end of the video
+      //  videoRef.current.currentTime = videoRef.current.duration;
+   };
    return (
-      <iframe
-         className="  w-full h-auto rounded-lg min-h-[500px] bg-yellow-200  "
+      // <iframe
+      //    className="  w-full h-auto rounded-lg min-h-[500px] bg-yellow-200  "
+      //    allow="autoplay; fullscreen"
+      //    controls
+      //    src={props.src}
+      //    //src={'https://res.cloudinary.com/drgvislmm/video/upload/v1669371379/videos/tech/yt1s.com_-Toyata_1080p_1_ewgaum.mp4'}
+      //    poster={men}
+      //    onEnded={handleVideoEnded}
+      //    ref={videoRef}
+      // ></iframe>
+      <video
+         className="w-full h-auto rounded-lg min-h-[500px] bg-[#000]"
          allow="autoplay; fullscreen"
          controls
-         // src={props.src}
-         src={'https://res.cloudinary.com/drgvislmm/video/upload/v1669371379/videos/tech/yt1s.com_-Toyata_1080p_1_ewgaum.mp4'}
+         src={props.src}
          poster={men}
-      ></iframe>
+         onEnded={() => props.onVideoEnd()}
+         ref={videoRef}
+      ></video>
    )
 }
 
@@ -60,6 +79,12 @@ const VideoComp = () => {
                      !loading &&
                      <Video_
                         src={selectedVideo}
+                        onVideoEnd={async () => {
+                           if (data.vi)
+                           await setLoading(true)
+                           await setSelectedIndex(selectedIndex + 1);
+                           await setLoading(false)
+                        }}
                      // poster={data[0].videos[selectedIndex].thumbnail}
                      />
                   }

@@ -4,21 +4,28 @@ import { BsEye, BsFacebook, BsApple } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 import axios from 'axios';
 import { Apiurl } from '@/constants/url';
+import { useRouter } from 'next/router';
 
 
 const LoginScreen = () => {
 
+    const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const Login = (email, password) => {
+        console.log("hello mf")
         const postData = {
             email: email,
             password: password,
         };
         axios.post(`${Apiurl}/auth/Login`, postData)
             .then((response) => {
-                console.log('Post created successfully:', response.data);
+                if (response.data.success) {
+                    const token = response.data.token
+                    localStorage.setItem('token', token);
+                    router.push('/')
+                }
             })
             .catch((error) => {
                 console.error('Error creating post:', error);
@@ -35,8 +42,12 @@ const LoginScreen = () => {
                             <h2 className='font-pressfont text-[1rem] lg:text-[1.5rem] pressFont  '>
                                 Welcome Back</h2>
                         </div>
-
-                        <form action='' className='flex flex-col gap-4 text-white '>
+                        {/* 
+                        <form onSubmit={(e) => {
+                            e.preventDefault();
+                            Login(email, password);
+                        }} className='flex flex-col gap-4 text-white '> */}
+                        <div>
                             <div className='relative'>
                                 <span>EMAIL</span>
                                 <input className='p-2 w-full text-gray-500' type="text" name="email" placeholder='name@email.com' autoComplete='off'
@@ -60,7 +71,8 @@ const LoginScreen = () => {
                                     Login(email, password)
                                 }}
                             >Login</button>
-                        </form>
+                        </div>
+                        {/* </form> */}
                         <div className='mt-5 grid grid-cols-3 items-center text-dimPink'>
                             <hr className='border-gray-400' />
                             <p className='text-center text-sm' >OR</p>
@@ -84,7 +96,7 @@ const LoginScreen = () => {
                     </div>
                 </section>
 
-            </div>
+            </div >
         </>
     )
 }
