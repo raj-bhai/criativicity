@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@next/font": "13.1.4",
-    "@reduxjs/toolkit": "^1.9.3",
     "axios": "^1.3.4",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.4",
@@ -19,8 +18,14 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
+<<<<<<< HEAD
     "react-loading-skeleton": "^3.2.0",
     "react-redux": "^8.0.5"
+=======
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.1",
+    "redux-thunk": "^2.4.2"
+>>>>>>> 7ac22bfdd729c0497e8433e32345888436c4bbc4
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",

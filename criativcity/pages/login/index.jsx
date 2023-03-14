@@ -47,7 +47,7 @@ const LoginScreen = () => {
                             e.preventDefault();
                             Login(email, password);
                         }} className='flex flex-col gap-4 text-white '> */}
-                        <div>
+                        <div className='flex flex-col gap-4 text-white ' >
                             <div className='relative'>
                                 <span>EMAIL</span>
                                 <input className='p-2 w-full text-gray-500' type="text" name="email" placeholder='name@email.com' autoComplete='off'
