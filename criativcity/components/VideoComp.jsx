@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import student from "../assets/student.png";
 import Image from "next/image";
-import vidImg from "../assets/videoimg.png";
 import men from "../assets/men.png";
-import smallvid from "../assets/smallvid.png";
 import { AiOutlineComment, AiFillLock } from "react-icons/ai";
 import { GoSettings } from "react-icons/go";
 import { BiLike, BiDislike } from "react-icons/bi";
@@ -52,9 +49,9 @@ const VideoComp = () => {
          return false;
       }
    };
-    
 
-    
+
+
 
    return (
       <>
@@ -66,11 +63,14 @@ const VideoComp = () => {
                         src={selectedVideo}
                         thumbnail={data[0].videos[selectedIndex].thumbnail}
                         onVideoEnd={async () => {
-                           if (data.vi) await setLoading(true);
-                           await setSelectedIndex(selectedIndex + 1);
-                           await videoListRef.current.children[selectedIndex + 1].scrollIntoView({ behavior: "smooth", block: "start" });
-                          // await window.scrollTo(0, 0)
-                           await setLoading(false);
+                           if (data[0].videos.length - 1 > selectedIndex) {
+                              await setLoading(true);
+                              await setSelectedIndex(selectedIndex + 1);
+                              if (data[0].videos.length - 1 > selectedIndex + 1) {
+                                 await videoListRef.current.children[selectedIndex + 1].scrollIntoView({ behavior: "smooth", block: "start" });
+                              }
+                              await setLoading(false);
+                           }
                         }}
                      // poster={data[0].videos[selectedIndex].thumbnail}
                      />
@@ -167,7 +167,7 @@ const VideoComp = () => {
                               {/* <h3 className="text-[0.9rem] font-medium">10 hours 33 Minutes Left</h3>
                               <h3 className="text-[0.9rem] font-medium">Creator: Yasir Quyoom</h3>
                               <h3 className="text-[0.9rem] font-medium">Last updated 08/2022</h3> */}
-                           </div> 
+                           </div>
                         ))}
                      </div>
                      <div className="space-y-4 border- border-red-300 py-2 px-1 no-scrollbar overflow-auto h-[550px]" ref={videoListRef} >
@@ -175,53 +175,53 @@ const VideoComp = () => {
                            (viddet, index1) =>
                               // ((selectedIndex < index1) && (selectedIndex !== index1)) &&
                               // ((selectedIndex && index1 === selectedIndex - 1) || selectedIndex < index1) && 
-                              (  selectedIndex !== index1) &&
-                           (
-                              <div
-                                 className={`space-y-2 relative  ${AllowedToWatch(selectedIndex, index1) ? " cursor-pointer  " : "cursor-not-allowed "
-                                    } ${Completed(selectedIndex, index1) ? "bg-[#CACFD2] " : ""}  `}
-                                 key={index1}
-                                 onClick={async () => {
-                                    if (AllowedToWatch(selectedIndex, index1)) {
-                                       await setLoading(true);
-                                       await setSelectedIndex(index1);
-                                       await setLoading(false);
-                                       videoListRef.current.children[index1].scrollIntoView({ behavior: "smooth", block: "start" });
+                              (selectedIndex !== index1) &&
+                              (
+                                 <div
+                                    className={`space-y-2 relative  ${AllowedToWatch(selectedIndex, index1) ? " cursor-pointer  " : "cursor-not-allowed "
+                                       } ${Completed(selectedIndex, index1) ? "bg-[#CACFD2] " : ""}  `}
+                                    key={index1}
+                                    onClick={async () => {
+                                       if (AllowedToWatch(selectedIndex, index1)) {
+                                          await setLoading(true);
+                                          await setSelectedIndex(index1);
+                                          await setLoading(false);
+                                          if (index1 !== item.videos.length - 1) {
+                                             videoListRef.current.children[index1].scrollIntoView({ behavior: "smooth", block: "start" });
+                                          }
+                                       }
+                                    }}
+                                 >
+                                    <div className="border border-fuchsia-400 rounded-md flex items-center p-4">
+                                       <img src={viddet.thumbnail} alt="thumbnail" className="w-20 lg:w-1/2 h-auto rounded-md" />
+                                       <div className="ml-4">
+                                          <h3 className="text-[0.6rem] lg:text-[0.89rem] font-medium mb-1">{viddet.title}</h3>
+                                          <h4 className="text-sm font-medium text-gray-500 mb-1">By: John Smith</h4>
+                                          <div className="flex items-center">
+                                             <h5 className="text-sm font-medium mr-2">Duration</h5>
+                                             <h5 className="text-sm font-medium">{viddet.duration}</h5>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    {!AllowedToWatch(selectedIndex, index1) ? (
+                                       <div className=" absolute w-[50px] h-[50px] bg-white  top-[30%] left-[45%] flex items-center justify-center rounded-lg ">
+                                          <AiFillLock color="#000" size={30} />
+                                       </div>
+                                    ) : null}
+                                    {
+                                       (selectedIndex + 1 === index1) ?
+                                          <div className=" absolute w-[50px] h-[50px] bg-white  top-[30%] left-[45%] flex items-center justify-center rounded-lg " >
+                                             <h1 className="text-[#000] font-bold " >Next</h1>
+                                          </div>
+                                          : null
                                     }
-                                 }}
-                              >
-                                 <div className="border border-fuchsia-400 rounded-md flex items-center p-4">
-                                    <img src={viddet.thumbnail} alt="thumbnail" className="w-20 lg:w-1/2 h-auto rounded-md" />
-                                    <div className="ml-4">
-                                       <h3 className="text-[0.6rem] lg:text-[0.89rem] font-medium mb-1">{viddet.title}</h3>
-                                       <h4 className="text-sm font-medium text-gray-500 mb-1">By: John Smith</h4>
-                                       <div className="flex items-center">
-                                          <h5 className="text-sm font-medium mr-2">Duration</h5>
-                                          <h5 className="text-sm font-medium">{viddet.duration}</h5>
+                                    {Completed(selectedIndex, index1) ? (
+                                       <div className=" absolute w-[50px] h-[50px] bg-white top-[30%] left-[45%] flex items-center justify-center rounded-lg ">
+                                          <FaBackward color="#000" size={30} />
                                        </div>
-                                    </div>
+                                    ) : null}
                                  </div>
-                                 {!AllowedToWatch(selectedIndex, index1) ? (
-                                    <div className=" absolute w-[50px] h-[50px] bg-white  top-[30%] left-[45%] flex items-center justify-center rounded-lg ">
-                                       {/* <h1 className="text-[#000]" >{index1}</h1> */}
-                                       <AiFillLock color="#000" size={30} />
-                                    </div>
-                                 ) : null}
-                                 {
-                                    (selectedIndex + 1 === index1) ?
-                                       <div className=" absolute w-[50px] h-[50px] bg-white  top-[30%] left-[45%] flex items-center justify-center rounded-lg " >
-                                          <h1 className="text-[#000] font-bold " >Next</h1>
-                                       </div>
-                                       : null
-                                 }
-                                 {Completed(selectedIndex, index1) ? (
-                                    <div className=" absolute w-[50px] h-[50px] bg-white top-[30%] left-[45%] flex items-center justify-center rounded-lg ">
-                                       {/* <h1 className="text-[#000] font-bold " >Next</h1> */}
-                                       <FaBackward color="#000" size={30} />
-                                    </div>
-                                 ) : null}
-                              </div>
-                           )
+                              )
                         )}
                      </div>
                   </div>
