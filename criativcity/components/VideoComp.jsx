@@ -31,6 +31,8 @@ const VideoComp = () => {
    const [selectedIndex, setSelectedIndex] = useState(0);
    const [selectedVideo, setSelectedVideo] = useState("");
    const [loading, setLoading] = useState(false);
+   const [commentData, setCommentData] = useState([]);
+   const [commentText, setCommentText] = useState('');
    const videoListRef = useRef(null);
    const mainScrollRef = useRef(null);
 
@@ -44,6 +46,49 @@ const VideoComp = () => {
    useEffect(() => {
       getAllCourse(id)
    }, [])
+
+   useEffect(() => {
+      if (course_)
+         getCommentData(course_.videos[selectedIndex]._id)
+   }, [selectedIndex, course_])
+
+
+   const getCommentData = (videoId) => {
+      const data = {
+         "videoId": videoId
+      };
+      axios.post(`${Apiurl}/course/getComment`, data)
+         .then(response => {
+            setCommentData(response.data.data);
+         })
+         .catch(error => {
+            setCommentData([])
+            console.error(error);
+         });
+   }
+
+   const AddComment = async (text) => {
+      const token =  await localStorage.getItem('token')
+      const data = {
+         "courseId": id,
+         "videoId": course_.videos[selectedIndex]._id,
+         "data": text
+      };
+      const config = {
+         headers: { Authorization: `Bearer ${token}` }
+       };
+       
+      axios.post(`${Apiurl}/course/addComment`, data, config)
+         .then(response => {
+            console.log(response)
+            if (response.data.success) {
+               getCommentData(course_.videos[selectedIndex]._id)
+            }
+         })
+         .catch(error => {
+            console.error(error);
+         });
+   }
 
 
 
@@ -150,11 +195,11 @@ const VideoComp = () => {
                            </h2>
                         </div>
                         {
-                           data[0].videos[selectedIndex]?.comments?.length ?
+                           commentData.length ?
                               <div className="commentFilter flex items-center justify-between">
                                  <div className="cms flex items-center gap-x-[0.7rem]">
                                     <AiOutlineComment className="lg:w-7 lg:h-7" />
-                                    <h3>{data[0].videos[selectedIndex]?.comments?.length}</h3>
+                                    <h3>{commentData.length}</h3>
                                     <h3 className="text-[0.6rem] lg:text-[1.1rem]">comments</h3>
                                  </div>
                                  <div className="filter gap-x-[0.6rem] flex items-center ">
@@ -173,10 +218,21 @@ const VideoComp = () => {
                            className=" mx-4 py-2 bg-transparent border-none focus:border-none border-transparent outline-none"
                            placeholder="Add a comment"
                            type="text"
-                        />
+                           value={commentText}
+                           onChange={(e) => {
+                              setCommentText(e.target.value)
+                           }}
+                           onKeyDown={async (e) => {
+                              if (e.key === 'Enter') {
+                                 await AddComment(commentText)
+                                 await setCommentText('')
+                                 // Call your function here
+                              }
+                           }}
+                        ></input>
                      </div>
                      {
-                        data[0].videos[selectedIndex].comments.map((comment, i) => (
+                        commentData.map((comment, i) => (
                            <div key={i} className="flex py-3 items-start flex-col border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400">
                               <div className="flex items-center gap-x-[0.9rem] px-3">
                                  <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
