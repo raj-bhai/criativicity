@@ -133,8 +133,8 @@ const VideoComp = () => {
                      />
                   </div>
                   {
-                     data[0].videos[selectedIndex].comments.map((comment) => (
-                        <div className="flex py-3 items-start flex-col border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400">
+                     data[0].videos[selectedIndex].comments.map((comment, i) => (
+                        <div key={i} className="flex py-3 items-start flex-col border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400">
                            <div className="flex items-center gap-x-[0.9rem] px-3">
                               <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
                               <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">{comment.user}</h3>
