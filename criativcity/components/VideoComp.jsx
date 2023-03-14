@@ -118,7 +118,6 @@ const VideoComp = () => {
                                  scrollToSelectedVideo(selectedIndex + 1);
                               }
                            }}
-                        // poster={data[0].videos[selectedIndex].thumbnail}
                         />
                      )}
                      {/* <Image src={vidImg} alt="men" className="w-full h-auto rounded-t-lg " /> */}
@@ -148,8 +147,6 @@ const VideoComp = () => {
                         <div className="summary px-2 py-2">
                            <h2 className="text-[0.78rem] font-Lato lg:text-[1rem] ">
                               {course_.videos[selectedIndex].description}
-                              {/* In this video, We are explaining about Introduction to Video Editing. Please do watch the complete video for in-depth
-                           information. */}
                            </h2>
                         </div>
                         {

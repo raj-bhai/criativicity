@@ -33,7 +33,7 @@ const CourseComp = () => {
                   <div className="flex items-center navbarbg justify-center">
                      {
                         Courses.map((item, index) => (
-                           <section key={index} className="mt flex justify-center border-2 border-fuchsia-50 rounded-lg lg:w-[78%] px-2 mx-2 py-1">
+                           <section key={index} className="mt flex justify-center cursor-pointer hover:bg-[#17202A] border-2 border-fuchsia-50 rounded-lg lg:w-[78%] px-2 mx-2 py-1">
                               <div className="adobe-vid-cont lg:flex lg:items-start  justify-between">
                                  <div className="text-cont ">
                                     <div className="" >
