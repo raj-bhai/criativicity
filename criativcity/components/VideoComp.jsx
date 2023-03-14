@@ -30,7 +30,7 @@ const Video_ = (props) => {
       //    ref={videoRef}
       // ></iframe>
       <video
-         className="w-full h-auto rounded-lg min-h-[500px] bg-[#000]"
+         className="w-full h-auto rounded-lg min-h-[500px] bg-[#000] mt-[5rem]"
          allow="autoplay; fullscreen"
          controls
          src={props.src}
@@ -52,6 +52,9 @@ const VideoComp = () => {
       setSelectedVideo(data[0].videos[selectedIndex].url);
    }, [selectedIndex]);
 
+   
+  
+
    const AllowedToWatch = (selectedI, i) => {
       if (selectedI + 1 <= i) {
          return true;
@@ -67,6 +70,26 @@ const VideoComp = () => {
          return false;
       }
    };
+
+const scrollToSelectedVideo = (index) => {
+   const videoElement = videoListRef.current.children[index];
+   if (videoElement) {
+     const topOffset = videoElement.offsetTop;
+     videoListRef.current.scrollBy({
+       top: topOffset - videoListRef.current.offsetTop,
+       behavior: "smooth",
+     });
+   }
+ };
+ 
+ const handleVideoClick = async (index) => {
+   if (AllowedToWatch(selectedIndex, index)) {
+     await setLoading(true);
+     await setSelectedIndex(index);
+     await setLoading(false);
+     scrollToSelectedVideo(index);
+   }
+ };
 
    return (
       <>
@@ -207,7 +230,7 @@ const VideoComp = () => {
                            </div>
                         ))}
                      </div>
-                     <div className="space-y-4 border- border-red-300 py-2 px-1 no-scrollbar overflow-auto h-[550px]"ref={videoListRef} >
+                     <div className="space-y-4 border- border-red-300 py-2 px-1 no-scrollbar overflow-scroll max-h-[550px]" style={{ paddingTop: '64px' }}  ref={videoListRef}>
                         {item.videos.map(
                            (viddet, index1) =>
                               // ((selectedIndex < index1) && (selectedIndex !== index1)) &&
@@ -217,14 +240,17 @@ const VideoComp = () => {
                                        AllowedToWatch(selectedIndex, index1) ? " cursor-pointer  " : "cursor-not-allowed "
                                     } ${Completed(selectedIndex, index1) ? "bg-[rgba(16,188,156,0.1)] " : ""}  `}
                                     key={index1}
-                                    onClick={async () => {
-                                       if (AllowedToWatch(selectedIndex, index1)) {
-                                          await setLoading(true);
-                                          await setSelectedIndex(index1);
-                                          await setLoading(false);
-                                          videoListRef.current.children[index1].scrollIntoView({ behavior: "smooth", block: "start" });
-                                       }
-                                    }}
+                                    onClick={() => handleVideoClick(index1)}
+                                    // onClick={async () => {
+                                    //    if (AllowedToWatch(selectedIndex, index1)) {
+                                    //       await setLoading(true);
+                                    //       await setSelectedIndex(index1);
+                                    //       await setLoading(false);
+                                    //       await setSelectedIndex(index1);
+                                    //       // videoListRef.current.children[index1].scrollIntoView({ behavior: "smooth", block: "start" });
+
+                                    //    }
+                                    // }}
                                  >
                                     <div className="border border-fuchsia-400 rounded-md flex items-center p-4">
                                        <img src={viddet.thumbnail} alt="thumbnail" className="w-20 lg:w-1/2 h-auto rounded-md" />
