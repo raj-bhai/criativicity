@@ -49,6 +49,69 @@ const VideoComp = () => {
       }, 2000);
    }, [selectedIndex]);
 
+   useEffect(() => {
+      getAllCourse(id)
+   }, [])
+
+   useEffect(() => {
+      if (course_)
+         getCommentData(course_.videos[selectedIndex]._id)
+   }, [selectedIndex, course_])
+
+
+   const getCommentData = (videoId) => {
+      const data = {
+         "videoId": videoId
+      };
+      axios.post(`${Apiurl}/course/getComment`, data)
+         .then(response => {
+            setCommentData(response.data.data);
+         })
+         .catch(error => {
+            setCommentData([])
+            console.error(error);
+         });
+   }
+
+   const AddComment = async (text) => {
+      const token = await localStorage.getItem('token')
+      const data = {
+         "courseId": id,
+         "videoId": course_.videos[selectedIndex]._id,
+         "data": text
+      };
+      const config = {
+         headers: { Authorization: `Bearer ${token}` }
+      };
+
+      axios.post(`${Apiurl}/course/addComment`, data, config)
+         .then(response => {
+            console.log(response)
+            if (response.data.success) {
+               getCommentData(course_.videos[selectedIndex]._id)
+            }
+         })
+         .catch(error => {
+            console.error(error);
+         });
+   }
+
+
+
+   const getAllCourse = (id) => {
+      axios
+         .get(`${Apiurl}/course/getCourseById?id=${id}`, {
+         })
+         .then((res) => {
+            if (res.data.success) {
+               setCourse_(res.data.data)
+            }
+         })
+         .catch((err) => {
+            console.log(err);
+         });
+   }
+
    const AllowedToWatch = (selectedI, i) => {
       if (selectedI + 1 >= i) {
          return true;
@@ -118,16 +181,22 @@ const VideoComp = () => {
                         <Video_
                            src={selectedVideo}
                            onVideoEnd={async () => {
-                              if (data.vi) await setLoading(true);
-                              await setSelectedIndex(selectedIndex + 1);
-                              await setLoading(false);
+                              if (course_?.videos.length - 1 > selectedIndex) {
+                                 await setLoading(true);
+                                 await setSelectedIndex(selectedIndex + 1);
+                                 if (course_?.videos.length - 1 > selectedIndex + 1) {
+                                    await videoListRef.current.children[selectedIndex + 1].scrollIntoView({ behavior: "smooth", block: "start" });
+                                 }
+                                 await setLoading(false);
+                                 scrollToSelectedVideo(selectedIndex + 1);
+                              }
                            }}
-                           // poster={data[0].videos[selectedIndex].thumbnail}
+                        // poster={data[0].videos[selectedIndex].thumbnail}
                         />
                      )}
                      {/* <Image src={vidImg} alt="men" className="w-full h-auto rounded-t-lg " /> */}
                      <div className="p-4 border-[0.03rem] border-fuchsia-400 rounded-t-lg mt-4 ">
-                        <h2 className="text-[1rem] font-Lato lg:text-[1.2rem] font-bold mb-4">Adobe Premiere Pro Essentials Course</h2>
+                        <h2 className="text-[1rem] font-Lato lg:text-[1.2rem] font-bold mb-4">{course_?.videos[selectedIndex].title}</h2>
                         <div className="flex justify-between items-center">
                            <div className="flex items-center">
                               <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
@@ -151,23 +220,19 @@ const VideoComp = () => {
                         </div>
                         <div className="summary px-2 py-2">
                            <h2 className="text-[0.78rem] font-Lato lg:text-[1rem] ">
-                              In this video, We are explaining about Introduction to Video Editing. Please do watch the complete video for in-depth
-                              information.
+                              {course_?.videos[selectedIndex].description}
                            </h2>
                         </div>
-                        <div className="commentFilter flex items-center justify-between">
-                           <div className="cms flex items-center gap-x-[0.7rem]">
-                              <AiOutlineComment className="lg:w-7 lg:h-7" />
-                              <h3>51</h3>
-                              <h3 className="text-[0.6rem] lg:text-[1.1rem]">comments</h3>
-                           </div>
-                           {/* <div className="filter gap-x-[0.6rem] flex items-center ">
-                              <div className="">
-                                 <GoSettings className="rotate-90 lg:w-4 lg:h-4" />
-                              </div>
-                              <div className="text-[0.6rem] lg:text-[1.1rem]">Sort By</div>
-                           </div> */}
-                        </div>
+                        {
+                           commentData.length ?
+                              <div className="commentFilter flex items-center justify-between">
+                                 <div className="cms flex items-center gap-x-[0.7rem]">
+                                    <AiOutlineComment className="lg:w-7 lg:h-7" />
+                                    <h3>{commentData.length}</h3>
+                                    <h3 className="text-[0.6rem] lg:text-[1.1rem]">comments</h3>
+                                 </div>
+                              </div> : null
+                        }
                      </div>
                      <div className="flex py-2.5 items-center border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400 w-full">
                         <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
@@ -176,89 +241,68 @@ const VideoComp = () => {
                            className=" mx-4 py-2 bg-transparent border-none focus:border-none border-transparent outline-none"
                            placeholder="Add a comment"
                            type="text"
-                        />
+                           value={commentText}
+                           onChange={(e) => {
+                              setCommentText(e.target.value)
+                           }}
+                           onKeyDown={async (e) => {
+                              if (e.key === 'Enter') {
+                                 await AddComment(commentText)
+                                 await setCommentText('')
+                                 // Call your function here
+                              }
+                           }}
+                        ></input>
                      </div>
-                     <div className="flex py-3 items-start flex-col border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400">
-                        <div className="flex items-center gap-x-[0.9rem] px-3">
-                           <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
-                           <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">Satish Prajapati</h3>
-                           <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">2 days ago</h3>
-                        </div>
-                        <div className="flex ml-[4rem] flex-col">
-                           <h3 className="text-[0.7rem] lg:text-[1.1rem] py-2">All this was Comment section</h3>
-                           <div className="flex gap-x-[0.4rem] items-center justify-between">
-                              <div className="flex gap-x-[0.6rem]">
-                                 <BiLike></BiLike>
-                                 {/* <BiDislike /> */}
+                     {
+                        commentData.map((comment, i) => (
+                           <div key={i} className="flex py-3 items-start flex-col border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400">
+                              <div className="flex items-center gap-x-[0.9rem] px-3">
+                                 <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
+                                 <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">{comment.user}</h3>
+                                 <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">2 days ago</h3>
                               </div>
-                              <h2 className="text-[0.7rem] lg:text-[1rem]">Reply</h2>
-                           </div>
-                        </div>
-                     </div>
-
-                     <div className="flex py-3 items-start flex-col border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400">
-                        <div className="flex items-center gap-x-[0.9rem] px-3">
-                           <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
-                           <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">Satish Prajapati</h3>
-                           <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">2 days ago</h3>
-                        </div>
-                        <div className="flex ml-[4rem] flex-col">
-                           <h3 className="text-[0.7rem] lg:text-[1.1rem] py-2">All this was Comment section</h3>
-                           <div className="flex gap-x-[0.4rem] items-center justify-between">
-                              <div className="flex gap-x-[0.6rem]">
-                                 <BiLike></BiLike>
-                                 {/* <BiDislike /> */}
-                              </div>
-                              <h2 className="text-[0.7rem] lg:text-[1rem]">Reply</h2>
-                           </div>
-                        </div>
-                     </div>
-
-                     <div className="flex py-3 items-start flex-col border-r-[0.04rem] border-l-[0.04rem] px-4 border-b-[0.04rem] border-fuchsia-400">
-                        <div className="flex items-center gap-x-[0.9rem] px-3">
-                           <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
-                           <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">Satish Prajapati</h3>
-                           <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">2 days ago</h3>
-                        </div>
-                        <div className="flex ml-[4rem] flex-col ">
-                           <h3 className="text-[0.7rem] lg:text-[1.1rem] py-2">All this was Comment section</h3>
-                           {replies.map((reply, index) => (
-                              <div key={index}>{reply}</div>
-                           ))}
-                           <div className="flex gap-x-[0.4rem] items-center justify-between">
-                              <div className="flex gap-x-[0.6rem]">
-                                 <BiLike></BiLike>
-                                 {/* <BiDislike /> */}
-                              </div>
-                              {showInput && (
-                                 <div>
-                                    <form onSubmit={handleSubmit}>
-                                       <input
-                                          className=" lg:mx-4 p-2 bg-transparent border-none focus:border-none border-transparent outline-none"
-                                          placeholder="Add a comment"
-                                          type="text"
-                                       />
-                                       <button type="submit" className="text-sm ">
-                                          Submit
-                                       </button>
-                                    </form>
+                              <div className="flex ml-[4rem] flex-col ">
+                                 <h3 className="text-[0.7rem] lg:text-[1.1rem] py-2">{comment.data}</h3>
+                                 {replies.map((reply, index) => (
+                                    <div key={index}>{reply}</div>
+                                 ))}
+                                 <div className="flex gap-x-[0.4rem] items-center justify-between">
+                                    <div className="flex gap-x-[0.6rem]">
+                                       <BiLike></BiLike>
+                                       {/* <BiDislike /> */}
+                                    </div>
+                                    {showInput && (
+                                       <div>
+                                          <form onSubmit={handleSubmit}>
+                                             <input
+                                                className=" lg:mx-4 p-2 bg-transparent border-none focus:border-none border-transparent outline-none"
+                                                placeholder="Add a comment"
+                                                type="text"
+                                             />
+                                             <button type="submit" className="text-sm ">
+                                                Submit
+                                             </button>
+                                          </form>
+                                       </div>
+                                    )}
+                                    <button onClick={handleClick}>
+                                       <h2 className="text-[0.7rem] lg:text-[1rem]">Reply</h2>
+                                    </button>
                                  </div>
-                              )}
-                              <button onClick={handleClick}>
-                                 <h2 className="text-[0.7rem] lg:text-[1rem]">Reply</h2>
-                              </button>
+                              </div>
                            </div>
-                        </div>
-                     </div>
+                        ))
+                     }
                   </div>
-                  {data.map((item, index) => (
-                     <div className="space-y-4 lg:mx-4 border-[0px] lg:pr-[20px] w-full pt-12 lg:pt-0 " key={index}>
+                  {/* {data.map((item, index) => ( */}
+                     <div className="space-y-4 lg:mx-4 border-[0px] lg:pr-[20px] w-full pt-12 lg:pt-0 ">
                         <div className="border border-fuchsia-400 rounded-md p-4 lg:pb- mb-4">
                            {/* <h2 className="text-[0.6rem] lg:text-[0.89rem] font-bold mb-4">Adobe Premiere Pro CC Masterclass: Full Crash Course</h2> */}
                            <h2 className="text-[0.6rem] lg:text-[0.89rem] font-bold mb-4">
-                              {item.courseName} {selectedIndex}
+                              {course_?.courseName}
                            </h2>
-                           {item.details.map((texts, index) => (
+                           {course_?.details.map((texts, index) => (
                               <div className="space-y-2" key={index}>
                                  <h3 className="text-[0.9rem] font-medium">{texts}</h3>
                                  {/* <h3 className="text-[0.9rem] font-medium">10 hours 33 Minutes Left</h3>
@@ -272,13 +316,12 @@ const VideoComp = () => {
                            // style={{ paddingTop: "0px" }}
                            ref={videoListRef}
                         >
-                           {item.videos.map(
+                           {course_?.videos.map(
                               (viddet, index1) =>
                                  ((selectedIndex && index1 === selectedIndex - 1) || selectedIndex < index1) && (
                                     <div
-                                       className={`space-y-2 relative ${
-                                          AllowedToWatch(selectedIndex, index1) ? " cursor-pointer " : "cursor-not-allowed "
-                                       } ${Completed(selectedIndex, index1) ? "bg-[rgba(16,188,156,0.1)] " : ""}`}
+                                       className={`space-y-2 relative ${AllowedToWatch(selectedIndex, index1) ? " cursor-pointer " : "cursor-not-allowed "
+                                          } ${Completed(selectedIndex, index1) ? "bg-[rgba(16,188,156,0.1)] " : ""}`}
                                        key={index1}
                                        onClick={() => handleVideoClick(index1)}
                                     >
@@ -320,7 +363,6 @@ const VideoComp = () => {
                            )}
                         </div>
                      </div>
-                  ))}
                </div>
             </section>
          </SkeletonTheme>
