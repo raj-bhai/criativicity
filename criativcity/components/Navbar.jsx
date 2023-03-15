@@ -1,28 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { navlinks } from "@/constants/navlinks";
-import Image from "next/image";
-import Logo from "../public/img/Criativcity.png";
 import { CgClose, CgMenuRight } from "react-icons/cg";
 import { motion } from "framer-motion";
-import { navVariants } from "@/utils/motion";
 import Link from "next/link";
-import styles from "@/src/style";
 import { useRouter } from "next/router";
+import * as userAction from '../redux/action/user';
+import { useDispatch } from "react-redux";
 
 const Navbar = () => {
    const [toggle, setToggle] = useState(true);
    const [active, setActive] = useState("Home");
    const [token, setToken] = useState(null);
    const router = useRouter()
+   const dispatch = useDispatch();
 
 
    useEffect(() => {
       const token = localStorage.getItem('token');
       if (token) {
          setToken(token)
+         dispatch(userAction.getUserDetail())
       }
-      console.log("Token :", token)
+      // console.log("Token :", token)
    }, [])
+
 
 
    return (
@@ -43,7 +44,7 @@ const Navbar = () => {
                            if (token) {
                               localStorage.removeItem('token');
                               setToken(null)
-                              router.reload( )
+                              router.reload()
                            } else {
                               router.push('/login')
                            }

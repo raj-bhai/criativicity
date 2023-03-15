@@ -7,10 +7,13 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 import "react-loading-skeleton/dist/skeleton.css";
 import * as CourseAction from "../redux/action/course";
+import { useRouter } from "next/router";
 
 const CourseComp = () => {
    const dispatch = useDispatch();
+   const router = useRouter();
    const Courses = useSelector((state) => state.course.CourseList);
+   const userDetail = useSelector((state) => state.user.UserDetail)
 
    useEffect(() => {
       if (!Courses?.length) {
@@ -24,6 +27,17 @@ const CourseComp = () => {
       setShow((prev) => {
          return { ...prev, [id]: !prev[id] };
       });
+   }
+
+   const onClickCourse = async () => {
+      const token = await localStorage.getItem('token');
+      if (!token) {
+         router.push('./login')
+      } else {
+         if (userDetail?.paidUser) {
+            router.push('./video')
+         }
+      }
    }
 
    return (
@@ -45,6 +59,9 @@ const CourseComp = () => {
                         <section
                            key={index}
                            className="mt flex justify-center cursor-pointer hover:bg-[#17202A] border-2 border-fuchsia-50 rounded-lg lg:w-[78%] px-2 mx-2 py-1"
+                           onClick={() => {
+                              onClickCourse()
+                           }}
                         >
                            <div className="adobe-vid-cont lg:flex lg:items-start  justify-between">
                               <div className="text-cont ">
@@ -62,13 +79,6 @@ const CourseComp = () => {
                                     <Image src={vidimg} alt="videoimg"></Image>
                                  </div>
                                  <div className="cta flex items-center justify-end pb-2  gap-x-8 lg:gap-x-14 mt-5 lg:mt-10 ">
-                                    {/* <div className="imgencont flex items-center justify-start flex-col">
-                              <div className="w-full h-full aspect-3/2 object-contain flex items-center justify-center gap-2">
-                                 <Image src={student} alt="student"></Image>
-                                 <h1 className="text-[#00DB8C] text-[1.5rem] lg:text-[2rem] font-bold font-Lato">414</h1>
-                              </div>
-                              <h1 className="text-white font-normal font-Lato text-[0.8rem] lg:text-[1.1rem]">Students Enrolled</h1>
-                           </div> */}
                                     <div className="price">
                                        <h3>Rs.1000</h3>
                                     </div>

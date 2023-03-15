@@ -11,6 +11,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { course } from "@/constants/course";
 import axios from "axios";
 import { Apiurl } from "@/constants/url";
+import moment from "moment/moment";
+
+
 
 const Video_ = (props) => {
    const videoRef = useRef(null);
@@ -260,7 +263,7 @@ const VideoComp = () => {
                               <div className="flex items-center gap-x-[0.9rem] px-3">
                                  <Image src={men} alt="men" className="w-8 h-8 rounded-full mr-2" />
                                  <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">{comment.user}</h3>
-                                 <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">2 days ago</h3>
+                                 <h3 className="text-[0.5rem] lg:text-[0.97rem] font-medium">{moment(comment.createdAt).fromNow()}</h3>
                               </div>
                               <div className="flex ml-[4rem] flex-col ">
                                  <h3 className="text-[0.7rem] lg:text-[1.1rem] py-2">{comment.data}</h3>

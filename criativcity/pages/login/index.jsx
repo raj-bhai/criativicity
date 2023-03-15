@@ -14,7 +14,6 @@ const LoginScreen = () => {
     const [password, setPassword] = useState('');
 
     const Login = (email, password) => {
-        console.log("hello mf")
         const postData = {
             email: email,
             password: password,
@@ -82,7 +81,7 @@ const LoginScreen = () => {
                         {/* <button className='border-dimPink border-2 py-2 px-3 items-center w-full mt-4 flex justify-center text-sm text-white'><BsFacebook width="25px" height="25px" className='mr-8 text-white' />Continue with Facebook</button>
                         <button className='border-dimPink border-2 py-2 px-3 items-center w-full mt-4 flex justify-center text-sm text-white'><BsApple width="25px" height="25px" className='mr-8' />Continue with Apple</button> */}
                         <div className='mt-3 text-xs flex justify-center items-center text-white'>
-                            <p>New to Coursera?</p>
+                            <p>New to criativcity?</p>
                             <button className='py-2 hover:scale-110 duration-300 ml-2'><a href='signup'>Sign up</a></button>
                         </div>
                         <hr className='border-white' />

@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
@@ -6,14 +7,21 @@ import Hero from "@/components/Hero";
 import MidSection from "@/components/MidSection";
 import LowMidSection from "@/components/LowMidSection";
 import CourseFAQ from "@/components/CourseFAQ";
-import Instructor from "@/components/Followus";
 import FollowUs from "@/components/Followus";
 import Quote from "@/components/Quote";
 import Footer from "@/components/Footer";
 import Subcontent from "@/components/Subcontent";
 
 export default function Home() {
+
+   const [domLoaded, setDomLoaded] = useState(false)
+
+   useEffect(() => {
+      setDomLoaded(true)
+   }, [])
+
    return (
+      domLoaded &&
       <>
          <Head>
             <title>Criativcity</title>
