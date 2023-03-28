@@ -3,10 +3,108 @@ import student from "../assets/student.png";
 import Image from "next/image";
 import affimg from "../assets/affimg.png";
 import ellipse from '../assets/ellipse.png'
-import planets from '../assets/Group.png'
+import planets from '../assets/Group.png';
+import axios from "axios";
+
+
+
+const CopyText = () => {
+   const [textToCopy, setTextToCopy] = useState("This is the text to copy.");
+   const [copySuccess, setCopySuccess] = useState(false);
+
+   const handleCopyClick = () => {
+      navigator.clipboard.writeText(textToCopy).then(() => {
+         setCopySuccess(true);
+         setTimeout(() => {
+            setCopySuccess(false);
+         }, 3000);
+      });
+   };
+
+   return (
+      <div className="relative">
+         <p className="mb-4">{textToCopy}</p>
+         <button
+            className={`absolute right-0 bottom-0 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ${copySuccess ? "bg-green-500 hover:bg-green-600" : ""
+               }`}
+            onClick={handleCopyClick}
+         >
+            {copySuccess ? "Copied!" : "Copy"}
+         </button>
+      </div>
+   );
+}
+
+
+const Popup = (props) => {
+
+   const [email, setEmail] = useState('');
+   const [isEmailValid, setIsEmailValid] = useState(true);
+
+   const SubmitHandler = () => {
+      if (isValidEmail(email)) {
+         console.log(email);
+         setIsEmailValid(true);
+         props.onSubmit();
+      } else {
+         setIsEmailValid(false);
+      }
+   }
+
+   const isValidEmail = (email) => {
+      // Basic email validation using regular expression
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+   };
+
+   return (
+      props.showPop &&
+      <div className="fixed top-0 left-0 h-screen w-screen flex justify-center items-center">
+         <div className="absolute bg-white  p-6 rounded">
+            <CopyText />
+            <div
+            >
+               <label className="block mb-2 font-bold text-gray-700">
+                  Enter email :
+               </label>
+               <input
+                  className="border rounded w-full py-2 px-3 mb-4"
+                  type="text"
+                  value={email}
+                  onChange={(e) => {
+                     setEmail(e.target.value);
+                  }}
+               />
+               {!isEmailValid && (
+                  <p className="text-red-500 mb-4">Invalid email address</p>
+               )}
+               <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  type="submit"
+                  onClick={() => {
+                     SubmitHandler()
+                  }}
+               >
+                  Submit
+               </button>
+            </div>
+         </div>
+         {/* <div
+            className="fixed top-0 left-0 border w-full h-full bg-gray-900 opacity-50"
+            onClick={() => {
+               props.onSubmit()
+               // setShowPopup(false)
+            }}
+         ></div> */}
+      </div>
+   );
+}
 
 
 const Affiliate = () => {
+
+   const [showPop, setShowPop] = useState(false);
+
    return (
       <>
          <section className="navbarbg lg:pt-[12rem] pt-[8rem]">
@@ -99,7 +197,11 @@ const Affiliate = () => {
                               <h3>$199</h3>
                            </div>
                            <div className="btn">
-                              <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg">
+                              <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg"
+                                 onClick={() => {
+                                    setShowPop(true)
+                                 }}
+                              >
                                  Invite Friends
                               </button>
                            </div>
@@ -126,6 +228,12 @@ const Affiliate = () => {
             <div className="pt-12">
                <Image src={ellipse} alt="ellipse"></Image>
             </div>
+            <Popup
+               showPop={showPop}
+               onSubmit={() => {
+                  setShowPop(false)
+               }}
+            />
          </section>
       </>
    );

@@ -8,6 +8,8 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import "react-loading-skeleton/dist/skeleton.css";
 import * as CourseAction from "../redux/action/course";
 import { useRouter } from "next/router";
+import axios from "axios";
+import { Apiurl } from "@/constants/url";
 
 const CourseComp = () => {
    const dispatch = useDispatch();
@@ -28,6 +30,126 @@ const CourseComp = () => {
          return { ...prev, [id]: !prev[id] };
       });
    }
+
+
+
+   const makePayment = async () => {
+      const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+      if (!res) {
+         alert("Razorpay SDK failed to load. Are you online?");
+         return;
+      }
+      const result = await axios.post(`${Apiurl}/razorpay/createOrder`, {
+         amount: 10 * 100,
+      });
+
+      // console.log("Result :", result)
+      // return
+
+      if (!result) {
+         alert("Server error. Are you online?");
+         return;
+      }
+      if (!result.data.success) {
+         return;
+      }
+      var options = {
+         description: "Add money in wallet",
+         // image: "https://beyobo-static-data.s3.ap-south-1.amazonaws.com/icons/beyobologo.png",
+         currency: "INR",
+         key: "rzp_test_0NvMtWlychjUkW",
+         amount: result.data.data.amount,
+         name: "Creativcity",
+         order_id: result.data.data.id,
+         handler: async function (response) {
+            // OrderPlaced(paymentMethod);
+            console.log("Payment success :", response)
+         },
+         prefill: {
+            email: "test@gmail.com",
+            contact: "9954546495",
+            name: "Test name",
+         },
+         theme: { color: "#2BA4F6" },
+      };
+
+      const paymentObject = new window.Razorpay(options);
+      await paymentObject.open();
+   };
+
+   //loadScript Rzpay
+   function loadScript(src) {
+      return new Promise((resolve) => {
+         const script = document.createElement("script");
+         script.src = src;
+         script.onload = () => {
+            resolve(true);
+         };
+         script.onerror = () => {
+            resolve(false);
+         };
+         document.body.appendChild(script);
+      });
+   }
+
+   // const handlePayment = async () => {
+   //    try {
+   //       const response = await fetch("../api/payment", {
+   //          method: "POST",
+   //          headers: {
+   //             "Content-Type": "application/json",
+   //          },
+   //          body: JSON.stringify({
+   //             "amount": 100,
+   //             "currency": "INR",
+   //             "receipt": "receipt_1",
+   //             "Fpayment_capture": 1,
+   //          }),
+   //       });
+   //       const data = await response.json();
+   //       if (response.ok) {
+   //          console.log("ok")
+   //       } else {
+   //          console.log("not ok")
+   //       }
+   //    } catch (err) {
+   //       console.log("error :", err)
+   //    }
+   // };
+
+
+
+   // const Payment = () => {
+   //    console.log("payment initiated")
+
+   //    const options = {
+   //       key: "YOUR_KEY_ID",
+   //       amount: 10000, // Amount in paise
+   //       currency: "INR",
+   //       name: "My Company",
+   //       description: "Test Transaction",
+   //       image: "https://via.placeholder.com/150",
+   //       order_id: "order_EdZe6xyiuVOlIq",
+   //       handler: function (response) {
+   //          console.log("Payment response :", response)
+   //          // setPaymentStatus("success");
+   //       },
+   //       prefill: {
+   //          name: "John Doe",
+   //          email: "johndoe@example.com",
+   //          contact: "9999999999",
+   //       },
+   //       notes: {
+   //          address: "Razorpay Corporate Office",
+   //       },
+   //       theme: {
+   //          color: "#3399cc",
+   //       },
+   //    };
+
+   //    const rzp = new Razorpay(options);
+   //    rzp.open();
+   // };
 
    const onClickCourse = async () => {
       const token = await localStorage.getItem('token');
@@ -78,16 +200,33 @@ const CourseComp = () => {
                                  <div className="videocont lg:w-[500px] lg:h-[340px] mt-7">
                                     <Image src={vidimg} alt="videoimg"></Image>
                                  </div>
-                                 <div className="cta flex items-center justify-end pb-2  gap-x-8 lg:gap-x-14 mt-5 lg:mt-10 ">
-                                    <div className="price">
-                                       <h3>Rs.1000</h3>
-                                    </div>
-                                    <div className="btn">
-                                       <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg">
-                                          Buy Now
-                                       </button>
-                                    </div>
-                                 </div>
+                                 {
+                                    userDetail?.paidUser ?
+                                       <div className="cta flex items-center justify-end pb-2  gap-x-8 lg:gap-x-14 mt-5 lg:mt-10 " >
+                                          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                             onClick={() => {
+                                                router.push('./video')
+                                             }}
+                                          >
+                                             Watch Now
+                                          </button>
+
+                                       </div> :
+                                       <div className="cta flex items-center justify-end pb-2  gap-x-8 lg:gap-x-14 mt-5 lg:mt-10 ">
+                                          <div className="price">
+                                             <h3>Rs.1000</h3>
+                                          </div>
+                                          <div className="btn">
+                                             <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg"
+                                                onClick={() => {
+                                                   makePayment()
+                                                }}
+                                             >
+                                                Buy Now
+                                             </button>
+                                          </div>
+                                       </div>
+                                 }
                               </div>
                            </div>
                         </section>
