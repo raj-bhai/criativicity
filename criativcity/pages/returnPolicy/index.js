@@ -25,7 +25,7 @@ function ReturnPolicy() {
                     Certainly, we understand that clarity is important when it comes to refunds. If you decide to cancel your course within
                     the 7-day window and are eligible for a refund, we will process a full refund of the amount you paid for the course.
                     For example, if the course costs 1000 Rs, you will receive a full refund of 1000 Rs. Our goal is to provide our
-                    customers with a worry-free purchasing experience, and we are committed to upholding this policy. Please don't hesitate
+                    customers with a worry-free purchasing experience, and we are committed to upholding this policy. Please don&apos;t hesitate
                     to contact us if you have any further questions or concerns.
                 </p>
                 <p className="mb-2">
