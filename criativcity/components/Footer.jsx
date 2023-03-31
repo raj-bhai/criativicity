@@ -21,9 +21,9 @@ const Footer = () => {
         <h3>support@criativcity.com</h3>
       </div>
       <div className="feedback">
-        <h2>Feedback</h2>
-        <h2>Email</h2>
-        <h2>Services</h2>
+        <h2>Address</h2>
+        <h2>Prabhakar, Jangid Estate, Mira road</h2>
+        <h2> East Thane, Maharastra, 401107</h2>
       </div>
       {/* <div></div> */}
     </section>

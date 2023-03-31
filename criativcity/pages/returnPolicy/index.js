@@ -22,9 +22,11 @@ function ReturnPolicy() {
                     We recommend contacting us for assistance if you experience any issues receiving or downloading our products.
                 </p>
                 <p className="mb-2">
-                    Yes! You can cancel your course within 7 days of purchase if you don’t like it. We don’t want your money if you are not happy with the course.
-                    You can email us at support@criativcity.com & we will cancel and refund your money within hours. No awkward questions asked.
-                    Contact us for any issues:
+                    Certainly, we understand that clarity is important when it comes to refunds. If you decide to cancel your course within
+                    the 7-day window and are eligible for a refund, we will process a full refund of the amount you paid for the course.
+                    For example, if the course costs 1000 Rs, you will receive a full refund of 1000 Rs. Our goal is to provide our
+                    customers with a worry-free purchasing experience, and we are committed to upholding this policy. Please don't hesitate
+                    to contact us if you have any further questions or concerns.
                 </p>
                 <p className="mb-2">
                     If you have any questions about our Returns and Refunds Policy, please contact us at: support@criativcity.com
