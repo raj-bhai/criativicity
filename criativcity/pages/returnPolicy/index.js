@@ -22,7 +22,7 @@ function ReturnPolicy() {
                     We recommend contacting us for assistance if you experience any issues receiving or downloading our products.
                 </p>
                 <p className="mb-2">
-                    Yes! You can cancel your course within 7 days of purchase if you don’t like it. We don’t want your money if you are not happy with the course. 
+                    Yes! You can cancel your course within 7 days of purchase if you don’t like it. We don’t want your money if you are not happy with the course.
                     You can email us at support@criativcity.com & we will cancel and refund your money within hours. No awkward questions asked.
                     Contact us for any issues:
                 </p>
