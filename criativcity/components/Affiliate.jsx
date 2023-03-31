@@ -6,14 +6,19 @@ import ellipse from '../assets/ellipse.png'
 import planets from '../assets/Group.png';
 import axios from "axios";
 
+import { useSelector } from "react-redux";
+import { Apiurl } from "@/constants/url";
+import { AiFillLock } from 'react-icons/ai';
+
 
 
 const CopyText = () => {
-   const [textToCopy, setTextToCopy] = useState("This is the text to copy.");
+   // const [textToCopy, setTextToCopy] = useState("This is the text to copy.");
    const [copySuccess, setCopySuccess] = useState(false);
+   const userDetail = useSelector((state) => state.user.UserDetail)
 
    const handleCopyClick = () => {
-      navigator.clipboard.writeText(textToCopy).then(() => {
+      navigator.clipboard.writeText(userDetail?.referralCodey).then(() => {
          setCopySuccess(true);
          setTimeout(() => {
             setCopySuccess(false);
@@ -23,7 +28,7 @@ const CopyText = () => {
 
    return (
       <div className="relative">
-         <p className="mb-4">{textToCopy}</p>
+         <p className="mb-4 text-[30px] font-semibold ">{userDetail?.referralCode}</p>
          <button
             className={`absolute right-0 bottom-0 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ${copySuccess ? "bg-green-500 hover:bg-green-600" : ""
                }`}
@@ -40,12 +45,32 @@ const Popup = (props) => {
 
    const [email, setEmail] = useState('');
    const [isEmailValid, setIsEmailValid] = useState(true);
+   const [loading, setLoading] = useState(false);
 
-   const SubmitHandler = () => {
+   function ReferToFriend(postData) {
+      return new Promise((resolve, reject) => {
+         axios.post(`${Apiurl}/course/referral`, postData)
+            .then(response => {
+               resolve(response.data);
+               props.onSubmit()
+               setEmail("")
+               setLoading(false)
+            })
+            .catch(error => {
+               reject(error);
+
+            });
+      });
+   }
+
+   const SubmitHandler = async () => {
       if (isValidEmail(email)) {
-         console.log(email);
-         setIsEmailValid(true);
-         props.onSubmit();
+         await setLoading(true)
+         ReferToFriend(
+            {
+               "email": email
+            }
+         )
       } else {
          setIsEmailValid(false);
       }
@@ -60,16 +85,18 @@ const Popup = (props) => {
    return (
       props.showPop &&
       <div className="fixed top-0 left-0 h-screen w-screen flex justify-center items-center">
-         <div className="absolute bg-white  p-6 rounded">
+         <div className="absolute bg-white w-[400px]  p-6 rounded">
             <CopyText />
+            <p className="text-[10px] text-green-500 font-semibold" >Share this code to earn through our referral program</p>
             <div
             >
                <label className="block mb-2 font-bold text-gray-700">
-                  Enter email :
+                  Refer through Email :
                </label>
                <input
                   className="border rounded w-full py-2 px-3 mb-4"
                   type="text"
+                  placeholder="Enter email address"
                   value={email}
                   onChange={(e) => {
                      setEmail(e.target.value);
@@ -78,26 +105,54 @@ const Popup = (props) => {
                {!isEmailValid && (
                   <p className="text-red-500 mb-4">Invalid email address</p>
                )}
-               <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  type="submit"
-                  onClick={() => {
-                     SubmitHandler()
-                  }}
-               >
-                  Submit
-               </button>
+               <div className="flex justify-end mt-4">
+                  <button
+                     className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 mr-2 rounded"
+                     type="button"
+                     onClick={() => {
+                        props.onSubmit()
+                     }}
+                  >
+                     Cancel
+                  </button>
+                  <button
+                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                     type="submit"
+                     onClick={() => {
+                        SubmitHandler()
+                     }}
+                     disabled={loading} // Disable the button while loading is true
+                  >
+                     {loading ? "Loading..." : "Submit"} {/* Show "Loading..." while loading is true */}
+                  </button>
+               </div>
+
             </div>
          </div>
-         {/* <div
-            className="fixed top-0 left-0 border w-full h-full bg-gray-900 opacity-50"
-            onClick={() => {
-               props.onSubmit()
-               // setShowPopup(false)
-            }}
-         ></div> */}
       </div>
    );
+}
+
+
+const Item = ({ locked }) => {
+   const classes = locked ? "opacity-50 pointer-events-none" : "";
+   return (
+      <div className={`border-fuchsia-400 rounded-lg px-4 py-6 flex justify-center items-center text-white text-center border-[0.04rem] ${classes}`}>
+         {
+            !locked &&
+            <div>
+               <h3>Available Balance</h3>
+               <h3>&#8377; 250</h3>
+            </div>
+         }
+         {
+            locked &&
+            <AiFillLock
+               size={40}
+            />
+         }
+      </div>
+   )
 }
 
 
@@ -117,11 +172,11 @@ const Affiliate = () => {
                      Affiliates
                   </h1>
                </div>
-               <div className="paymenBTn">
+               {/* <div className="paymenBTn">
                   <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg">
                      Manage Payments
                   </button>
-               </div>
+               </div> */}
             </div>
             <div className="flex items-center navbarbg justify-center mt-[3.3rem] ">
                <section className="mt flex justify-center border-[0.04rem]  border-fuchsia-400 rounded-lg lg:w-[80%]  px-2 mx-2 py-1">
@@ -130,54 +185,16 @@ const Affiliate = () => {
                         <h2 className="text-[1.2rem]  mt-4">Here&apos;s how we are doing </h2>
                         <div className="flex items-center justify-center mt-[2rem]">
                            <div className="grid grid-cols-3 gap-4">
-                              <div className="border-fuchsia-400 rounded-lg px-4 py-6 text-white text-center border-[0.04rem]  ">
-                                 <div>
-                                    <h3>$199</h3>
-                                 </div>
-                                 <div>
-                                    <h3>Available Balance</h3>
-                                 </div>
-                              </div>
-                              <div className="border-fuchsia-400 rounded-lg px-4 py-6 text-white text-center border-[0.04rem] ">
-                                 <div>
-                                    <h3>$199</h3>
-                                 </div>
-                                 <div>
-                                    <h3>Available Balance</h3>
-                                 </div>
-                              </div>
-                              <div className="border-fuchsia-400 rounded-lg px-4 py-6 text-white text-center border-[0.04rem] ">
-                                 <div>
-                                    <h3>$199</h3>
-                                 </div>
-                                 <div>
-                                    <h3>Available Balance</h3>
-                                 </div>
-                              </div>
-                              <div className="border-fuchsia-400 rounded-lg px-4 py-6 text-white text-center border-[0.04rem] ">
-                                 <div>
-                                    <h3>$199</h3>
-                                 </div>
-                                 <div>
-                                    <h3>Available Balance</h3>
-                                 </div>
-                              </div>
-                              <div className="border-fuchsia-400 rounded-lg px-4 py-6 text-white text-center border-[0.04rem] ">
-                                 <div>
-                                    <h3>$199</h3>
-                                 </div>
-                                 <div>
-                                    <h3>Available Balance</h3>
-                                 </div>
-                              </div>
-                              <div className="border-fuchsia-400 rounded-lg px-4 py-4 text-white text-center border-[0.04rem] ">
-                                 <div>
-                                    <h3>$199</h3>
-                                 </div>
-                                 <div>
-                                    <h3>Available Balance</h3>
-                                 </div>
-                              </div>
+                              <Item
+                                 locked={true}
+                              />
+                              <Item
+                                 locked={true}
+                              />
+                              <Item />
+                              <Item />
+                              <Item />
+                              <Item />
                            </div>
                         </div>
                      </div>
@@ -185,17 +202,17 @@ const Affiliate = () => {
                         <div className="videocont lg:w-[500px] lg:h-[340px] mt-7 ">
                            <Image src={affimg} className="rounded-lg" alt="image affiliate"></Image>
                         </div>
-                        <div className="cta flex items-center justify-center  gap-x-8 lg:gap-x-14 mt-3 lg:mt-10 ">
-                           <div className="imgencont flex items-center justify-start flex-col">
+                        <div className="cta flex items-center justify-end pr-[20px] pb-[10px]  gap-x-8 lg:gap-x-14 mt-3 lg:mt-10 ">
+                           {/* <div className="imgencont flex items-center justify-start flex-col">
                               <div className="w-full h-full aspect-3/2 object-contain flex items-center justify-center gap-2">
                                  <Image src={student} alt="Student Enrolled"></Image>
                                  <h1 className="text-[#00DB8C] text-[1.5rem] lg:text-[2rem] font-bold font-Lato">414</h1>
                               </div>
                               <h1 className="text-white font-normal font-Lato text-[0.8rem] lg:text-[1.1rem]">Recently Joined</h1>
-                           </div>
-                           <div className="price text-white">
+                           </div> */}
+                           {/* <div className="price text-white">
                               <h3>$199</h3>
-                           </div>
+                           </div> */}
                            <div className="btn">
                               <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg"
                                  onClick={() => {
