@@ -18,6 +18,7 @@ const CourseComp = () => {
    const Courses = useSelector((state) => state.course.CourseList);
    const userDetail = useSelector((state) => state.user.UserDetail);
    const [domLoaded, setDomLoaded] = useState(false);
+   const [isCheckoutOpen, setIsCheckoutOpen] = useState(true);
 
    useEffect(() => {
       setDomLoaded(true)
@@ -39,65 +40,6 @@ const CourseComp = () => {
 
 
 
-   const makePayment = async () => {
-      const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
-      if (!res) {
-         alert("Razorpay SDK failed to load. Are you online?");
-         return;
-      }
-      const result = await axios.post(`${Apiurl}/razorpay/createOrder`, {
-         amount: 10 * 100,
-      });
-
-      // console.log("Result :", result)
-      // return
-
-      if (!result) {
-         alert("Server error. Are you online?");
-         return;
-      }
-      if (!result.data.success) {
-         return;
-      }
-      var options = {
-         description: "Add money in wallet",
-         // image: "https://beyobo-static-data.s3.ap-south-1.amazonaws.com/icons/beyobologo.png",
-         currency: "INR",
-         key: "rzp_test_0NvMtWlychjUkW",
-         amount: result.data.data.amount,
-         name: "Creativcity",
-         order_id: result.data.data.id,
-         handler: async function (response) {
-            // OrderPlaced(paymentMethod);
-            console.log("Payment success :", response)
-         },
-         prefill: {
-            email: "test@gmail.com",
-            contact: "9954546495",
-            name: "Test name",
-         },
-         theme: { color: "#2BA4F6" },
-      };
-
-      const paymentObject = new window.Razorpay(options);
-      await paymentObject.open();
-   };
-
-   //loadScript Rzpay
-   function loadScript(src) {
-      return new Promise((resolve) => {
-         const script = document.createElement("script");
-         script.src = src;
-         script.onload = () => {
-            resolve(true);
-         };
-         script.onerror = () => {
-            resolve(false);
-         };
-         document.body.appendChild(script);
-      });
-   }
-
    const onClickCourse = async () => {
       const token = await localStorage.getItem('token');
       if (!token) {
@@ -108,6 +50,14 @@ const CourseComp = () => {
          }
       }
    }
+
+   const handleCheckoutClick = () => {
+      setIsCheckoutOpen(true);
+   };
+
+   const handleCloseCheckout = () => {
+      setIsCheckoutOpen(false);
+   };
 
    return (
       <>
@@ -162,13 +112,15 @@ const CourseComp = () => {
 
                                        </div> :
                                        <div className="cta flex items-center justify-end pb-2  gap-x-8 lg:gap-x-14 mt-5 lg:mt-10 ">
-                                          <div className="price">
-                                             <h3>Rs.1000</h3>
+                                          <div className="price flex row gap-2  items-center justify-center ">
+                                             <h3 className="line-through text-[#BDC3C7] text-[18px] font-semibold " >₹ 1250</h3>
+                                             <h3 className="text-[#fff] font-semibold text-[20px]" >₹ 1000</h3>
                                           </div>
                                           <div className="btn">
                                              <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg"
                                                 onClick={() => {
-                                                   makePayment()
+                                                   // makePayment()
+                                                   router.push('./checkout')
                                                 }}
                                              >
                                                 Buy Now

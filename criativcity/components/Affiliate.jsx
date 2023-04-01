@@ -10,6 +10,9 @@ import { useSelector } from "react-redux";
 import { Apiurl } from "@/constants/url";
 import { AiFillLock } from 'react-icons/ai';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const CopyText = () => {
@@ -52,6 +55,7 @@ const Popup = (props) => {
          axios.post(`${Apiurl}/course/referral`, postData)
             .then(response => {
                resolve(response.data);
+               toast.success("Invitation sent successfully")
                props.onSubmit()
                setEmail("")
                setLoading(false)
@@ -163,6 +167,7 @@ const Affiliate = () => {
    return (
       <>
          <section className="navbarbg lg:pt-[12rem] pt-[8rem]">
+            <ToastContainer />
             <div className="outerTextDiv flex items-center justify-around lg:justify-between lg:mx-[10rem]">
                <div className="afftext">
                   <h1

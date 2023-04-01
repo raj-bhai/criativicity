@@ -25,8 +25,8 @@ const SignupScreen = () => {
 
         if (regex.test(email) && password.length >= 6 && fullName.length >= 3) {
             const postData = {
-                "name" : fullName,
-                "email" : email,
+                "name": fullName,
+                "email": email,
                 "password": password
             };
             axios.post(`${Apiurl}/auth/Register`, postData)
@@ -34,7 +34,7 @@ const SignupScreen = () => {
                     if (response.data.success) {
                         const token = response.data.token
                         localStorage.setItem('token', token);
-                        router.push('/')
+                        router.push('./')
                     }
                 })
                 .catch((error) => {
@@ -48,11 +48,11 @@ const SignupScreen = () => {
     return (
         <>
             <Navbar />
-            <div className='w-full h-full bg-planets bg-contain bg-no-repeat rounded-top-[120px] z-[0] mt-20 navbarbg'>
-                <section className='bg-planets min-h-screen flex items-center justify-center bg-contain bg-no-repeat rounded-top-[120px]'>
-                    <div className='bg-black text-white  shadow-lg max-w-3xl p-5'>
+            <div className='w-full h-full bg-planets bg-contain bg-no-repeat rounded-top-[120px] z-[0] mt-[80x] navbarbg'>
+                <section className='bg-planets min-h-screen flex items-center justify-center pt-8 bg-contain bg-no-repeat rounded-top-[120px]'>
+                    <div className='bg-black text-white border border-fuchsia-500 rounded-lg  shadow-lg max-w-3xl p-10'>
                         <div className='justify-center items-center px-16'>
-                            <h2 className='font-pressfont text-[1rem] lg:text-[1.5rem]  pressFont text-white'>Create Account</h2>
+                            <h2 className='font-pressfont text-[1rem] lg:text-[2rem]  pressFont text-white'>Create Account</h2>
                         </div>
                         <div className='flex flex-col gap-4' >
                             <div className='relative'>
@@ -75,7 +75,7 @@ const SignupScreen = () => {
                             </div>
                             <div className='relative'>
                                 <span>PASSWORD</span>
-                                <input className='p-2 w-full text-gray-500' type="password" name="password" placeholder='Enter Your Password' autoComplete='off'
+                                <input className='p-2 w-full text-gray-500' type="password" name="password" placeholder='create Your Password' autoComplete='off'
                                     value={password}
                                     onChange={(e) => {
                                         setPassword(e.target.value)
@@ -90,19 +90,13 @@ const SignupScreen = () => {
                                 }}
                             >Sign Up</button>
                         </div>
-                        <div className='mt-5 grid grid-cols-3 items-center text-dimPink'>
+                        {/* Google Login */}
+                        {/* <div className='mt-5 grid grid-cols-3 items-center text-dimPink'>
                             <hr className='border-gray-400' />
                             <p className='text-center text-sm' >OR</p>
                             <hr className='border-gray-400' />
                         </div>
-                        <button className=' border-dimPink border-2 py-2 px-3 items-center w-full mt-4 flex justify-center text-sm'><FcGoogle width="25px" height="25px" className='mr-8' />Continue with Google</button>
-                        <hr className='border-white' />
-                        <div className='justify-center items-center text-sm'>
-                            <br></br>
-                            <p className='text-white'>Having trouble logging in?<u>Learner Help center</u></p>
-                            <br />
-                            <p className='text-white'>This site is protected by reCAPTCHA Enterprise and <br />the Google <u>Privacy Policy</u> and <u>Terms of Service</u> apply.</p>
-                        </div>
+                        <button className=' border-dimPink border-2 py-2 px-3 items-center w-full mt-4 flex justify-center text-sm'><FcGoogle width="25px" height="25px" className='mr-8' />Continue with Google</button> */}
                     </div>
                 </section>
             </div>

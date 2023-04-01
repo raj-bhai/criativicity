@@ -25,20 +25,31 @@ const SupportScreen = () => {
                                     CONTACT US</h2>
                             </div>
 
-                            <form action='' className='flex flex-col gap-4 text-white mt-10'>
+                            <div action='' className='flex flex-col gap-4 text-white mt-10'>
                                 <div className="border-2 border-fuchsia-50 rounded-lg relative">
                                     {/* <Image src={whatsappimg} alt="" className='absolute top-1/2 left-1' width="16" height="16" /> */}
                                     <input className="outline-none px-2 py-3 bg-transparent" placeholder="Contact us on WhatsApp" type="text" />
-                                    <button className="px-5 border-2 mx-1 rounded-lg py-2 logibtn text-white ">Start Chat</button>
+                                    <button
+                                        className="px-5 border-2 mx-1 rounded-lg py-2 logibtn text-white "
+                                        onClick={() => {
+                                            window.open('https://wa.me/8413802010')
+                                            // window.location.href = 'https://wa.me/8413802010'
+                                        }}
+                                    >Start Chat</button>
                                 </div>
 
                                 <div className="border-2 border-fuchsia-50 rounded-lg relative gap-2">
                                     {/* <Image src={discordimg} alt="" className='absolute top-1/2 left-1' width="16" height="16" /> */}
                                     <input className="outline-none px-2 py-3 bg-transparent" placeholder="Contact us on Discord" type="text" />
-                                    <button className="px-5 border-2 mx-1 rounded-lg py-2 logibtn text-white ">Start Chat</button>
+                                    <button className="px-5 border-2 mx-1 rounded-lg py-2 logibtn text-white "
+                                        onClick={() => {
+                                            window.open('https://discord.gg/6g98ssNG')
+                                            // window.location.href = 'https://wa.me/8413802010'
+                                        }}
+                                    >Start Chat</button>
                                 </div>
 
-                            </form>
+                            </div>
 
                         </div>
 

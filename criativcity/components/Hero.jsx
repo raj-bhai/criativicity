@@ -6,8 +6,10 @@ import { motion } from "framer-motion";
 import { slideIn, staggerContainer, textVariant, textVariant2 } from "@/utils/motion";
 import Link from "next/link";
 import student from "../assets/student.png";
+import { useRouter } from "next/router";
 
 const Hero = () => {
+   const router = useRouter()
    return (
       <section id="home" className="flex md:flex mt-24 overflow-hidden">
          <div className=" w-full h-full bg-planets bg-contain bg-no-repeat rounded-top-[120px] z-[0]">
@@ -55,7 +57,11 @@ const Hero = () => {
                            <h1 className="text-white font-normal font-Lato text-[0.8rem] lg:text-[1.1rem]">Students Enrolled</h1>
                         </div> */}
                         <div className="btn">
-                           <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg">
+                           <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg"
+                           onClick={() => {
+                              router.push('./courses')
+                           }}
+                           >
                               Get Started
                            </button>
                         </div>
