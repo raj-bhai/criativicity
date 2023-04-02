@@ -11,6 +11,41 @@ const CheckoutComp = () => {
     const [netPayableAmount, setNetPayableAmount] = useState("₹ 1000");
     const [validCoupon, setValidCoupon] = useState("doubt")
     const [loading, setLoading] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
+
+
+    const PopUp = () => {
+
+        const togglePopup = () => {
+            setIsOpen(!isOpen);
+        }
+
+        return (
+            isOpen && (
+                <div className="fixed inset-0 flex items-center justify-center z-[500]">
+                    <div className="bg-white rounded-lg shadow-lg flex flex-col items-center p-4 mx-auto border-[2px] border-fuchsia-500 max-w-md w-full">
+                        <p className="text-sm sm:text-base md:text-lg lg:text-md xl:text-sm font-medium mb-4">
+                            For assistance with payment, please contact us via WhatsApp at +91 8413802010, and our team will be happy to assist you further.
+                        </p>
+
+
+
+
+                        {/* <p className="text-sm text-gray-600">
+                            Our team will guide you to proceed further.
+                        </p> */}
+                        <button
+                            className="mt-4 px-4 py-2 text-white bg-blue-500 rounded-full focus:outline-none"
+                            onClick={togglePopup}
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )
+        );
+    }
+
 
     const calculateSubtotal = () => {
         const priceNumber = parseFloat(price);
@@ -111,10 +146,12 @@ const CheckoutComp = () => {
         }
     }
 
+
     return (
         <div className="container mx-auto px-4 py-8 pt-[100px]">
+            <PopUp />
             <h1 className="text-3xl font-bold mb-4">Checkout</h1>
-            <div className="grid grid-cols-2 gap-4  px-32 py-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4  md:px-32 py-8">
                 <div>
                     <label htmlFor="price" className="block font-medium mb-2">Price:</label>
                     <input
@@ -197,11 +234,12 @@ const CheckoutComp = () => {
                 <div className="flex justify-end mt-8">
                     <button className="bg-gray-800 text-white rounded-lg py-2 px-4"
                         onClick={() => {
-                            if (validCoupon === "valid") {
-                                makePayment(750)
-                            } else {
-                                makePayment(1000)
-                            }
+                            // if (validCoupon === "valid") {
+                            //     makePayment(750)
+                            // } else {
+                            //     makePayment(1000)
+                            // }
+                            setIsOpen(true)
                         }}
                     >
                         Proceed

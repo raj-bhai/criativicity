@@ -89,11 +89,10 @@ const Popup = (props) => {
    return (
       props.showPop &&
       <div className="fixed top-0 left-0 h-screen w-screen flex justify-center items-center">
-         <div className="absolute bg-white w-[400px]  p-6 rounded">
+         <div className="absolute bg-white w-[90%] md:w-[400px] p-6 rounded">
             <CopyText />
-            <p className="text-[10px] text-green-500 font-semibold" >Share this code to earn through our referral program</p>
-            <div
-            >
+            <p className="text-[10px] text-green-500 font-semibold mt-4 md:mt-0">Share this code to earn through our referral program</p>
+            <div>
                <label className="block mb-2 font-bold text-gray-700">
                   Refer through Email :
                </label>
@@ -109,12 +108,12 @@ const Popup = (props) => {
                {!isEmailValid && (
                   <p className="text-red-500 mb-4">Invalid email address</p>
                )}
-               <div className="flex justify-end mt-4">
+               <div className="flex flex-col md:flex-row md:justify-end mt-4">
                   <button
-                     className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 mr-2 rounded"
+                     className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 mr-2 rounded mb-2 md:mb-0"
                      type="button"
                      onClick={() => {
-                        props.onSubmit()
+                        props.onSubmit();
                      }}
                   >
                      Cancel
@@ -123,25 +122,27 @@ const Popup = (props) => {
                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                      type="submit"
                      onClick={() => {
-                        SubmitHandler()
+                        SubmitHandler();
                      }}
                      disabled={loading} // Disable the button while loading is true
                   >
-                     {loading ? "Loading..." : "Submit"} {/* Show "Loading..." while loading is true */}
+                     {loading ? "Loading..." : "Submit"}{" "}
+                     {/* Show "Loading..." while loading is true */}
                   </button>
                </div>
-
             </div>
          </div>
       </div>
+
    );
 }
 
 
 const Item = ({ locked }) => {
    const classes = locked ? "opacity-50 pointer-events-none" : "";
+   const [showPopover, setShowPopOver] = useState(false)
    return (
-      <div className={`border-fuchsia-400 rounded-lg px-4 py-6 flex justify-center items-center text-white text-center border-[0.04rem] ${classes}`}>
+      <div className={`border-fuchsia-400 rounded-lg px-4 py-6 flex min-w-[180px] justify-center items-center text-white text-center border-[0.04rem] ${classes}`}>
          {
             !locked &&
             <div>
@@ -151,9 +152,15 @@ const Item = ({ locked }) => {
          }
          {
             locked &&
-            <AiFillLock
-               size={40}
-            />
+            <div className="relative flex flex-col justify-center items-center ">
+               <AiFillLock
+                  size={40}
+                  onMouseEnter={() => setShowPopOver(true)}
+                  onMouseLeave={() => setShowPopOver(false)}
+               />
+               <p className="text-sm" >unlock this to earn &#8377; 250</p>
+            </div>
+
          }
       </div>
    )
@@ -196,10 +203,18 @@ const Affiliate = () => {
                               <Item
                                  locked={true}
                               />
-                              <Item />
-                              <Item />
-                              <Item />
-                              <Item />
+                              <Item
+                                 locked={true}
+                              />
+                              <Item
+                                 locked={true}
+                              />
+                              <Item
+                                 locked={true}
+                              />
+                              <Item
+                                 locked={true}
+                              />
                            </div>
                         </div>
                      </div>
@@ -221,7 +236,11 @@ const Affiliate = () => {
                            <div className="btn">
                               <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg"
                                  onClick={() => {
-                                    setShowPop(true)
+                                    if (localStorage.getItem('token')) {
+                                       setShowPop(true)
+                                    } else {
+                                       toast.info("you need to login first")
+                                    }
                                  }}
                               >
                                  Invite Friends

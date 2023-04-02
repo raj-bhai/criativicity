@@ -11,6 +11,8 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { Apiurl } from "@/constants/url";
 import Shimmer from "./courseShimmer";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CourseComp = () => {
    const dispatch = useDispatch();
@@ -41,14 +43,14 @@ const CourseComp = () => {
 
 
    const onClickCourse = async () => {
-      const token = await localStorage.getItem('token');
-      if (!token) {
-         router.push('./login')
-      } else {
-         if (userDetail?.paidUser) {
-            router.push('./video')
-         }
-      }
+      // const token = await localStorage.getItem('token');
+      // if (!token) {
+      //    router.push('./login')
+      // } else {
+      //    if (userDetail?.paidUser) {
+      //       router.push('./video')
+      //    }
+      // }
    }
 
    const handleCheckoutClick = () => {
@@ -65,6 +67,7 @@ const CourseComp = () => {
          {
             domLoaded &&
             <section className=" text-white navbarbg">
+               <ToastContainer />
                <div className="text-center lg:text-left lg:ml-[10rem] mt-[4rem] py-12">
                   <h1
                      className={`font-pressfont text-[1.5rem] lg:text-[3.1rem]  
@@ -120,7 +123,11 @@ const CourseComp = () => {
                                              <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg"
                                                 onClick={() => {
                                                    // makePayment()
-                                                   router.push('./checkout')
+                                                   if (localStorage.getItem('token')) {
+                                                      router.push('./checkout')
+                                                   } else {
+                                                      toast.info('You need to login first')
+                                                   }
                                                 }}
                                              >
                                                 Buy Now

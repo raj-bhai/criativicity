@@ -5,6 +5,8 @@ import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { Apiurl } from '@/constants/url';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -22,6 +24,18 @@ const SignupScreen = () => {
         console.log("email :", email)
         console.log("password :", password)
         console.log("Name :", fullName)
+        if (fullName.length < 3) {
+            toast.warn("Invalid name")
+            return
+        }
+        if (!regex.test(email)) {
+            toast.warn("Invalid email")
+            return
+        }
+        if (password.length < 6) {
+            toast.warn("Too short password")
+            return
+        }
 
         if (regex.test(email) && password.length >= 6 && fullName.length >= 3) {
             const postData = {
@@ -35,6 +49,8 @@ const SignupScreen = () => {
                         const token = response.data.token
                         localStorage.setItem('token', token);
                         router.push('./')
+                    } else {
+                        toast.warn(response.data.message)
                     }
                 })
                 .catch((error) => {
@@ -48,6 +64,7 @@ const SignupScreen = () => {
     return (
         <>
             <Navbar />
+            <ToastContainer />
             <div className='w-full h-full bg-planets bg-contain bg-no-repeat rounded-top-[120px] z-[0] mt-[80x] navbarbg'>
                 <section className='bg-planets min-h-screen flex items-center justify-center pt-8 bg-contain bg-no-repeat rounded-top-[120px]'>
                     <div className='bg-black text-white border border-fuchsia-500 rounded-lg  shadow-lg max-w-3xl p-10'>
@@ -83,7 +100,11 @@ const SignupScreen = () => {
                                 />
                                 <BsEye className='absolute top-1/2 right-3 -translate-y-1/2' width="16" height="16" />
                             </div>
-                            <span className='text-dimPink'>Have an account?  Login</span>
+                            <span className='text-dimPink'>Have an account? <span className='cursor-pointer hover:text-[#fff] ' 
+                            onClick={() => {
+                                router.push('./login')
+                            }}
+                            >Login</span></span>
                             <button className='logibtn text-white py-2 px-3'
                                 onClick={() => {
                                     SignUp()

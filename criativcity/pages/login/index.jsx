@@ -78,6 +78,7 @@ const LoginScreen = () => {
                                     }}
                                 >Login</button>
                             </div>
+                            {/* Google Login */}
                             {/* <div className='mt-5 grid grid-cols-3 items-center text-dimPink'>
                                 <hr className='border-gray-400' />
                                 <p className='text-center text-sm' >OR</p>
