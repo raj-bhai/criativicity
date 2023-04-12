@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Apiurl } from '../constants/url';
-import { CardElement, useStripe, useElements, Elements,PaymentElement } from '@stripe/react-stripe-js';
+import { CardElement, useStripe, useElements, Elements, PaymentElement } from '@stripe/react-stripe-js';
+import { useRouter } from 'next/router';
 
 const CheckoutComp = () => {
     const [price, setPrice] = useState('₹ 1000');
@@ -13,6 +14,7 @@ const CheckoutComp = () => {
     const [validCoupon, setValidCoupon] = useState("doubt")
     const [loading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const router = useRouter()
 
     const [clientSecret, setClientSecret] = useState(null);
     const stripe = useStripe();
@@ -21,12 +23,12 @@ const CheckoutComp = () => {
 
     const CheckoutForm = () => {
         return (
-          <form>
-            <PaymentElement />
-            <button>Submit</button>
-          </form>
+            <form>
+                <PaymentElement />
+                <button>Submit</button>
+            </form>
         );
-      };
+    };
 
 
 
@@ -279,12 +281,13 @@ const CheckoutComp = () => {
                 <div className="flex justify-end mt-8">
                     <button className="bg-gray-800 text-white rounded-lg py-2 px-4"
                         onClick={() => {
-                            if (validCoupon === "valid") {
-                                makePayment(750)
-                            } else {
-                                makePayment(1000)
-                            }
+                            // if (validCoupon === "valid") {
+                            //     makePayment(750)
+                            // } else {
+                            //     makePayment(1000)
+                            // }
                             // setIsOpen(true)
+                            router.push('/payment')
                         }}
                     >
                         Proceed
