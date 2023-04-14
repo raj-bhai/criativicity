@@ -28,33 +28,6 @@ const CheckoutComp = () => {
 
 
 
-    const PopUp = () => {
-
-        const togglePopup = () => {
-            setIsOpen(!isOpen);
-        }
-
-        return (
-            isOpen && (
-                <div className="fixed inset-0 flex items-center justify-center z-[500]">
-                    <div className="bg-white rounded-lg py-[50px] shadow-lg flex flex-col items-center p-4 mx-auto border-[2px] border-fuchsia-500 max-w-md w-full">
-                        {/* <p className="text-sm sm:text-base md:text-lg lg:text-md xl:text-sm font-medium mb-4">
-                            For assistance with payment, please contact us via WhatsApp at +91 8413802010, and our team will be happy to assist you further.
-                        </p>
-                        <button
-                            className="mt-4 px-4 py-2 text-white bg-blue-500 rounded-full focus:outline-none"
-                            onClick={togglePopup}
-                        >
-                            Close
-                        </button> */}
-                        <InjectedCheckoutForm />
-                    </div>
-                </div>
-            )
-        );
-    }
-
-
     const calculateSubtotal = () => {
         const priceNumber = parseFloat(price);
         const gstNumber = parseFloat(gst);
@@ -74,9 +47,13 @@ const CheckoutComp = () => {
     const handleCouponCodeChange = async (event) => {
         await setCouponCode(event.target.value);
         if (event.target.value.length === 8) {
+            setLoading(true)
             CouponValidation(event.target.value)
         } else {
             setValidCoupon("doubt")
+            setDiscount(0)
+            setSubtotal("₹1000")
+            setNetPayableAmount("₹ 1000")
         }
     };
 
@@ -184,17 +161,53 @@ const CheckoutComp = () => {
     }
 
     const CouponValidation = async (value) => {
-        if (value === "12345678") {
-            await setLoading(true)
-            await setValidCoupon("valid")
-            await setDiscount("₹ 250")
-            await setSubtotal("₹750")
-            await setNetPayableAmount("₹ 750")
-            await setLoading(false)
-        } else {
-            setValidCoupon("invalid")
-            setLoading(false)
-        }
+
+        // axios.post(`${Apiurl}/user/verifyReferral`, {
+        //     "code": value
+        // })
+        const token = localStorage.getItem('token');
+        axios.post(`${Apiurl}/user/verifyReferral`, {
+            "code": value
+        }, {
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            }
+        })
+            .then(response => {
+                // console.log(response.data);
+                if (response.data.success) {
+                    setValidCoupon("valid")
+                    setDiscount("₹ 250")
+                    setSubtotal("₹750")
+                    setNetPayableAmount("₹ 750")
+                    setLoading(false)
+                } else {
+                    setValidCoupon("invalid")
+                    setDiscount(0)
+                    setSubtotal("₹1000")
+                    setNetPayableAmount("₹ 1000")
+                    setLoading(false)
+                }
+            })
+            .catch(error => {
+                // console.error(error);
+                setValidCoupon("invalid")
+                setDiscount(0)
+                setSubtotal("₹1000")
+                setNetPayableAmount("₹ 1000")
+                setLoading(false)
+            });
+        // if (value === "12345678") {
+        //     await setLoading(true)
+        //     await setValidCoupon("valid")
+        //     await setDiscount("₹ 250")
+        //     await setSubtotal("₹750")
+        //     await setNetPayableAmount("₹ 750")
+        //     await setLoading(false)
+        // } else {
+        //     setValidCoupon("invalid")
+        //     setLoading(false)
+        // }
     }
 
     // const options = {
@@ -205,9 +218,6 @@ const CheckoutComp = () => {
 
     return (
         <div className="container mx-auto px-4 py-8 pt-[100px]">
-            {/* <Elements stripe={stripePromise} options={options} >
-                <PopUp />
-            </Elements> */}
             <h1 className="text-3xl font-bold mb-4">Checkout</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4  md:px-32 py-8">
                 <div>
