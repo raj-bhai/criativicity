@@ -305,7 +305,8 @@ const CheckoutComp = () => {
                             if (validCoupon === "valid") {
                                 createOrder(750)
                             } else {
-                                createOrder(1000)
+                                // createOrder(1000)
+                                createOrder(1)
                             }
                         }}
                     >

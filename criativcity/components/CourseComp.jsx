@@ -166,14 +166,14 @@ const CourseComp = () => {
                            handleShow(1);
                         }}
                      >
-                        <h3 className="text-white relative flex items-center justify-between text-[0.9rem] lg:text-[1.8rem]  font-Lato">
+                        <h1 className="text-white relative flex items-center justify-between text-[0.9rem] lg:text-[1.8rem]  font-Lato">
                            <h2 className="w-[90%] lg:w-[95%] mr-1"> Master industry-standard software, &quot;Adobe Premiere Pro&quot;</h2>
                            {show[1] ? (
                               <IoIosArrowUp size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowUp>
                            ) : (
                               <IoIosArrowDown size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowDown>
                            )}
-                        </h3>
+                        </h1>
 
                         {show[1] && (
                            <div className="text-left text-white font-Lato lg:text-[1.2rem] text-[0.9rem]">
