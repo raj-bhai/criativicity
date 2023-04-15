@@ -78,7 +78,6 @@ const CourseComp = () => {
                </div>
                {Courses?.length ? (
                   <div className="flex items-center navbarbg justify-center">
-                     {/* <Skeleton height={460}></Skeleton> */}
                      {Courses.map((item, index) => (
                         <section
                            key={index}
@@ -123,7 +122,6 @@ const CourseComp = () => {
                                           <div className="btn">
                                              <button className="logibtn lg:px-4 lg:py-3 py-2 px-2  font-lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg"
                                                 onClick={() => {
-                                                   // makePayment()
                                                    if (localStorage.getItem('token')) {
                                                       router.push('./checkout')
                                                    } else {
@@ -259,7 +257,6 @@ const CourseComp = () => {
             </section>
 
          }
-         {/* </SkeletonTheme> */}
       </>
    );
 };

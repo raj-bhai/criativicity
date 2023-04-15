@@ -134,7 +134,7 @@ const CourseFAQ = () => {
 
                   return (
                      <Item
-                     key={i}
+                     key={index}
                      item= {x}
                      />
                   )
