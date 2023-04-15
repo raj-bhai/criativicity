@@ -82,19 +82,20 @@ const CourseComp = () => {
                      {Courses.map((item, index) => (
                         <section
                            key={index}
-                           className="mt flex justify-center cursor-pointer hover:bg-[#17202A] border-2 border-fuchsia-500 rounded-lg lg:w-[78%] px-2 mx-2 py-1"
+                           // hover:bg-[#17202A]
+                           className="mt flex justify-center cursor-pointer  border-2 border-fuchsia-500 rounded-lg lg:w-[78%] px-2 mx-2 py-1"
                            onClick={() => {
                               onClickCourse()
                            }}
                         >
-                           <div className="adobe-vid-cont lg:flex lg:items-start  justify-between">
+                           <div className="adobe-vid-cont w-[95%] lg:flex lg:items-start  justify-between">
                               <div className="text-cont ">
                                  <div className="">
-                                    <h2 className="text-[1.2rem] w-3/4 mt-4 ">{item.courseName} </h2>
+                                    <h2 className=" font-pressfont text-[1.2rem] w-3/4 mt-4 ">{item.courseName} </h2>
                                  </div>
                                  <div className=" mt-[20px] ">
                                     {item.details.map((x, i) => (
-                                       <h3 key={i}>--- {x}</h3>
+                                       <h3 className="font-pressfont" key={i}>&mdash; {x}</h3>
                                     ))}
                                  </div>
                               </div>
@@ -104,8 +105,8 @@ const CourseComp = () => {
                                  </div>
                                  {
                                     userDetail?.paidUser ?
-                                       <div className="cta flex items-center justify-end pb-2  gap-x-8 lg:gap-x-14 mt-5 lg:mt-10 " >
-                                          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                       <div className="cta flex items-center justify-end pb-2   gap-x-8 lg:gap-x-14 mt-5 lg:mt-5 " >
+                                          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold font-pressfont py-2 px-4 rounded"
                                              onClick={() => {
                                                 router.push('./video')
                                              }}
@@ -114,13 +115,13 @@ const CourseComp = () => {
                                           </button>
 
                                        </div> :
-                                       <div className="cta flex items-center justify-end pb-2  gap-x-8 lg:gap-x-14 mt-5 lg:mt-10 ">
+                                       <div className="cta flex items-center justify-end pb-2  gap-x-8 lg:gap-x-14 mt-5 lg:mt-5 ">
                                           <div className="price flex row gap-2  items-center justify-center ">
-                                             <h3 className="line-through text-[#BDC3C7] text-[18px] font-semibold " >₹ 1250</h3>
-                                             <h3 className="text-[#fff] font-semibold text-[20px]" >₹ 1000</h3>
+                                             {/* <h3 className="line-through text-[#BDC3C7] text-[18px] font-pressfont font-semibold " >₹ 1250</h3> */}
+                                             <h3 className="text-[#fff] text-[20px]  font-lato " >₹ 998</h3>
                                           </div>
                                           <div className="btn">
-                                             <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg"
+                                             <button className="logibtn lg:px-4 lg:py-3 py-2 px-2  font-lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg"
                                                 onClick={() => {
                                                    // makePayment()
                                                    if (localStorage.getItem('token')) {

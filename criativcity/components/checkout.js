@@ -72,7 +72,7 @@ const CheckoutComp = () => {
         });
     }
 
-    const makePayment = async (amount) => {
+    const  makePayment = async (amount) => {
         const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
         if (!res) {
             alert("Razorpay SDK failed to load. Are you online?");
