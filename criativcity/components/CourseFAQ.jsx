@@ -92,6 +92,7 @@ const CourseFAQ = () => {
       const [show, setShow] = useState(false);
       return(
          <div
+         key={props.key}
          className=" rounded-lg border-[0.04rem] border-fuchsia-400 px-4 py-3"
          onClick={() => {
             setShow(!show)
@@ -106,7 +107,7 @@ const CourseFAQ = () => {
             <div className="text-left text-white font-Lato lg:text-[1.2rem] text-[0.9rem]">
                {
                   props.item.value.map((value, i) => (
-                     <h6>&mdash;  {value.text} </h6>
+                     <h6 key={i} >&mdash;  {value.text} </h6>
                   ))
                }
             </div>
@@ -133,6 +134,7 @@ const CourseFAQ = () => {
 
                   return (
                      <Item
+                     key={i}
                      item= {x}
                      />
                   )
