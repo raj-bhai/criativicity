@@ -12,7 +12,36 @@ import axios from "axios";
 import { Apiurl } from "@/constants/url";
 import Shimmer from "./courseShimmer";
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'
+import { AiOutlineClockCircle, AiOutlineCloudDownload, AiOutlineMobile,AiFillCaretRight } from 'react-icons/ai'
+
+
+let FAQ = [
+   {
+      title: "Can I cancel my course purchase if I don’t like it? Will I get a refund?",
+      detail: "Yes! You can cancel your course within 7 days of purchase if you don’t like it. You can email us at support@criativcity.com & we’ll cancel and refund your money within hours. No awkward questions asked :"
+   },
+   {
+      title: "Why Us?",
+      detail: "Cause our content will help you build a career in video editing. Everyone else in the market just teaches premiere pro in 6-10 hours but we dive deep into every aspect from premiere pro to building a business. In addition to that, with our weekly live sessions, all your queries will be solved."
+   },
+   {
+      title: "Where to ask queries?",
+      detail: "You can either comment on a particular video or ask queries in our discord community and our managers and support team will respond withing 6 hours or sooner :)"
+   },
+   {
+      title: "How can I access course materials and resources?",
+      detail: "We provide google drive links of all the recourses and if you face any issue in downloading or accessing it, you can contact us, and we would love to help you out"
+   },
+   {
+      title: "Is there job opportunity?",
+      detail: "YES! There is a whole section on how to get your client and how to build a team and more but in addition to that, we will also announce PRIZE WINNING COMPETITIONS, CONTESTS & COMPETITIVE EXAMS for recruitment for our own production house and soon for other companies as well so yes there is a lot of job opportunity options available with us."
+   },
+   {
+      title: "What is our future goal?",
+      detail: "To make CRIATIVCITY, a place where like-minded and enthusiastic people come to build a legacy with the most powerful and creative community, to build an ecosystem where students can come, learn, showcase and earn."
+   },
+]
 
 const CourseComp = () => {
    const dispatch = useDispatch();
@@ -32,12 +61,41 @@ const CourseComp = () => {
       }
    }, []);
 
-   const [show, setShow] = useState({});
 
    function handleShow(id) {
       setShow((prev) => {
          return { ...prev, [id]: !prev[id] };
       });
+   }
+
+   const Item = (props) => {
+      const [show, setShow] = useState(false);
+
+
+      return (
+         <div
+            key={props.key}
+            className=" rounded-lg border-[0.04rem] border-fuchsia-400 px-4 py-3 "
+            onClick={() => {
+               setShow(!show)
+            }}
+         >
+            <h1 className="text-white relative flex items-center justify-between text-[0.9rem] lg:text-[1.8rem]  font-Lato">
+               <h2 className="w-[90%] lg:w-[95%] mr-1 font-poppins "> {props.title}</h2>
+               {show ? (
+                  <IoIosArrowUp size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowUp>
+               ) : (
+                  <IoIosArrowDown size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowDown>
+               )}
+            </h1>
+
+            {show && (
+               <div className="text-left text-white font-Lato lg:text-[1.2rem]  w-[95%]  mt-2 text-[0.9rem]">
+                  <h6 className="font-poppins text-[0.8rem] lg:text-[1.1rem]" >{props.detail} </h6>
+               </div>
+            )}
+         </div>
+      )
    }
 
 
@@ -90,11 +148,14 @@ const CourseComp = () => {
                            <div className="adobe-vid-cont w-[95%] lg:flex lg:items-start  justify-between">
                               <div className="text-cont ">
                                  <div className="">
-                                    <h2 className=" font-pressfont text-[1.2rem] w-3/4 mt-4 ">{item.courseName} </h2>
+                                    <h2 className=" font-poppins text-[1.2rem] w-3/4 mt-4 ">{item.courseName} </h2>
                                  </div>
                                  <div className=" mt-[20px] ">
                                     {item.details.map((x, i) => (
-                                       <h3 className="font-pressfont" key={i}>&mdash; {x}</h3>
+                                       <div key={index} className="flex items-center my-1 gap-x-2">
+                                          <AiFillCaretRight size={15} />
+                                          <h6>{x}</h6>
+                                       </div>
                                     ))}
                                  </div>
                               </div>
@@ -158,100 +219,16 @@ const CourseComp = () => {
                      <input className="outline-none px-2 py-3 bg-transparent" placeholder="Enter Your Email" type="text" />
                      <button className="px-5 border-2 mx-1 rounded-lg py-2 text-fuchsia-400 ">Submit</button>
                   </div>
-                  <div className="faqqna navbarbg lg:space-y-5 space-y-2 mt-3 pt-12 ">
-                     <div
-                        className=" rounded-lg border-[0.04rem] border-fuchsia-400 px-4 py-3 "
-                        onClick={() => {
-                           handleShow(1);
-                        }}
-                     >
-                        <h1 className="text-white relative flex items-center justify-between text-[0.9rem] lg:text-[1.8rem]  font-Lato">
-                           <h2 className="w-[90%] lg:w-[95%] mr-1"> Master industry-standard software, &quot;Adobe Premiere Pro&quot;</h2>
-                           {show[1] ? (
-                              <IoIosArrowUp size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowUp>
-                           ) : (
-                              <IoIosArrowDown size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowDown>
-                           )}
-                        </h1>
-
-                        {show[1] && (
-                           <div className="text-left text-white font-Lato lg:text-[1.2rem] text-[0.9rem]">
-                              <h6>- Edit and enhance video footage </h6>
-                              <h6>- Edit and enhance video footage </h6>
-                              <h6>- Edit and enhance video footage </h6>
-                              <h6>- Edit and enhance video footage </h6>
-                           </div>
-                        )}
-                     </div>
-                     <div
-                        className="rounded-lg border-[0.04rem] border-fuchsia-400 px-4 py-3"
-                        onClick={() => {
-                           handleShow(2);
-                        }}
-                     >
-                        <h3 className="text-white text-[0.9rem] flex items-center justify-between lg:text-[1.8rem] font-Lato">
-                           Understand the Psychology behind Editing
-                           {show[2] ? (
-                              <IoIosArrowUp size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowUp>
-                           ) : (
-                              <IoIosArrowDown size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowDown>
-                           )}
-                        </h3>
-                        {show[2] && (
-                           <div className="text-left text-white font-Lato lg:text-[1.2rem] text-[0.9rem]">
-                              <h6>- Edit and enhance video footage </h6>
-                              <h6>- Edit and enhance video footage </h6>
-                              <h6>- Edit and enhance video footage </h6>
-                              <h6>- Edit and enhance video footage </h6>
-                           </div>
-                        )}
-                     </div>
-                     <div
-                        className="rounded-lg border-[0.04rem] border-fuchsia-400 px-4 py-3"
-                        onClick={() => {
-                           handleShow(3);
-                        }}
-                     >
-                        <h3 className="text-white text-[0.9rem] items-center flex justify-between lg:text-[1.8rem] font-Lato">
-                           Decoding Youtubers and industries
-                           {show[3] ? (
-                              <IoIosArrowUp size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowUp>
-                           ) : (
-                              <IoIosArrowDown size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowDown>
-                           )}
-                        </h3>
-                        {show[3] && (
-                           <div className="text-left text-white font-Lato lg:text-[1.2rem] text-[0.9rem]">
-                              <h6>- Edit and enhance video footage </h6>
-                              <h6>- Edit and enhance video footage </h6>
-                              <h6>- Edit and enhance video footage </h6>
-                              <h6>- Edit and enhance video footage </h6>
-                           </div>
-                        )}
-                     </div>
-                     <div
-                        className=" rounded-lg border-[0.04rem] border-fuchsia-400 px-4 py-3"
-                        onClick={() => {
-                           handleShow(4);
-                        }}
-                     >
-                        <h3 className="text-white text-[0.9rem] items-center flex justify-between lg:text-[1.8rem] font-Lato">
-                           Businesses With Editing
-                           {show[4] ? (
-                              <IoIosArrowUp size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowUp>
-                           ) : (
-                              <IoIosArrowDown size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowDown>
-                           )}
-                        </h3>
-                        {show[4] && (
-                           <div className="text-left text-white font-Lato lg:text-[1.2rem] text-[0.9rem]">
-                              <h6>- Edit and enhance video footage </h6>
-                              <h6>- Edit and enhance video footage </h6>
-                              <h6>- Edit and enhance video footage </h6>
-                              <h6>- Edit and enhance video footage </h6>
-                           </div>
-                        )}
-                     </div>
+                  <div className="faqqna navbarbg lg:space-y-5  w-[70%] space-y-2 mt-3 pt-12 ">
+                     {
+                        FAQ.map((x, index) => (
+                           <Item
+                              key={index}
+                              title={x.title}
+                              detail={x.detail}
+                           />
+                        ))
+                     }
                   </div>
                </div>
             </section>

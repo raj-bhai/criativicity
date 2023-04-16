@@ -7,14 +7,28 @@ import { slideIn, staggerContainer, textVariant, textVariant2 } from "@/utils/mo
 import moneyback from "../assets/moneyback.png";
 import student from "../assets/student.png";
 import vidimg from "../assets/vidimg.png";
-import { AiOutlineClockCircle, AiOutlineCloudDownload, AiOutlineMobile } from 'react-icons/ai'
+import { AiOutlineClockCircle, AiOutlineCloudDownload, AiOutlineMobile,AiFillCaretRight } from 'react-icons/ai'
 import { TbCertificate } from 'react-icons/tb'
 import { MdLanguage } from 'react-icons/md'
 import { BiNotepad } from 'react-icons/bi'
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import * as CourseAction from '../redux/action/course';
+
+
 
 const Quote = () => {
    const router = useRouter()
+   const dispatch = useDispatch()
+   const Courses = useSelector((state) => state.course.CourseList);
+
+   useEffect(() => {
+      if (!Courses?.length) {
+         dispatch(CourseAction.getAllCourse());
+      }
+   }, [])
+
+
    return (
       <section className="navbarbg">
          <div className="  flex lg:flex-row flex-col items-center justify-around pb-4">
@@ -61,23 +75,28 @@ const Quote = () => {
                      <h3 className="lg:text-[1.2rem] font-Lato font-medium">This Course includes:</h3>
                   </div>
                   <div className="minortext">
-                     <div className="flex items-center my-1 gap-x-2">
-                        <AiOutlineClockCircle size={20} />
-                        <h6>24.5 hours demand video</h6>
-                     </div>
-                     <div className="flex items-center my-1 gap-x-2">
+                     {
+                        Courses?.length &&
+                        Courses[0].details.map((x, index) => (
+                           <div key={index} className="flex items-center my-1 gap-x-2">
+                              <AiFillCaretRight size={15} />
+                              <h6>{x}</h6>
+                           </div>
+                        ))
+                     }
+                     {/* <div className="flex items-center my-1 gap-x-2">
                         <AiOutlineCloudDownload size={20} />
                         <h6>18 downloadable resoures</h6>
-                     </div>
-                     <div className="flex items-center my-1 gap-x-2">
+                     </div> */}
+                     {/* <div className="flex items-center my-1 gap-x-2">
                         <AiOutlineClockCircle size={20} />
                         <h6>24.5 hours demand video</h6>
-                     </div>
-                     <div className="flex items-center my-1  gap-x-2">
+                     </div> */}
+                     {/* <div className="flex items-center my-1  gap-x-2">
                         <AiOutlineMobile size={20} />
                         <h6>Access on Mobile and Tv</h6>
-                     </div>
-
+                     </div> */}
+                     {/* 
                      <div className="flex items-center my-1 gap-x-2">
                         <TbCertificate size={20} />
                         <h6>Certificate on Completion</h6>
@@ -90,7 +109,7 @@ const Quote = () => {
                      <div className="flex items-center my-1  gap-x-2">
                         <BiNotepad size={20} />
                         <h6>Last updated 08/22</h6>
-                     </div>
+                     </div> */}
 
                   </div>
                </div>

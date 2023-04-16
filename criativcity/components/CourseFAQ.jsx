@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/src/style";
 import heroPlanet from "../assets/Group.png";
+import * as CourseAction from '../redux/action/course';
+import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -88,31 +90,40 @@ let arr = [
 
 const CourseFAQ = () => {
 
+   const dispatch = useDispatch()
+   const Courses = useSelector((state) => state.course.CourseList);
+
+   useEffect(() => {
+      if (!Courses?.length) {
+         dispatch(CourseAction.getAllCourse());
+      }
+   }, [])
+
    const Item = (props) => {
       const [show, setShow] = useState(false);
-      return(
+      return (
          <div
-         key={props.key}
-         className=" rounded-lg border-[0.04rem] border-fuchsia-400 px-4 py-3"
-         onClick={() => {
-            setShow(!show)
-         }}
-      >
-         <h3 className="text-white relative flex items-center justify-between text-[0.9rem] lg:text-[1.8rem]  font-Lato">
-            <h2 className="w-[90%] lg:w-[95%] mr-1">{props.item.title}</h2>
-            {show ? <IoIosArrowUp size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowUp> : <IoIosArrowDown size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowDown>}
-         </h3>
+            key={props.key}
+            className=" rounded-lg border-[0.04rem] border-fuchsia-400 px-4 py-3"
+            onClick={() => {
+               setShow(!show)
+            }}
+         >
+            <h3 className="text-white relative flex items-center justify-between text-[0.9rem] lg:text-[1.8rem]  font-Lato">
+               <h2 className="w-[90%] lg:w-[95%] mr-1 font-poppins">{props.item.title}</h2>
+               {show ? <IoIosArrowUp size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowUp> : <IoIosArrowDown size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowDown>}
+            </h3>
 
-         {show && (
-            <div className="text-left text-white font-Lato lg:text-[1.2rem] text-[0.9rem]">
-               {
-                  props.item.value.map((value, i) => (
-                     <h6 key={i} >&mdash;  {value.text} </h6>
-                  ))
-               }
-            </div>
-         )}
-      </div>
+            {show && (
+               <div className="text-left text-white font-Lato lg:text-[1.2rem] text-[0.9rem]">
+                  {
+                     props.item.value.map((value, i) => (
+                        <h6 className="font-poppins" key={i} >&mdash;  {value.text} </h6>
+                     ))
+                  }
+               </div>
+            )}
+         </div>
       )
    }
 
@@ -134,8 +145,8 @@ const CourseFAQ = () => {
 
                   return (
                      <Item
-                     key={index}
-                     item= {x}
+                        key={index}
+                        item={x}
                      />
                   )
                })

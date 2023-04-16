@@ -79,7 +79,7 @@ const Navbar = () => {
          </div>
          <div className={`${toggle ? "hidden" : "flex"} p-6 bg-mob-menu absolute z-20 top-[3.9rem] right-0 mx-4 my-2 min-w-[140px] rounded-xl sidebar`}>
             <ul className="list-none flex justify-end items-start flex-1 flex-col">
-               {navlinks.map((nav, index) => (
+               {navlinks.map((nav, index) => ( 
                   <li
                      key={nav.id}
                      className={`font-pressfont font-medium cursor-pointer text-[16px]  ${active === nav.text ? "text-white" : "text-dimWhite"} ${index === navlinks.length - 1 ? "mb-0" : "mb-4"
