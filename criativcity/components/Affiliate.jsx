@@ -191,9 +191,9 @@ const Affiliate = () => {
                </div> */}
             </div>
             <div className="flex items-center navbarbg justify-center mt-[3.3rem] ">
-               <section className="mt flex justify-center border-[0.04rem]  border-fuchsia-400 rounded-lg lg:w-[80%]  px-2 mx-2 py-1">
-                  <div className="adobe-vid-cont lg:flex lg:flex-wrap lg:justify-center lg:items-start w-full justify-between">
-                     <div className="text-cont mx-auto text-white">
+               <section className="mt flex justify-between border-[0.04rem]  border-fuchsia-400 rounded-lg lg:w-[80%]  px-2 mx-2 py-1">
+                  <div className="adobe-vid-cont  p-1 lg:flex  lg:flex-wrap lg:justify-between lg:items-between w-full justify-between">
+                     {/* <div className="text-cont mx-auto text-white border">
                         <h2 className="text-[1.2rem]  mt-4">Here&apos;s how we are doing </h2>
                         <div className="flex items-center justify-center mt-[2rem]">
                            <div className="grid grid-cols-3 gap-4">
@@ -217,7 +217,7 @@ const Affiliate = () => {
                               />
                            </div>
                         </div>
-                     </div>
+                     </div> */}
                      <div className="vidimg-cont">
                         <div className="videocont lg:w-[500px] lg:h-[340px] mt-7 ">
                            <Image src={affimg} className="rounded-lg" alt="image affiliate"></Image>
@@ -233,7 +233,7 @@ const Affiliate = () => {
                            {/* <div className="price text-white">
                               <h3>$199</h3>
                            </div> */}
-                           <div className="btn">
+                           {/* <div className="btn">
                               <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg"
                                  onClick={() => {
                                     if (localStorage.getItem('token')) {
@@ -245,13 +245,39 @@ const Affiliate = () => {
                               >
                                  Invite Friends
                               </button>
-                           </div>
+                           </div> */}
                         </div>
+                     </div>
+                     <div className="text-cont flex flex-col justify-between text-white lg:w-[50%]">
+                        <div className=" " >
+                           <h3 className="text-[1.2rem] mb-4">How Criativcity Affiliate Program Will Work</h3>
+                           <h6>
+                              You can earn money by sharing Criativcity courses through their affiliate program. To become an affiliate, you must first create
+                              an account on Criativcity. Once your account is created, you can access the affiliate section and generate unique links for any
+                              course on the website. When someone clicks on your link and enrolls in a course, you will earn a commission on the sale.
+                              Additionally, You can also share courses on your website or social media channels and use tracking links to earn 20% commission
+                              on any course purchases made through your links.
+                           </h6>
+                        </div>
+                        <div className="btn flex flex-col items-end">
+                           <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg"
+                              onClick={() => {
+                                 if (localStorage.getItem('token')) {
+                                    setShowPop(true)
+                                 } else {
+                                    toast.info("you need to login first")
+                                 }
+                              }}
+                           >
+                              Invite Friends
+                           </button>
+                        </div>
+
                      </div>
                   </div>
                </section>
             </div>
-            <div className=" text-white mt-4 outerTextDiv flex border-[0.04rem]  rounded-lg border-fuchsia-400 items-center justify-around lg:justify-between lg:mx-[8.5rem]">
+            {/* <div className=" text-white mt-4 outerTextDiv flex border-[0.04rem]  rounded-lg border-fuchsia-400 items-center justify-around lg:justify-between lg:mx-[8.5rem]">
                <div className="px-5 py-7">
                   <h3 className="text-[1.2rem] mb-4">How Criativcity Affiliate Program Will Work</h3>
                   <h6>
@@ -262,7 +288,7 @@ const Affiliate = () => {
                      on any course purchases made through your links.
                   </h6>
                </div>
-            </div>
+            </div> */}
             <div className="pt-12">
                <Image src={planets} alt="planets"></Image>
             </div>
