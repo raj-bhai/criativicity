@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 const Hero = () => {
    const router = useRouter()
    return (
-      <section id="home" className="flex md:flex mt-24 overflow-hidden">
+      <section id="home" className="flex md:flex mt-24 overflow-hidden  ">
          <div className=" w-full h-full bg-planets bg-contain bg-no-repeat rounded-top-[120px] z-[0]">
             <motion.div
                // variants={staggerContainer}

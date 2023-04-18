@@ -18,7 +18,7 @@ const LowMidSection = () => {
             <div className="lg:flex  lg:items-start lg:justify-between lg:mx-24">
                <div className="crstext text-center lg:text-start">
                   <div className="heading">
-                     <Image src={polygon} alt="polygon" className="w-14 lg:pb-10 ml-2 lg:pt-2 pt-14"></Image>
+                     <Image src={polygon} alt="polygon" className="w-14 lg:pb-10 ml-2 lg:pt-2 pt-14 animate-slow"></Image>
                      <h2
                         className={`font-pressfont text-[1.5rem] lg:text-[3.1rem]  
                   pressFont text-transparent bg-clip-text bg-gradient-to-r from-dimPink to-dimPurple`}
@@ -31,7 +31,7 @@ const LowMidSection = () => {
                         Our course is designed to teach you the essential tools, techniques, psychology and systems used to be a professional video
                         editor
                      </h3>
-                     <Image src={ball} alt="ball" className=" lg:-ml-12  w-[4rem] h-[4rem] lg:w-[5rem] lg:h-[5rem] mt-4"></Image>
+                     <Image src={ball} alt="ball" className=" lg:-ml-12  w-[4rem] h-[4rem] lg:w-[5rem] lg:h-[5rem] mt-4 animate-slow "></Image>
                   </div>
                </div>
                <motion.div
@@ -55,8 +55,8 @@ const LowMidSection = () => {
                >
                   <Image src={video} width={300} height={300} alt="video" className=" aspect-4/4 w-56 h-56 lg:h-96 lg:w-96"></Image>
 
-               <Image src={polygon} alt="polygon" className=" absolute top-4 lg:right-12 right-12 w-[3rem] h-[3rem]  lg:w-[3.9rem] lg:h-[3.9rem]"></Image>
-               <Image src={ball} alt="ball" className=" absolute bottom-0 lg:left-12 left-20 w-[3rem] h-[3rem]  lg:w-[3.9rem] lg:h-[3.9rem]"></Image>
+               <Image src={polygon} alt="polygon" className=" animate-slow absolute top-4 lg:right-12 right-12 w-[3rem] h-[3rem]  lg:w-[3.9rem] lg:h-[3.9rem]"></Image>
+               <Image src={ball} alt="ball" className=" animate-slow absolute bottom-0 lg:left-12 left-20 w-[3rem] h-[3rem]  lg:w-[3.9rem] lg:h-[3.9rem]"></Image>
                </motion.div>
 
                <div className="textCont lg:text-left lg:w-1/2 text-center px-4 ">
