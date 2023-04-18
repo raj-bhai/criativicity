@@ -289,9 +289,9 @@ const Affiliate = () => {
                   </h6>
                </div>
             </div> */}
-            <div className="pt-12">
+            {/* <div className="pt-12">
                <Image src={planets} alt="planets"></Image>
-            </div>
+            </div> */}
             <div className="pt-12">
                <Image src={ellipse} alt="ellipse"></Image>
             </div>

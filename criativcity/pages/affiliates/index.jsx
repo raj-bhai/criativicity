@@ -8,7 +8,7 @@ const index = () => {
     <>
     <Navbar/>
     <Affiliate/>
-    <Subcontent/>
+    {/* <Subcontent/> */}
     <Footer/>
     </>
   )
