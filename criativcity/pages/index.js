@@ -48,7 +48,7 @@ export default function Home() {
                </div>
             </div>
 
-            <div className={`navbarbg `}>
+            <div className={`navbarbg  `}>
                <div className={`${styles.boxWidth}`}>
                   <LowMidSection />
                </div>
@@ -69,7 +69,7 @@ export default function Home() {
                   <Quote />
                </div>
             </div>
-            <div className={`navbarbg `}>
+            <div className={`navbarbg`}>
                <div className={`${styles.boxWidth}`}>
                   <Subcontent />
                </div>

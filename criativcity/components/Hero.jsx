@@ -40,7 +40,7 @@ const Hero = () => {
                         className={` font-pressfont text-[1.5rem] lg:text-[4.8rem] text-transparent bg-clip-text bg-gradient-to-r from-dimPink to-dimPurple`}
                      >
                         {" "}
-                        Criativcity.
+                        Criativcity
                      </h1>
                      {/* <div className=" absolute -z-50  inset-0 gradient-01"/> */}
 

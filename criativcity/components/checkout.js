@@ -72,7 +72,7 @@ const CheckoutComp = () => {
         });
     }
 
-    const  makePayment = async (amount) => {
+    const makePayment = async (amount) => {
         const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
         if (!res) {
             alert("Razorpay SDK failed to load. Are you online?");
@@ -115,58 +115,17 @@ const CheckoutComp = () => {
     };
 
 
-    // const createOrder = async (amount) => {
-    //     const result = await axios.post(`${Apiurl}/razorpay/createOrder`, {
-    //         amount: amount * 100,
-    //     });
+    const createOrder = async (amount) => {
+        const result = await axios.post(`${Apiurl}/razorpay/createOrder`, {
+            amount: amount * 100,
+        });
 
-    //     if (!result) {
-    //         return;
-    //     }
-    //     // await setOptions(clientSecret)
-    //     // setIsOpen(true)
-    //     router.push(`/payment?data=${result.data.clientSecret}`)
-    //     console.log(result.data)
-    // }
-
-    // const makePayment = async (event) => {
-    //     // event.preventDefault();
-
-    //     // const { error, paymentMethod } = await stripe.createPaymentMethod({
-    //     //     type: 'card',
-    //     //     card: elements.getElement(CardElement),
-    //     // });
-
-    //     // if (error) {
-    //     //     console.error(error);
-    //     //     return;
-    //     // }
-
-    //     try {
-    //         const result = await axios.post(`${Apiurl}/razorpay/createOrder`, {
-    //             amount: 1 * 100,
-    //         });
-
-    //         if (!result) {
-    //             alert("Server error. Are you online?");
-    //             return;
-    //         }
-
-    //         const { clientSecret } = await response.json();
-    //         setClientSecret(clientSecret);
-
-    //         const { error: stripeError } = await stripe.confirmCardPayment(clientSecret, {
-    //             payment_method: paymentMethod.id,
-    //         });
-
-    //         if (stripeError) {
-    //             console.error(stripeError);
-    //             return;
-    //         }
-    //     } catch (err) {
-    //         console.log("Stripe Error ", err)
-    //     }
-    // }
+        if (!result) {
+            return;
+        }
+        router.push(`/payment?data=${result.data.clientSecret}`)
+        // console.log(result.data)
+    }
 
     const CouponValidation = async (value) => {
 
@@ -205,23 +164,8 @@ const CheckoutComp = () => {
                 setNetPayableAmount("₹ 1000")
                 setLoading(false)
             });
-        // if (value === "12345678") {
-        //     await setLoading(true)
-        //     await setValidCoupon("valid")
-        //     await setDiscount("₹ 250")
-        //     await setSubtotal("₹750")
-        //     await setNetPayableAmount("₹ 750")
-        //     await setLoading(false)
-        // } else {
-        //     setValidCoupon("invalid")
-        //     setLoading(false)
-        // }
     }
 
-    // const options = {
-    //     // passing the client secret obtained from the server
-    //     clientSecret: "pi_3MwIZwSB8NyItH1J1xnxHhls_secret_nf7qkMFVq2WqhnwAnqcA08pgc",
-    // };
 
 
     return (
@@ -311,12 +255,11 @@ const CheckoutComp = () => {
                     <button className="bg-gray-800 text-white rounded-lg py-2 px-4"
                         onClick={() => {
                             if (validCoupon === "valid") {
-                                // createOrder(750)
-                                makePayment(1)
+                                //makePayment(750)   ---------------------------Razorpay
+                                createOrder(750)
                             } else {
-                                // createOrder(1000)
-                                // createOrder(1)
-                                makePayment(1)
+                                // makePayment(1000)  ---------------------------Razorpay
+                                createOrder(1000)
                             }
                         }}
                     >

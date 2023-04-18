@@ -95,6 +95,11 @@
   background: linear-gradient(95.75deg, #5200FF 5.19%, #AD00FF 104.15%);
 }
 
+.logibtn:hover {
+  background: linear-gradient(95.75deg, #AD00FF 5.19%, #5200FF 104.15%);
+  /* other styles */
+}
+
 :root {
   --black-gradient: linear-gradient(144.39deg,
       #ffffff -278.56%,

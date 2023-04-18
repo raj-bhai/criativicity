@@ -30,13 +30,13 @@ const Navbar = () => {
       }
       else if (index === 1 && currentRoute === "/courses") {
          return true
-      } 
+      }
       else if (index === 2 && currentRoute === "/affiliates") {
          return true
-      } 
+      }
       else if (index === 3 && currentRoute === "/support") {
          return true
-      } 
+      }
       else {
          return false
       }
@@ -54,7 +54,7 @@ const Navbar = () => {
             <ul className="list-none sm:flex hidden text-white justify-end items-center flex-1">
                {navlinks.map((nav, index) => (
                   index !== 4 ?
-                     <li className={` text-white ${Selected(index) ? 'text-[1.2rem] underline underline-offset-8 ' : 'text-[1.1rem] '}  w-[100px] hover:text-[1.2rem] mr-8`} key={index}>
+                     <li className={` text-white font-Lato ${Selected(index) ? 'text-[1.2rem] decoration-dimPink underline underline-offset-8 ' : 'text-[1.1rem] '}  w-[100px] hover:text-[1.2rem] mr-8`} key={index}>
                         <a href={`${nav.path}`}>{nav.text}</a>
                      </li>
                      :
@@ -85,6 +85,9 @@ const Navbar = () => {
                      vertical-align: Center;
                      cursor:pointer;
                   }
+                  li:last-of-type:hover {
+                     background: linear-gradient(95.75deg, #ad00ff 5.19%, #5200ff 104.15%);
+                 }
                `}</style>
             </ul>
          </motion.nav>
