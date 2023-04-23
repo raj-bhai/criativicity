@@ -2,8 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
+.line-animate {
+  animation:  example 5s linear infinite;
+}
+
+@keyframes example {
+  0%   {top: 0px; left : 0px}
+  100% {top: 500px; left: 500px}
+}
+
+.line-animate1 {
+  animation:  example1 6s linear infinite;
+}
+
+@keyframes example1 {
+  0%   {top: 0px; left : 500px}
+  100% {top: 500px; left: 1000px}
+}
+
+.line-animate2 {
+  animation:  example2 7s linear infinite;
+}
+
+@keyframes example2 {
+  0%   {top: 0px; left : 1000px}
+  100% {top: 500px; left: 1500px}
+}
+
+.animate-superslow {
+  animation: spinsuperslow 30s linear infinite;
+}
+
+@keyframes spinsuperslow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-slowReverse {
+  animation: spinSlowReverse 5s linear infinite;
+}
+
+@keyframes spinSlowReverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
 .animate-slow {
-  animation: spinSlow 3s linear infinite;
+  animation: spinSlow 5s linear infinite;
 }
 
 @keyframes spinSlow {

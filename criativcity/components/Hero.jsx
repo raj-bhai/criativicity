@@ -7,12 +7,15 @@ import { slideIn, staggerContainer, textVariant, textVariant2 } from "@/utils/mo
 import Link from "next/link";
 import student from "../assets/student.png";
 import { useRouter } from "next/router";
+import Planet from "./planet";
 
 const Hero = () => {
    const router = useRouter()
    return (
       <section id="home" className="flex md:flex mt-24 overflow-hidden  ">
-         <div className=" w-full h-full bg-planets bg-contain bg-no-repeat rounded-top-[120px] z-[0]">
+         {/* bg-planets */}
+         <div className=" w-full h-full  bg-contain bg-no-repeat rounded-top-[120px] z-[0]">
+            <Planet/>
             <motion.div
                // variants={staggerContainer}
                // initial="hidden"

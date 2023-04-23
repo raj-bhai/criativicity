@@ -142,7 +142,6 @@ const CourseFAQ = () => {
          <div className="faqqna navbarbg lg:space-y-5 space-y-2 mt-3 w-[50%] ">
             {
                arr.map((x, index) => {
-
                   return (
                      <Item
                         key={index}
