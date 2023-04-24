@@ -59,8 +59,11 @@ const Hero = () => {
                            </div>
                            <h1 className="text-white font-normal font-Lato text-[0.8rem] lg:text-[1.1rem]">Students Enrolled</h1>
                         </div> */}
-                        <div className="btn">
+                        <div className="btn z-50">
                            <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg"
+                           onMouseEnter={() => {
+                              console.log("mouse enter")
+                           }}
                            onClick={() => {
                               router.push('./courses')
                            }}

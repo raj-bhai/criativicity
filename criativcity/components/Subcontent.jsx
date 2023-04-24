@@ -10,9 +10,9 @@ import grouppl from "../assets/Group.png";
 const Subcontent = () => {
    return (
       <section className="navbarbg ">
-         <div className="w-full relative flex flex-col items-center justify-center">
-            <Image src={grouppl} alt="group" className="absolute lg:top-32 "></Image>
-            <Image src={fish} alt="fish" className="aspect-1/4 w-full "></Image>
+         <div className="w-full relative flex flex-col items-center justify-start">
+            {/* <Image src={grouppl} alt="group" className="absolute lg:top-32 "></Image> */}
+            <Image style={{ clipPath: "inset(700px 0 0 0)" }} src={fish} alt="fish" className=" w-full -mt-[700px] "></Image>
          </div>
       </section>
    );

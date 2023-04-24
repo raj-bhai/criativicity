@@ -51,10 +51,12 @@ const Navbar = () => {
             <h1 className="font-pressfont text-[1.3rem] lg:text-[2rem] uppercase">Criativcity</h1>
          </Link>
          <motion.nav animate={{ x: 50 }} transition={{ type: "spring", stiffness: 100, damping: 45 }}>
-            <ul className="list-none sm:flex hidden text-white justify-end items-center flex-1">
+            {/* <ul className="list-none sm:flex hidden text-white justify-end items-center flex-1">
                {navlinks.map((nav, index) => (
                   index !== 4 ?
-                     <li className={` text-white font-Lato ${Selected(index) ? 'text-[1.2rem] decoration-dimPink underline underline-offset-8 ' : 'text-[1.1rem] '}  w-[100px] hover:text-[1.2rem] mr-8`} key={index}>
+                     <li
+                        className={` text-white font-Lato ${Selected(index) ? 'text-[1.2rem] decoration-dimPink underline underline-offset-8 ' : 'text-[1.1rem] '}  w-[100px] hover:text-[1.2rem] transition duration-1000`}
+                        key={index}>
                         <a href={`${nav.path}`}>{nav.text}</a>
                      </li>
                      :
@@ -89,6 +91,40 @@ const Navbar = () => {
                      background: linear-gradient(95.75deg, #ad00ff 5.19%, #5200ff 104.15%);
                  }
                `}</style>
+            </ul> */}
+
+            <ul className="list-none sm:flex hidden text-white justify-end items-center flex-1">
+               {navlinks.map((nav, index) => (
+                  index !== 4 ? (
+                     <div key={index} className={`${(index === 0)? 'w-[90px]' : 'w-[120px]'} h-[50px] flex flex-col justify-center items-center`} >
+                        <li
+                           className={`text-white font-Lato ${Selected(index) ?
+                              `${styles.selectedNav} ${styles.selectedUnderline}` :
+                              styles.navLink
+                              }`}
+                           key={index}
+                        >
+                           <a href={`${nav.path}`}>{nav.text}</a>
+                        </li>
+                     </div>
+                  ) : (
+                     <li
+                        className={`${styles.logoutLink} ${styles.loggedIn} ml-2`}
+                        key={index}
+                        onClick={() => {
+                           if (token) {
+                              localStorage.removeItem('token');
+                              setToken(null);
+                              router.reload();
+                           } else {
+                              router.push('/login');
+                           }
+                        }}
+                     >
+                        <a>{token ? 'Logout' : 'Login'}</a>
+                     </li>
+                  )
+               ))}
             </ul>
          </motion.nav>
          <div
@@ -116,4 +152,14 @@ const Navbar = () => {
       </nav>
    );
 };
+
+
+const styles = {
+   navLink: 'text-[1.1rem] hover:text-[1.2rem] transition duration-5000',
+   selectedNav: 'text-[1.2rem] decoration-dimPink',
+   selectedUnderline: 'underline underline-offset-8',
+   logoutLink: 'text-white text-[1.1rem] mr-8 cursor-pointer font-weight-bold',
+   loggedIn: 'bg-purple-600 rounded-lg px-4 py-2 logibtn',
+};
+
 export default Navbar;
