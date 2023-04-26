@@ -248,10 +248,10 @@ const Affiliate = () => {
                            </div> */}
                         </div>
                      </div>
-                     <div className="text-cont flex flex-col justify-between font-lato text-white lg:w-[50%]">
+                     <div className="text-cont flex  flex-col justify-between font-lato text-white lg:w-[50%]">
                         <div className=" " >
-                           <h3 className="text-[1.2rem] mb-4 font-semibold font-lato">How Criativcity Affiliate Program Will Work</h3>
-                           <h6 className="text-[1.1rem] font-lato" >
+                           <h3 className="text-[1.2rem] mb-4 font-semibold font-Lato">How Criativcity Affiliate Program Will Work</h3>
+                           <h6 className="lg:text-[1.1rem] text-[0.8rem] font-Lato" >
                               You can earn money by sharing Criativcity courses through their affiliate program. To become an affiliate, you must first create
                               an account on Criativcity. Once your account is created, you can access the affiliate section and generate unique links for any
                               course on the website. When someone clicks on your link and enrolls in a course, you will earn a commission on the sale.

@@ -13,12 +13,12 @@ import { Apiurl } from "@/constants/url";
 import Shimmer from "./courseShimmer";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-import { AiOutlineClockCircle, AiOutlineCloudDownload, AiOutlineMobile,AiFillCaretRight } from 'react-icons/ai'
+import { AiOutlineClockCircle, AiOutlineCloudDownload, AiOutlineMobile, AiFillCaretRight } from 'react-icons/ai'
 
 
 let FAQ = [
    {
-      title: "Can I cancel my course purchase if I don’t like it? Will I get a refund?",
+      title: "Can I cancel my course purchase if I don’t like it?  Will I get a refund?",
       detail: "Yes! You can cancel your course within 7 days of purchase if you don’t like it. You can email us at support@criativcity.com & we’ll cancel and refund your money within hours. No awkward questions asked :"
    },
    {
@@ -41,6 +41,10 @@ let FAQ = [
       title: "What is our future goal?",
       detail: "To make CRIATIVCITY, a place where like-minded and enthusiastic people come to build a legacy with the most powerful and creative community, to build an ecosystem where students can come, learn, showcase and earn."
    },
+   {
+      title: "What if I still have queries after watching the course?",
+      detail: "We will conduct weekly qna sessions for a month live in google/zoom meeting through our discord where we will discuss and solve all the queries."
+   }
 ]
 
 const CourseComp = () => {
@@ -80,8 +84,8 @@ const CourseComp = () => {
                setShow(!show)
             }}
          >
-            <h1 className="text-white relative flex items-center justify-between text-[0.9rem] lg:text-[1.8rem]  font-Lato">
-               <h2 className="w-[90%] lg:w-[95%] mr-1 font-poppins "> {props.title}</h2>
+            <h1 className="text-white relative flex items-center justify-between text-[0.9rem] lg:text-[1.3rem]  font-Lato">
+               <h2 className="w-[90%] lg:w-[95%] mr-1 font-lato "> {props.title}</h2>
                {show ? (
                   <IoIosArrowUp size={45} className="border-[0.04rem] rounded-md  border-fuchsia-400 px-2 py-2"></IoIosArrowUp>
                ) : (
@@ -90,8 +94,8 @@ const CourseComp = () => {
             </h1>
 
             {show && (
-               <div className="text-left text-white font-Lato lg:text-[1.2rem]  w-[95%]  mt-2 text-[0.9rem]">
-                  <h6 className="font-poppins text-[0.8rem] lg:text-[1.1rem]" >{props.detail} </h6>
+               <div className="text-left w-[95%] ">
+                  <h6 className="font-Lato text-[0.8rem] lg:text-[1.0rem]" >{props.detail} </h6>
                </div>
             )}
          </div>
@@ -148,13 +152,13 @@ const CourseComp = () => {
                            <div className="adobe-vid-cont w-[95%] lg:flex lg:items-start  justify-between">
                               <div className="text-cont ">
                                  <div className="">
-                                    <h2 className=" font-poppins text-[1.2rem] w-3/4 mt-4 ">{item.courseName} </h2>
+                                    <h2 className=" font-Lato text-[1.0rem] lg:text-[1.2rem] w-3/4 mt-4 ">{item.courseName} </h2>
                                  </div>
                                  <div className=" mt-[20px] ">
                                     {item.details.map((x, i) => (
-                                       <div key={index} className="flex items-center my-1 gap-x-2">
-                                          <AiFillCaretRight size={15} />
-                                          <h6>{x}</h6>
+                                       <div key={index} className="flex items-start my-1 gap-x-2">
+                                          <AiFillCaretRight className=" lg:mt-[8px] mt-[2px] " size={15} />
+                                          <h6 className="text-white text-[0.8rem] lg:text-[1.2rem] font-Lato" >{x}</h6>
                                        </div>
                                     ))}
                                  </div>
