@@ -8,6 +8,7 @@ import Link from "next/link";
 import student from "../assets/student.png";
 import { useRouter } from "next/router";
 import Planet from "./planet";
+import Rain from "./rain";
 
 const Hero = () => {
    const router = useRouter()
@@ -15,7 +16,8 @@ const Hero = () => {
       <section id="home" className="flex md:flex mt-24 overflow-hidden  ">
          {/* bg-planets */}
          <div className=" w-full h-full  bg-contain bg-no-repeat rounded-top-[120px] z-[0]">
-            <Planet/>
+            <Planet />
+            <Rain />
             <motion.div
                // variants={staggerContainer}
                // initial="hidden"
@@ -61,12 +63,12 @@ const Hero = () => {
                         </div> */}
                         <div className="btn z-50">
                            <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg"
-                           onMouseEnter={() => {
-                              console.log("mouse enter")
-                           }}
-                           onClick={() => {
-                              router.push('./courses')
-                           }}
+                              onMouseEnter={() => {
+                                 console.log("mouse enter")
+                              }}
+                              onClick={() => {
+                                 router.push('./courses')
+                              }}
                            >
                               Get Started
                            </button>

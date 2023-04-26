@@ -10,6 +10,7 @@ import rightfeather from "../assets/rightfeather.png";
 import city from "../assets/city.png";
 import citymid from "../assets/citymid.png";
 import bigvid from "../assets/bigvid.png";
+// import gif from "../assets/gif/no-experience.gif"
 import polygon from "../assets/Polygon.png";
 import ball from "../assets/ball2.png";
 
