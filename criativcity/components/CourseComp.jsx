@@ -158,7 +158,7 @@ const CourseComp = () => {
                                     {item.details.map((x, i) => (
                                        <div key={index} className="flex items-start my-1 gap-x-2">
                                           <AiFillCaretRight className=" lg:mt-[8px] mt-[2px] " size={15} />
-                                          <h6 className="text-white text-[0.8rem] lg:text-[1.2rem] font-Lato" >{x}</h6>
+                                          <h6 className="text-white text-[0.8rem] lg:text-[1.1rem] font-Lato" >{x}</h6>
                                        </div>
                                     ))}
                                  </div>
