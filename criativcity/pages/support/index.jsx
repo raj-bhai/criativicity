@@ -16,13 +16,13 @@ const SupportScreen = () => {
         <>
             <Navbar />
             <div className=' bg-contain bg-no-repeat  navbarbg'>
-                <Rain />
-                <section className=' min-h-screen flex  items-center flex-wrap justify-center bg-contain bg-no-repeat '>
-                    <div className='flex flex-row  lg:w-[70%] justify-between  '>
-                        <div className='w-1/2 items-center justify-center w-[500px] h-[500px] '>
+                {/* <Rain /> */}
+                <section className=' min-h-screen flex  items-center justify-center bg-contain bg-no-repeat '>
+                    <div className='flex lg:flex-row flex-col sm:flex-col md:flex-col items-center justify-center gap-4 lg:gap-16  '>
+                        <div className='items-center justify-center w-[350px] h-[350px] lg:w-[700px] lg:h-[700px] '>
                             <Image src={referral} alt="" />
                         </div>
-                        <div className='w-1/3  flex flex-col justify-center '>
+                        <div className=' min-w-[400px] flex flex-col justify-center '>
                             <div className='justify-center items-center px-16 text-white'>
                                 <h2 className='font-pressfont text-[1.5rem] lg:text-[2rem]  pressFont text-transparent bg-clip-text bg-gradient-to-r from-dimPink to-dimPurple'>
                                     CONTACT US</h2>
@@ -33,7 +33,7 @@ const SupportScreen = () => {
                                     {/* <Image src={whatsappimg} alt="" className='absolute top-1/2 left-1' width="16" height="16" /> */}
                                     <input className="outline-none px-2 py-3 bg-transparent" placeholder="Contact us on WhatsApp" type="text" />
                                     <button
-                                        className="px-5 border-2 mx-1 rounded-lg py-2 h-[40px] logibtn text-white "
+                                        className="px-5 border-2 mx-1 rounded-lg py-2 h-[35px] flex items-center justify-center logibtn text-white "
                                         onClick={() => {
                                             window.open('https://wa.me/8413802010')
                                         }}
@@ -43,7 +43,7 @@ const SupportScreen = () => {
                                 <div className="border-2 border-fuchsia-50 h-[50px] rounded-lg relative flex items-center justify-between ">
                                     {/* <Image src={discordimg} alt="" className='absolute top-1/2 left-1' width="16" height="16" /> */}
                                     <input className="outline-none px-2 py-3 bg-transparent" placeholder="Contact us on Discord" type="text" />
-                                    <button className="px-5 border-2 mx-1 h-[40px] rounded-lg py-2 logibtn text-white "
+                                    <button className="px-5 border-2 mx-1 h-[35px] flex items-center justify-center rounded-lg py-2 logibtn text-white "
                                         onClick={() => {
                                             window.open('https://discord.gg/9gUHCnRbuR')
                                         }}
@@ -60,7 +60,7 @@ const SupportScreen = () => {
                 <div className="pt-12">
                     <Image src={ellipse} className="rounded-lg" alt=''></Image>
                 </div>
-                <Subcontent />
+                {/* <Subcontent /> */}
                 <Footer />
 
             </div>

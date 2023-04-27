@@ -11,13 +11,24 @@ import FollowUs from "@/components/Followus";
 import Quote from "@/components/Quote";
 import Footer from "@/components/Footer";
 import Subcontent from "@/components/Subcontent";
+import { useSelector, useDispatch } from "react-redux";
+
+import * as CourseAction from '../redux/action/course';
 
 export default function Home() {
 
    const [domLoaded, setDomLoaded] = useState(false)
+   const dispatch = useDispatch()
+   const Courses = useSelector((state) => state.course.CourseList);
 
    useEffect(() => {
       setDomLoaded(true)
+   }, [])
+
+   useEffect(() => {
+      if (!Courses?.length) {
+         dispatch(CourseAction.getAllCourse());
+      }
    }, [])
 
    return (

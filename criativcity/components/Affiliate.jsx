@@ -2,18 +2,42 @@ import React, { useState, useEffect } from "react";
 import student from "../assets/student.png";
 import Image from "next/image";
 import affimg from "../assets/affimg.png";
+import gif from "../assets/gif/referral.gif";
 import ellipse from '../assets/ellipse.png'
 import planets from '../assets/Group.png';
 import axios from "axios";
 
 import { useSelector } from "react-redux";
 import { Apiurl } from "@/constants/url";
-import { AiFillLock } from 'react-icons/ai';
+import { AiFillLock, AiFillCaretRight } from 'react-icons/ai';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
+const AffiliateData = [
+   {
+      value: "Get the referral code."
+   },
+   {
+      value: "Refer it to a friend so that he gets 250 off the course."
+   },
+   {
+      value: "Once the course is purchased, the person who referred will get 250 rupees as affiliate income."
+   },
+   {
+      value: "Payout will be redeemable after 7 days from the date of purchase."
+   },
+   {
+      value: "If the student demands for a refund, the affiliate income won’t be redeemed to your affiliate account."
+   },
+   {
+      value: "Payout will be processed within 1 business day through any method such as upi, bank transfer, etc"
+   },
+   {
+      value: "For further queries, kindly contact us on email, WhatsApp or discord."
+   },
+]
 
 const CopyText = () => {
    // const [textToCopy, setTextToCopy] = useState("This is the text to copy.");
@@ -191,7 +215,7 @@ const Affiliate = () => {
                </div> */}
             </div>
             <div className="flex items-center navbarbg justify-center mt-[3.3rem] ">
-               <section className="mt flex justify-between border-[0.04rem]  border-fuchsia-400 rounded-lg lg:w-[80%]  px-2 mx-2 py-1">
+               <section className="mt flex justify-between border-[0.04rem]  border-fuchsia-400 rounded-lg lg:w-[80%]  px-2 mx-2 py-4">
                   <div className="adobe-vid-cont  p-1 lg:flex  lg:flex-wrap lg:justify-between lg:items-between w-full justify-between">
                      {/* <div className="text-cont mx-auto text-white border">
                         <h2 className="text-[1.2rem]  mt-4">Here&apos;s how we are doing </h2>
@@ -218,9 +242,9 @@ const Affiliate = () => {
                            </div>
                         </div>
                      </div> */}
-                     <div className="vidimg-cont">
-                        <div className="videocont lg:w-[500px] lg:h-[340px] mt-7 ">
-                           <Image src={affimg} className="rounded-lg" alt="image affiliate"></Image>
+                     <div className="vidimg-cont flex items-center">
+                        <div className="videocont lg:w-[500px] lg:h-[340px] flex justify-center items-center ">
+                           <Image src={gif} className="rounded-lg" alt="image affiliate"></Image>
                         </div>
                         <div className="cta flex items-center justify-end pr-[20px] pb-[10px]  gap-x-8 lg:gap-x-14 mt-3 lg:mt-10 ">
                            {/* <div className="imgencont flex items-center justify-start flex-col">
@@ -251,13 +275,18 @@ const Affiliate = () => {
                      <div className="text-cont flex  flex-col justify-between font-lato text-white lg:w-[50%]">
                         <div className=" " >
                            <h3 className="text-[1.2rem] mb-4 font-semibold font-Lato">How Criativcity Affiliate Program Will Work</h3>
-                           <h6 className="lg:text-[1.1rem] text-[0.8rem] font-Lato" >
-                              You can earn money by sharing Criativcity courses through their affiliate program. To become an affiliate, you must first create
-                              an account on Criativcity. Once your account is created, you can access the affiliate section and generate unique links for any
-                              course on the website. When someone clicks on your link and enrolls in a course, you will earn a commission on the sale.
-                              Additionally, You can also share courses on your website or social media channels and use tracking links to earn 20% commission
-                              on any course purchases made through your links.
-                           </h6>
+                           {
+                              AffiliateData.map((x, i) => {
+                                 return (
+                                    <div key={i} className="flex items-start my-1">
+                                       <div>
+                                          <AiFillCaretRight className=" lg:mt-[8px] mt-[2px]  lg:w-[15px] lg:h-[15px] " size={15} />
+                                       </div>
+                                       <h6 className=" ml-2 text-white text-[0.8rem] lg:text-[1.1rem] font-Lato" >{x.value}</h6>
+                                    </div>
+                                 )
+                              })
+                           }
                         </div>
                         <div className="btn flex flex-col items-end">
                            <button className="logibtn lg:px-4 lg:py-3 py-2 px-2 font-Lato font-bold uppercase text-white text-[0.8rem] lg:text-[1.1rem] rounded-lg"

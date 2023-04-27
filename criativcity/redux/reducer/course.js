@@ -4,7 +4,7 @@ import {
 
 
 const initialState = {
-    CourseList: null
+    CourseList: []
 };
 
 export default (state = initialState, action) => {

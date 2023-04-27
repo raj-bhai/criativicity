@@ -18,7 +18,7 @@ const LowMidSection = () => {
    return (
       <>
          <section className="flex justify-center">
-            <div className="lg:flex lg:items-start lg:justify-between lg:mx-24">
+            <div className="lg:flex flex flex-col lg:flex-row justify-center items-center  lg:items-center lg:justify-between lg:mx-24">
                <div className="crstext text-center lg:text-start">
                   <div className="heading">
                      <Image src={polygon} alt="polygon" className="w-14 lg:pb-10 ml-2 lg:pt-2 pt-14 animate-slow"></Image>
@@ -43,13 +43,13 @@ const LowMidSection = () => {
                   variants={slideIn("right", "tween", 0.5, 1)}
                   className=" flex items-center justify-center mt-12"
                > */}
-               <Image src={gif} width={1500} alt="boy" height={1500} className="aspect-4/4 w-56 h-64 mt-4 lg:w-[500px] lg:h-[500px]"></Image>
+               <Image src={gif} width={1500} alt="boy" height={1500} className="aspect-4/4 w-[350px] h-[350px] lg:mt-4 lg:w-[700px] lg:h-[750px]"></Image>
                {/* </motion.div> */}
 
             </div>
          </section>
          <section className="mt-[3rem]">
-            <div className="lg:flex lg:items-center lg:justify-between lg:mx-24">
+            <div className="lg:flex lg:items-center  lg:justify-between lg:mx-24">
                {/* <motion.div
                   initial="hidden"
                   whileInView="show"

@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from "react";
-import styles from "@/src/style";
-import heroPlanet from "../assets/Group.png";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { slideIn, staggerContainer, textVariant, textVariant2 } from "@/utils/motion";
 import moneyback from "../assets/moneyback.png";
 import student from "../assets/student.png";
 import vidimg from "../assets/vidimg.png";
-import { AiOutlineClockCircle, AiOutlineCloudDownload, AiOutlineMobile,AiFillCaretRight } from 'react-icons/ai'
-import { TbCertificate } from 'react-icons/tb'
-import { MdLanguage } from 'react-icons/md'
-import { BiNotepad } from 'react-icons/bi'
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import * as CourseAction from '../redux/action/course';
+import { AiFillCaretRight } from 'react-icons/ai';
 
 
 
@@ -78,39 +71,14 @@ const Quote = () => {
                      {
                         Courses?.length &&
                         Courses[0].details.map((x, index) => (
-                           <div key={index} className="flex items-center my-1 gap-x-2">
-                              <AiFillCaretRight size={15} />
-                              <h6>{x}</h6>
+                           <div key={index} className="flex items-start my-1">
+                              <div>
+                                 <AiFillCaretRight className=" lg:mt-[8px] mt-[2px]  lg:w-[15px] lg:h-[15px] " size={15} />
+                              </div>
+                              <h6 className=" ml-2 text-white text-[0.8rem] lg:text-[1.0rem] font-Lato" >{x}</h6>
                            </div>
                         ))
                      }
-                     {/* <div className="flex items-center my-1 gap-x-2">
-                        <AiOutlineCloudDownload size={20} />
-                        <h6>18 downloadable resoures</h6>
-                     </div> */}
-                     {/* <div className="flex items-center my-1 gap-x-2">
-                        <AiOutlineClockCircle size={20} />
-                        <h6>24.5 hours demand video</h6>
-                     </div> */}
-                     {/* <div className="flex items-center my-1  gap-x-2">
-                        <AiOutlineMobile size={20} />
-                        <h6>Access on Mobile and Tv</h6>
-                     </div> */}
-                     {/* 
-                     <div className="flex items-center my-1 gap-x-2">
-                        <TbCertificate size={20} />
-                        <h6>Certificate on Completion</h6>
-                     </div>
-
-                     <div className="flex items-center my-1 gap-x-2">
-                        <MdLanguage size={20} />
-                        <h6>Language-Hindi</h6>
-                     </div>
-                     <div className="flex items-center my-1  gap-x-2">
-                        <BiNotepad size={20} />
-                        <h6>Last updated 08/22</h6>
-                     </div> */}
-
                   </div>
                </div>
             </div>
