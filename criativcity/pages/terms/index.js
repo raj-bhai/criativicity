@@ -15,7 +15,7 @@ function Terms() {
                 <p className="mb-2">
                     Welcome to Criativcity.com. The following terms of service (these &quot;Terms of Service&quot;), govern your access to
                     and use of the Criativcity website, including any content, functionality and services offered on or through
-                    www.criativcity.com by Elixzor Technologies Pvt Ltd. (208 Prabhakar, Jangid Estate, Mira Road, Thane- 401107, India)
+                    www.criativcity.com by Elixzor Technologies Pvt Ltd. (B-208, PRABHAKAR CHS LTD, JANGID ESTATE,NEAR VIJAY PARK, MIRA ROAD EAST, THANE, India)
                     as applicable.
                 </p>
                 <p className="mb-2">

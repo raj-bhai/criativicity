@@ -14,8 +14,8 @@ function PrivacyPolicy() {
                 <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
                 <p className="mb-2">
                     Please read this privacy policy (the &quot;Policy&quot;) carefully
-                    to understand how Elixzor technologies Pvt Ltd., Jangid Estate, Mira Road,
-                    Thane-401107, India (&quot;Elixzor&quot;, &quot;we&quot;) uses personal information.
+                    to understand how Elixzor technologies Pvt Ltd., B-208, PRABHAKAR CHS LTD, JANGID ESTATE,
+                    NEAR VIJAY PARK, MIRA ROAD EAST, THANE, India (&quot;Elixzor&quot;, &quot;we&quot;) uses personal information.
                 </p>
                 <p className="mb-2">
                     By accessing or using www.Criativcity.com, you acknowledge that you have read

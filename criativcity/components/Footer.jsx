@@ -22,8 +22,9 @@ const Footer = () => {
       </div>
       <div className="feedback">
         <h2 className="font-lato" >Address</h2>
-        <h2 className="font-lato" >Prabhakar, Jangid Estate, Mira road</h2>
-        <h2 className="font-lato" > East Thane, Maharastra, 401107</h2>
+        <h2 className="font-lato" >B-208, PRABHAKAR CHS LTD, JANGID ESTATE</h2>
+        <h2 className="font-lato" >NEAR VIJAY PARK, MIRA ROAD EAST, THANE,</h2>
+        <h2 className="font-lato" > 401107</h2>
       </div>
       {/* <div></div> */}
     </section>
