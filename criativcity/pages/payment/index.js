@@ -1,37 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import CheckoutComp from '@/components/checkout';
-import Navbar from "@/components/Navbar"    
-import Footer from '@/components/Footer';
-import CheckoutForm from '@/components/checkoutForm';
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
-import axios from 'axios';
-import { Apiurl } from '@/constants/url';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-const stripePromise = loadStripe('pk_live_51MvZaGSB8NyItH1JpBDZEV9GCj1Ait4hUzXZLT0ZFOG3hbCr9EWEXMb6urkhAIEJ8W0e7FfLLTbqvZsQ8v4LUV8W00hOPtM781');
+const CheckoutPage = () => {
+  const router = useRouter();
+  const data = JSON.parse(router.query.data);
 
-const CheckoutScreen = () => {
-    const router = useRouter()
-    // console.log("data :", router.query.data)
+  useEffect(() => {
+    const launchBillDeskSDK = () => {
+      const logo = 'base64_image_of_merchant_logo';
+      const flowType = 'payments';
+      const childWindow = 'true';
+      const retryCount = 3; // Number of retry attempts
+      const returnUrl = 'https://your-return-url.com'; // Merchant return URL
+      const prefs = ['category1', 'category2', 'category3']; // Payment categories in preferred order
+      const bdOrderId = data.orderid; // Order ID generated using Create Order API
+      const merchantId = data.mercid; // Merchant ID received from BillDesk
+      const authToken = data.links[1].headers.authorization; // Authorization token generated using Create Order API
 
-    const options = {
-        // passing the client secret obtained from the server
-        // clientSecret: "pi_3MwIZwSB8NyItH1J1xnxHhls_secret_nf7qkMFVq2WqhnwAnqcA08pgc",
-        clientSecret : router.query.data
+      const responseHandler = (transactionMetadata) => {
+        // Callback function to receive transaction metadata after completion of the transaction journey
+        console.log('Transaction Metadata:', transactionMetadata);
+
+        // Process the transaction metadata and handle the payment completion as needed
+        // Redirect the user to a success page or trigger any necessary actions
+      };
+
+      // Call the BillDesk SDK function to launch the checkout experience
+      window.BillDeskSDK.invokePaymentSDK(
+        logo,
+        flowType,
+        childWindow,
+        retryCount,
+        returnUrl,
+        prefs,
+        responseHandler,
+        bdOrderId,
+        merchantId,
+        authToken
+      );
     };
-    return (
-        options &&
-        <>
-            <Elements stripe={stripePromise} options={options} >
-                <Navbar />
-                <CheckoutForm />
-                <Footer />
-            </Elements>
-        </>
 
-    );
+    // Load the BillDesk SDK script dynamically
+    const loadBillDeskSDK = () => {
+      const script = document.createElement('script');
+      script.src = 'https://uat.billdesk.com/jssdk/v1/dist/billdesksdk.js';
+      script.async = true;
+      script.onload = launchBillDeskSDK;
+
+      document.body.appendChild(script);
+    };
+
+    // Call the function to load the BillDesk SDK when the component mounts
+    loadBillDeskSDK();
+  }, []);
+
+  return (
+    <div>
+      {/* Your checkout page content here */}
+    </div>
+  );
 };
 
-export default CheckoutScreen;
-
+export default CheckoutPage;

@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Apiurl } from '../constants/url';
-import { CardElement, useStripe, useElements, Elements, PaymentElement } from '@stripe/react-stripe-js';
 import { useRouter } from 'next/router';
-import InjectedCheckoutForm from './checkoutForm';
+import { loadBillDeskSDK } from '@/utils/billdesk';
 
-import { loadStripe } from '@stripe/stripe-js';
-
-const stripePromise = loadStripe('pk_live_51MvZaGSB8NyItH1JpBDZEV9GCj1Ait4hUzXZLT0ZFOG3hbCr9EWEXMb6urkhAIEJ8W0e7FfLLTbqvZsQ8v4LUV8W00hOPtM781');
 
 const CheckoutComp = () => {
     const [price, setPrice] = useState('₹ 1000');
@@ -18,31 +14,13 @@ const CheckoutComp = () => {
     const [netPayableAmount, setNetPayableAmount] = useState("₹ 1000");
     const [validCoupon, setValidCoupon] = useState("doubt")
     const [loading, setLoading] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-    const [options, setOptions] = useState({ clientSecret: '' })
     const router = useRouter()
 
-    const [clientSecret, setClientSecret] = useState(null);
-    const stripe = useStripe();
-    const elements = useElements();
+    useEffect(() => {
+        loadBillDeskSDK()
+    }, [])
 
 
-
-    const calculateSubtotal = () => {
-        const priceNumber = parseFloat(price);
-        const gstNumber = parseFloat(gst);
-        const discountNumber = parseFloat(discount);
-        const gstAmount = priceNumber * (gstNumber / 100);
-        const discountAmount = priceNumber * (discountNumber / 100);
-        const subtotalAmount = priceNumber + gstAmount - discountAmount;
-        setSubtotal(subtotalAmount);
-        calculateNetPayableAmount(subtotalAmount);
-    };
-
-    const calculateNetPayableAmount = (subtotalAmount) => {
-        const netPayableAmount = subtotalAmount;
-        setNetPayableAmount(netPayableAmount);
-    };
 
     const handleCouponCodeChange = async (event) => {
         await setCouponCode(event.target.value);
@@ -57,74 +35,31 @@ const CheckoutComp = () => {
         }
     };
 
-    // loadScript Rzpay
-    function loadScript(src) {
-        return new Promise((resolve) => {
-            const script = document.createElement("script");
-            script.src = src;
-            script.onload = () => {
-                resolve(true);
-            };
-            script.onerror = () => {
-                resolve(false);
-            };
-            document.body.appendChild(script);
-        });
+
+    function generateRandomOrderId() {
+        const timestamp = new Date().getTime();
+        const randomString = Math.random().toString(36).substring(2, 8);
+        const orderId = `ORDER-${timestamp}-${randomString}`;
+        return orderId;
     }
 
-    const makePayment = async (amount) => {
-        const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
-        if (!res) {
-            alert("Razorpay SDK failed to load. Are you online?");
-            return;
-        }
-
+    const createOrder = async (orderId, amount) => {
         const result = await axios.post(`${Apiurl}/razorpay/createOrder`, {
-            amount: amount * 100,
+            "orderId": orderId,
+            "amount": amount
         });
 
         if (!result) {
             return;
         }
-
-        if (!result.data.success) {
-            return;
-        }
-        var options = {
-            description: "Add money in wallet",
-            // image: "https://beyobo-static-data.s3.ap-south-1.amazonaws.com/icons/beyobologo.png",
-            currency: "INR",
-            key: "rzp_live_EtytychWChYFKt",
-            amount: result.data.data.amount,
-            name: "Creativcity",
-            order_id: result.data.data.id,
-            handler: async function (response) {
-                // OrderPlaced(amount);
-                console.log("Payment success :", response)
-            },
-            prefill: {
-                email: "test@gmail.com",
-                contact: "9954546495",
-                name: "Test name",
-            },
-            theme: { color: "#2BA4F6" },
-        };
-
-        const paymentObject = new window.Razorpay(options);
-        await paymentObject.open();
-    };
-
-
-    const createOrder = async (amount) => {
-        const result = await axios.post(`${Apiurl}/razorpay/createOrder`, {
-            amount: amount * 100,
-        });
-
-        if (!result) {
-            return;
-        }
-        router.push(`/payment?data=${result.data.clientSecret}`)
-        // console.log(result.data)
+        // ("./payment", { data: JSON.stringify(result.data) })
+        router.push({
+            pathname: '/payment',
+            query: {
+                data :JSON.stringify(result.data.data),
+            }
+          });
+        console.log(result.data)
     }
 
     const CouponValidation = async (value) => {
@@ -255,11 +190,9 @@ const CheckoutComp = () => {
                     <button className="bg-gray-800 text-white rounded-lg py-2 px-4"
                         onClick={() => {
                             if (validCoupon === "valid") {
-                                //makePayment(750)   ---------------------------Razorpay
-                                createOrder(750)
+                                createOrder(generateRandomOrderId(), "750.00")
                             } else {
-                                // makePayment(1000)  ---------------------------Razorpay
-                                createOrder(1000)
+                                createOrder(generateRandomOrderId(), "1000.00")
                             }
                         }}
                     >
