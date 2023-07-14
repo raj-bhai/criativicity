@@ -15,11 +15,11 @@ const CheckoutPage = () => {
 
         const logo = 'https://www.logodesign.net/logo/line-art-house-roof-and-buildings-4485ld.png';
         const flowType = 'payments';
-        const childWindow = 'true';
+        const childWindow = true;
         const retryCount = 3; // Number of retry attempts
-        const returnUrl = 'https://your-return-url.com'; // Merchant return URL
+        const returnUrl = 'https://criativcity.com/'; // Merchant return URL
         const prefs = ['category1', 'category2', 'category3']; // Payment categories in preferred order
-        const bdOrderId = data.orderid; // Order ID generated using Create Order API
+        const bdOrderId = data.orderid        ; // Order ID generated using Create Order API
         const merchantId = data.mercid; // Merchant ID received from BillDesk
         const authToken = data.links[1].headers.authorization; // Authorization token generated using Create Order API
 
