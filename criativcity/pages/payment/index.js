@@ -64,7 +64,7 @@ const CheckoutPage = () => {
     };
 
     loadBillDeskSDK();
-  }, [router.query.data]);
+  }, [router.query.data, typeof window]);
 
   return (
     <div>
