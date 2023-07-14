@@ -13,7 +13,7 @@ const CheckoutPage = () => {
         // Attempt to parse the value as JSON
         const data = JSON.parse(dataParam);
 
-        const logo = 'base64_image_of_merchant_logo';
+        const logo = 'https://www.logodesign.net/logo/line-art-house-roof-and-buildings-4485ld.png';
         const flowType = 'payments';
         const childWindow = 'true';
         const retryCount = 3; // Number of retry attempts
