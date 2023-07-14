@@ -32,18 +32,22 @@ const CheckoutPage = () => {
         };
 
         // Call the BillDesk SDK function to launch the checkout experience
-        window.BillDeskSDK.invokePaymentSDK(
-          logo,
-          flowType,
-          childWindow,
-          retryCount,
-          returnUrl,
-          prefs,
-          responseHandler,
-          bdOrderId,
-          merchantId,
-          authToken
-        );
+        if (window.BillDeskSDK && typeof window.BillDeskSDK.invokePaymentSDK === 'function') {
+          window.BillDeskSDK.invokePaymentSDK(
+            logoUrl,
+            flowType,
+            childWindow,
+            retryCount,
+            returnUrl,
+            prefs,
+            responseHandler,
+            bdOrderId,
+            merchantId,
+            authToken
+          );
+        } else {
+          console.error('BillDeskSDK.invokePaymentSDK is not available');
+        }
 
       } catch (error) {
         console.error('Error parsing JSON:', error);
