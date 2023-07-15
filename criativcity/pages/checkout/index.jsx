@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import CheckoutComp from '@/components/checkout';
 import Navbar from "@/components/Navbar"
-import CourseComp from "@/components/CourseComp"
-import FollowUs from "@/components/Followus"
-import Subcontent from "@/components/Subcontent"
+import Layout from './layout';
 import Footer from "@/components/Footer"
 import { CardElement, useStripe, useElements, Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
@@ -14,11 +12,13 @@ const CheckoutScreen = () => {
 
     return (
         // <>
-        <Elements stripe={stripePromise} >
+        // <Elements stripe={stripePromise} >
+        <Layout>
             <Navbar />
             <CheckoutComp />
             <Footer />
-        </Elements>
+        </Layout>
+        // </Elements>
         // </>
 
     );
