@@ -19,7 +19,7 @@ const CheckoutComp = () => {
   const launchSDK = (data) => {
     const mandate_flow_config = {
       merchantId: data.mercid,
-      bdOrderId: data.orderid,
+      bdOrderId: data.bdorderid,
       authToken: data.links[1].headers.authorization,
       flowType: 'payments', // Add the flowType propert
       childWindow: true,
@@ -29,6 +29,8 @@ const CheckoutComp = () => {
         "payment_categories": ["card", "emi", "nb", "upi", "wallets", "qr", "gpay"]
       }
     };
+
+    console.log(mandate_flow_config)
 
     var responseHandler = function (txn) {
         console.log("callback received status:: ",txn.status)
