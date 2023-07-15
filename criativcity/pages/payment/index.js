@@ -32,6 +32,7 @@ const CheckoutPage = () => {
         };
 
         // Call the BillDesk SDK function to launch the checkout experience
+
         if (typeof window !== 'undefined' && window.BillDeskSDK && typeof window.BillDeskSDK.invokePaymentSDK === 'function') {
           window.BillDeskSDK.invokePaymentSDK(
             logo,

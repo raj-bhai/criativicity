@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Apiurl } from '../constants/url';
 import { useRouter } from 'next/router';
-import { loadBillDeskSDK } from '@/utils/billdesk';
+// import { loadBillDeskSDK } from '@/utils/billdesk';
 
 
 const CheckoutComp = () => {
@@ -20,6 +20,77 @@ const CheckoutComp = () => {
         loadBillDeskSDK()
     }, [])
 
+
+    const loadBillDeskSDK = () => {
+        const script = document.createElement('script');
+        script.src = 'https://uat.billdesk.com/jssdk/v1/dist/billdesksdk.js';
+        script.async = true;
+
+        script.onload = onLoad;
+      
+        document.head.appendChild(script);
+      };
+
+      const onLoad = () => {
+        console.log("billdeskLoaded>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+      }
+      
+
+      const launchBillDeskSDK = (data) => {
+        // Retrieve the query parameter value
+        // const dataParam = router.query.data;
+  
+        try {
+          // Attempt to parse the value as JSON
+        //   const data = JSON.parse(dataParam);
+
+
+  
+          const logo = 'https://www.logodesign.net/logo/line-art-house-roof-and-buildings-4485ld.png';
+          const flowType = 'payments';
+          const childWindow = true;
+          const retryCount = 3; // Number of retry attempts
+          const returnUrl = 'https://criativcity.com/'; // Merchant return URL
+          const prefs = ['category1', 'category2', 'category3']; // Payment categories in preferred order
+          const bdOrderId = data.orderid; // Order ID generated using Create Order API
+          const merchantId = data.mercid; // Merchant ID received from BillDesk
+          const authToken = data.links[1].headers.authorization; // Authorization token generated using Create Order API
+  
+          const responseHandler = (transactionMetadata) => {
+            // Callback function to receive transaction metadata after completion of the transaction journey
+            console.log('Transaction Metadata:', transactionMetadata);
+  
+            // Process the transaction metadata and handle the payment completion as needed
+            // Redirect the user to a success page or trigger any necessary actions
+          };
+  
+          // Call the BillDesk SDK function to launch the checkout experience
+
+          console.log(" log",window.BillDeskSDK)
+
+          return
+  
+          if (typeof window !== 'undefined' && window.BillDeskSDK && typeof window.BillDeskSDK.invokePaymentSDK === 'function') {
+            window.BillDeskSDK.invokePaymentSDK(
+              logo,
+              flowType,
+              childWindow,
+              retryCount,
+              returnUrl,
+              prefs,
+              responseHandler,
+              bdOrderId,
+              merchantId,
+              authToken
+            );
+          } else {
+            console.error('BillDeskSDK.invokePaymentSDK is not available');
+          }
+  
+        } catch (error) {
+          console.error('Error parsing JSON:', error);
+        }
+      };
 
 
     const handleCouponCodeChange = async (event) => {
@@ -52,15 +123,11 @@ const CheckoutComp = () => {
         if (!result) {
             return;
         }
-        // ("./payment", { data: JSON.stringify(result.data) })
-        router.push({
-            pathname: '/payment',
-            query: {
-                data :JSON.stringify(result.data.data),
-            }
-          });
+console.log("type of :", typeof(result.data.data));
+        launchBillDeskSDK(result.data.data)
         console.log(result.data)
     }
+
 
     const CouponValidation = async (value) => {
 
