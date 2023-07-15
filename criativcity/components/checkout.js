@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Apiurl } from '../constants/url';
 import { useRouter } from 'next/router';
 
+
+
 const CheckoutComp = () => {
   const [price, setPrice] = useState('₹ 1000');
   const [gst, setGst] = useState(0);
@@ -15,37 +17,50 @@ const CheckoutComp = () => {
   const router = useRouter();
 
   const launchSDK = (data) => {
-    var flow_config = {
+    const mandate_flow_config = {
       merchantId: data.mercid,
       bdOrderId: data.orderid,
       authToken: data.links[1].headers.authorization,
+      flowType: 'payments', // Add the flowType propert
       childWindow: true,
       returnUrl: "https://criativcity.com/",
       retryCount: 3,
       prefs: {
-        "payment_categories": ["card", "emi"]
+        "payment_categories": ["card", "emi", "nb", "upi", "wallets", "qr", "gpay"]
       }
     };
-  
+
+    var responseHandler = function (txn) {
+        console.log("callback received status:: ",txn.status)
+        console.log("callback received response:: ",txn.response)
+        }
+
+        var config = {
+            responseHandler: responseHandler,
+            merchantLogo: "data:image/png;base64:eqwewqesddhgjdxsc==",
+            flowConfig: mandate_flow_config,
+            flowType: "payments"
+            }
+
     const launch = () => {
-      if (window.billdesksdk) {
-        window.billdesksdk.launch(flow_config);
+      if (window.loadBillDeskSdk) {
+        window.loadBillDeskSdk(config);
       } else {
         console.error("BillDesk SDK not available.");
       }
     };
-  
-    if (window.billdesksdk) {
+
+    if (window.loadBillDeskSdk) {
       launch();
     } else {
       // Wait for SDK to become available
       const checkSDK = setInterval(() => {
-        if (window.billdesksdk) {
+        if (window.loadBillDeskSdk) {
           clearInterval(checkSDK);
           launch();
         }
       }, 100);
-      console.log("not")
+      console.log("SDK not available");
     }
   };
   

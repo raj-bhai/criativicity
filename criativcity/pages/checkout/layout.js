@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
+import { billdeskTest, billdeskLive } from '@/constants/url';
 
 const Layout = ({ children }) => {
   useEffect(() => {
     const loadSDK = () => {
       const script = document.createElement('script');
-      script.src = 'https://uat.billdesk.com/jssdk/v1/dist/billdesksdk/billdesksdk.js';
+      script.src = `${billdeskTest}/billdesksdk/billdesksdk.js`;
       script.defer = true;
 
       script.onload = () => {
@@ -22,7 +23,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Head>
-        <link href="https://uat.billdesk.com/jssdk/v1/dist/billdesksdk/billdesksdk.css" rel="stylesheet" />
+        {/* <link href={`${billdeskTest}/billdesksdk/billdesksdk.css`} rel="stylesheet" /> */}
       </Head>
       {children}
     </>
