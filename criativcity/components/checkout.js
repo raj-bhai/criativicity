@@ -5,17 +5,17 @@ import { useRouter } from 'next/router';
 
 
 const CheckoutComp = () => {
-      const [price, setPrice] = useState('₹ 1000');
-      const [gst, setGst] = useState(0);
-      const [discount, setDiscount] = useState(0);
-      const [subtotal, setSubtotal] = useState('₹ 1000');
-      const [couponCode, setCouponCode] = useState('');
-      const [netPayableAmount, setNetPayableAmount] = useState("₹ 1000");
+    const [price, setPrice] = useState('₹ 1000');
+    const [gst, setGst] = useState(0);
+    const [discount, setDiscount] = useState(0);
+    const [subtotal, setSubtotal] = useState('₹ 1000');
+    const [couponCode, setCouponCode] = useState('');
+    const [netPayableAmount, setNetPayableAmount] = useState("₹ 1000");
 
-      const [validCoupon, setValidCoupon] = useState("doubt");
-      
-      const [loading, setLoading] = useState(false);
-      const router = useRouter();
+    const [validCoupon, setValidCoupon] = useState("doubt");
+
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
 
 
@@ -142,6 +142,85 @@ const CheckoutComp = () => {
             <h1 className="text-3xl font-bold mb-4">Checkout</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4  md:px-32 py-8">
                 {/* Rest of your code */}
+                <div>
+                    <label htmlFor="price" className="block font-medium mb-2">Price:</label>
+                    <input
+                        id="price"
+                        type="text"
+                        className="border-gray-300 rounded-lg w-full py-2 px-4 mb-4"
+                        value={price}
+                        onChange={(event) => setPrice(event.target.value)}
+                        disabled
+                    />
+                </div>
+                <div>
+                    <label htmlFor="gst" className="block font-medium mb-2">GST:</label>
+                    <input
+                        id="gst"
+                        type="text"
+                        className="border-gray-300 rounded-lg w-full py-2 px-4 mb-4"
+                        value={gst}
+                        onChange={(event) => setGst(event.target.value)}
+                        disabled
+                    />
+                </div>
+                <div>
+                    <label htmlFor="discount" className="block font-medium mb-2">Discount:</label>
+                    <input
+                        id="discount"
+                        type="text"
+                        className="border-gray-300 rounded-lg w-full py-2 px-4 mb-4"
+                        value={discount}
+                        onChange={(event) => setDiscount(event.target.value)}
+                        disabled
+                    />
+                </div>
+                <div>
+                    <label htmlFor="subtotal" className="block font-medium mb-2">Subtotal:</label>
+                    <input
+                        id="subtotal"
+                        type="text"
+                        className="border-gray-300 rounded-lg w-full py-2 px-4 mb-4"
+                        value={subtotal}
+                        onChange={() => { }}
+                        disabled
+                    />
+                </div>
+                <div>
+                    <div className='relative' >
+                        <label htmlFor="couponCode" className="block font-medium mb-2">Coupon Code:</label>
+                        <input
+                            id="couponCode"
+                            type="text"
+                            maxLength={8}
+                            className="border-[#000] border rounded-lg w-full py-2 px-4 mb-4"
+                            value={couponCode}
+                            onChange={handleCouponCodeChange}
+                        />
+                        <span className={loading ? 'loader' : 'hidden'}></span>
+                    </div>
+                    {
+                        validCoupon === "invalid" &&
+                        <p className=' -mt-[10px] text-red-600 font-semibold ' >Invalid Coupod Code</p>
+                    }
+                    {
+                        validCoupon === "valid" &&
+                        <p className=' -mt-[10px] text-green-600 font-semibold ' >You have saved &#8377;250</p>
+                    }
+                </div>
+                <div>
+                    <div>
+                        <label htmlFor="netPayableAmount" className="block font-medium mb-2">Net Payable Amount:</label>
+                        <input
+                            id="netPayableAmount"
+                            type="text"
+                            className=" border border-green-600 rounded-lg w-full py-2 px-4 mb-4"
+                            value={netPayableAmount}
+                            onChange={() => { }}
+                            disabled
+                        />
+                    </div>
+                </div>
                 <div className="flex justify-end mt-8">
                     <button className="bg-gray-800 text-white rounded-lg py-2 px-4"
                         onClick={() => {
