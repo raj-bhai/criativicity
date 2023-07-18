@@ -25,7 +25,7 @@ const CheckoutComp = () => {
             bdOrderId: data.bdorderid,
             authToken: data.links[1].headers.authorization,
             flowType: 'payments', // Add the flowType propert
-            childWindow: true,
+            childWindow: false,
             returnUrl: "https://criativcity.com/",
             retryCount: 3,
             prefs: {
