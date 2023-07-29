@@ -138,7 +138,7 @@ const CheckoutComp = () => {
     const createOrder = async (orderId, amount) => {
         const result = await axios.post(`${Apiurl}/razorpay/createOrder`, {
             "orderId": orderId,
-            "amount": "1000.00"
+            "amount": "10.00"
         });
         if (!result) {
             return;
