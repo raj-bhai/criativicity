@@ -26,7 +26,8 @@ const CheckoutComp = () => {
             authToken: data.links[1].headers.authorization,
             flowType: 'payments', // Add the flowType propert
             childWindow: false,
-            returnUrl: "https://criativcity.com/",
+            // returnUrl : "https://criativcitybe.onrender.com/razorpay/webhook",
+            // returnUrl: "https://criativcity.com/",
             retryCount: 3,
             prefs: {
                 "payment_categories": ["card", "emi", "nb", "upi", "wallets", "qr", "gpay"]
@@ -38,6 +39,48 @@ const CheckoutComp = () => {
         var responseHandler = function (txn) {
             console.log("callback received status:: ", txn.status)
             console.log("callback received response:: ", txn.response)
+            try {
+                control.log("inside response handler")
+                var responseXHR = new XMLHttpRequest();
+                responseXHR.onreadystatechange = function () {
+                    if (responseXHR.readyState == XMLHttpRequest.DONE) { // XMLHttpRequest.DONE == 4
+                        if (responseXHR.status == 200) {
+                            var jsonStr = responseXHR.responseText;
+                            console.log(jsonStr);
+                            jsonObj = JSON.parse(jsonStr);
+                            console.log(jsonObj);
+                            console.log(jsonObj.orderid);
+                            var htm = "";
+                            htm += "<div>Transaction Id: " + jsonObj.transactionid + " </div>";
+                            htm += "<div>Auth Status: " + jsonObj.auth_status + " </div>";
+                            htm += "<div>Transaction Date: " + jsonObj.transaction_date + " </div>";
+                            htm += "<div>Payment Method Type: " + jsonObj.payment_method_type + " </div>";
+                            htm += "<div>Amount: " + jsonObj.charge_amount + " </div>";
+                            htm += "<div>Bank Ref No.: " + jsonObj.bank_ref_no + " </div>";
+                            htm += "<div>Error code: " + jsonObj.transaction_error_code + " </div>";
+                            htm += "<div>Error desc: " + jsonObj.transaction_error_desc + " </div>";
+                            document.getElementById("result").innerHTML = htm;
+                            // hideSpinner();
+                        } else if (responseXHR.status == 400) {
+                            //alert('There was an error 400');
+                        } else {
+                            //alert('something else other than 200 was returned');
+                        }
+                    }
+                };
+                console.log(txn);
+                if (txn.txnResponse) {
+
+                    responseXHR.open("POST", "https://pguatweb.billdesk.io/pgtxnsimulator/v1_2/txnresponse", true);
+
+                    responseXHR.send(txn.txnResponse.transaction_response);
+                } else {
+                    console.log("fghjkl")
+                    // hideSpinner();
+                }
+            } catch (err) {
+                alert('There was an error 400');
+            }
         }
 
         var config = {

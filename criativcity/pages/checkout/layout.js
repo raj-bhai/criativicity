@@ -6,12 +6,11 @@ const Layout = ({ children }) => {
   useEffect(() => {
     const loadSDK = () => {
       const script = document.createElement('script');
-      script.src = `${billdeskTest}/billdesksdk/billdesksdk.js`;
+      script.src = `${billdeskLive}/billdesksdk/billdesksdk.js`;
       script.defer = true;
 
       script.onload = () => {
         console.log('BillDesk SDK loaded');
-        // Any additional logic or function invocations after the SDK is loaded
       };
 
       document.head.appendChild(script);
@@ -23,7 +22,6 @@ const Layout = ({ children }) => {
   return (
     <>
       <Head>
-        {/* <link href={`${billdeskTest}/billdesksdk/billdesksdk.css`} rel="stylesheet" /> */}
       </Head>
       {children}
     </>

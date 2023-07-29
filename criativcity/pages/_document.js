@@ -8,18 +8,7 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link href="https://fonts.googleapis.com/css2?family=Lato&family=Yatra+One&display=swap" rel="stylesheet" />
-          <link href={`${billdeskTest}/billdesksdk/billdesksdk.css`} rel="stylesheet" />
-          {/* <link href={`${billdeskTest}/billdesksdk/billdesksdk.css`} rel="stylesheet" /> */}
-          {/* <script
-            async
-            type="module"
-            src={`${billdeskTest}/billdesksdk/billdesksdk.esm.js`}
-          ></script> */}
-          {/* <script
-            async
-            nomodule
-            src={`${billdeskTest}/billdesksdk/billdesksdk.js`}
-          ></script> */}
+          <link href={`${billdeskLive}/billdesksdk/billdesksdk.css`} rel="stylesheet" />
         </Head>
         <body>
           <Main />
