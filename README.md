@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+# 🎬 Video Editing Course Website  
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+A responsive **Video Editing Course Website** built with **React** where users can purchase, watch video editing courses, and receive a certificate upon completion. The platform features a modern, user-friendly interface optimized for all devices.  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Features  
+- User authentication  
+- Purchase and access courses  
+- Watch video lessons  
+- Certificate upon course completion  
+- Fully responsive design  
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## 🌐 Live Demo  
+🔗 [View Project](https://criativicity.vercel.app/)  
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## ⚠️ Note  
+The backend server is currently paused. If you want a demo of the complete application working and wish to use this project, feel free to contact me.  
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## 📞 Contact  
+For inquiries or collaboration, reach out:  
 
-## Learn More
+📧 Email: [your.email@example.com](mailto:your.email@example.com)  
+🌐 Portfolio: [your-portfolio-url.com](https://your-portfolio-url.com)  
 
-To learn more about Next.js, take a look at the following resources:
+---  
+**Thank You & Happy Learning! 🚀**  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Let me know if you'd like any modifications! 😊
